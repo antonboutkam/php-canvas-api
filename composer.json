@@ -1,0 +1,22 @@
+{
+    "name": "hurah/util",
+    "description": "Collection of general purpose utility classes that i use in various projects",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anton Boutkam",
+            "email": "anton@nui-boutkam.nl"
+        }
+    ],
+    "type": "library",
+
+    "minimum-stability": "dev",
+    "require": {
+        "php" : "^7.4",
+        "ext-json": "^7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3@dev"
+
+    }
+}
