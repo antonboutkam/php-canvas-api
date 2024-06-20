@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # Specify the version you desire here
-      - image: circleci/php:7.4.13-cli-buster
+      - image: cimg/php:8.3.8
 
     steps:
       - checkout
