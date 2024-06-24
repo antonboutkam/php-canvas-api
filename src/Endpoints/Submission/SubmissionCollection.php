@@ -31,7 +31,7 @@ class SubmissionCollection extends AbstractCollectionDataType
 
     public function add(Submission $submission)
     {
-        $this->array[$this->position] = $submission;
+        $this->array[] = $submission;
     }
 
     public function current():Submission

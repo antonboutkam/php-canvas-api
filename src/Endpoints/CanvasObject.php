@@ -31,11 +31,11 @@ abstract class CanvasObject
             }
             if($property->getType()->getName() === 'DateTime')
             {
-                $value = self::formatDt($property->getValue());
+                $value = self::formatDt($property->getValue($this));
             }
             else
             {
-                $value = $property->getValue();
+                $value = $property->getValue($this);
             }
             $aOut[$keyName] = $value;
 

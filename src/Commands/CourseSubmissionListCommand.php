@@ -4,7 +4,6 @@ namespace Hurah\Canvas\Commands;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Hurah\Canvas\Canvas;
-use Hurah\Canvas\Endpoints\Assignment\Assignment;
 use Hurah\Types\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -12,14 +11,16 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class AssignmentCreateCommand extends Command
+class CourseSubmissionListCommand extends Command
 {
     function configure()
     {
-        $this->setDescription('Create a new assignment ');
+        $this->setDescription('List all open submissions that belong to a course ');
         $this->setHelp('XXX');
-        $this->setName('assignment:create');
+        $this->setName('course:submission:list');
+
         $this->addArgument('course_id', InputArgument::REQUIRED, 'The canvas id of the course');
+
     }
 
     /**
@@ -30,20 +31,20 @@ class AssignmentCreateCommand extends Command
     {
         $oCanvas = new Canvas();
         $iCourseId = $input->getArgument('course_id');
-
-        $oAssignment = new Assignment();
-        $oAssignment->setName('Test assignment');
-        $oAssignment->setDescription('Test description');
-
-        $aResult = $oCanvas->createAssignment($iCourseId, $oAssignment);
+        $oSubmissionCollection = $oCanvas->getCourseSubmissions($iCourseId, 'submitted');
 
         $table = new Table($output);
-        $table->setHeaders(['Key', 'Value']);
+        $table->setHeaders(['Page id', 'Type', 'Workflow state', 'User id']);
 
-        foreach ($aResult as $key => $value)
+        foreach ($oSubmissionCollection as $oSubmission)
         {
-            $table->addRow([$key, $value]);
+            $table->addRow([
+                $oSubmission->getId(),
+                $oSubmission->getSubmissionType(),
+                $oSubmission->getWorkflowState(),
+                $oSubmission->getUserId()]);
         }
+
 
         $table->render();
 

@@ -14,7 +14,7 @@ use Hurah\Types\Exception\NullPointerException;
 
 class Assignment extends CanvasObject
 {
-    public int $id;
+    public ?int $id = null;
     public string $name;
     public string $description;
     public DateTime $createdAt;

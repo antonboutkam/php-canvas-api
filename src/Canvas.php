@@ -67,14 +67,36 @@ class Canvas
     }
 
     /**
+     * GET /courses/:course_id/students/submissions
      * @throws InvalidArgumentException
      * @throws GuzzleException
      * @throws Exception
      */
-    public function getSubmissions(int $iCourseId, int $iAssignmentId, int $iLimit = 100): SubmissionCollection
+    public function getCourseSubmissions(int $iCourseId, string $sWorkflowState = 'pending_review',int $iLimit = 100): SubmissionCollection
+    {
+
+        $sUrl = "/courses/{$iCourseId}/students/submissions";
+
+        $data = $this->getCollection($sUrl, $iLimit);
+        print_r($data);
+        sleep(5);
+    //    return SubmissionCollection::fromCanvasArray($data, $assignment);
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function getSubmissions(int $iCourseId, int $iAssignmentId, string $sWorkflowState = 'pending_review',int $iLimit = 100): SubmissionCollection
     {
         $assignment = $this->getAssignment($iCourseId, $iAssignmentId);
-        $data = $this->getCollection("/courses/{$iCourseId}/assignments/{$iAssignmentId}/submissions?workflow_state=pending_review", $iLimit);
+        $sUrl = "/courses/{$iCourseId}/assignments/{$iAssignmentId}/submissions";
+
+
+        $data = $this->getCollection($sUrl, $iLimit);
+print_r($data);
+sleep(5);
         return SubmissionCollection::fromCanvasArray($data, $assignment);
     }
 
