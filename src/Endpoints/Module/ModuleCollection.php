@@ -21,6 +21,20 @@ class ModuleCollection extends AbstractCollectionDataType
         throw new NullPointerException("No module found that goes by the name {$sModuleName}");
     }
 
+    public function findOneOrCreate(string $sModuleName):Module
+    {
+        foreach ($this as $oModule)
+        {
+            if($oModule->getName() === $sModuleName)
+            {
+                return $oModule;
+            }
+        }
+        $oModule = new Module();
+        $oModule->setName($sModuleName);
+        $oModule->setPublished(false);
+        return $oModule;
+    }
     /**
      * @throws Exception
      */

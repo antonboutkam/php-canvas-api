@@ -78,9 +78,8 @@ class Canvas
         $sUrl = "/courses/{$iCourseId}/students/submissions";
 
         $data = $this->getCollection($sUrl, $iLimit);
-        print_r($data);
-        sleep(5);
-    //    return SubmissionCollection::fromCanvasArray($data, $assignment);
+        return new SubmissionCollection();
+       // return SubmissionCollection::fromCanvasArray($data, $assignment);
     }
 
     /**
@@ -95,8 +94,7 @@ class Canvas
 
 
         $data = $this->getCollection($sUrl, $iLimit);
-print_r($data);
-sleep(5);
+
         return SubmissionCollection::fromCanvasArray($data, $assignment);
     }
 
