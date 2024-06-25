@@ -10,6 +10,7 @@ use Hurah\Canvas\Endpoints\Assignment\AssignmentCollection;
 use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroup;
 use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroupCollection;
 use Hurah\Canvas\Endpoints\CanvasObject;
+use Hurah\Canvas\Endpoints\Module\Module;
 use Hurah\Types\Exception\InvalidArgumentException;
 
 
@@ -48,6 +49,7 @@ class Course extends CanvasObject
 
         return $aMatches[1] ?? substr($this->getCourseCode(),0,5);
     }
+
     public function getAssignment(int $canvas_id): Assignment
     {
         if (!isset($this->assignments[$canvas_id])) {

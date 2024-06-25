@@ -3,11 +3,23 @@
 namespace Hurah\Canvas\Endpoints\Module;
 
 use Exception;
+use Hurah\Types\Exception\NullPointerException;
 use Hurah\Types\Type\AbstractCollectionDataType;
 
 class ModuleCollection extends AbstractCollectionDataType
 {
 
+    public function findOneByName(string $sModuleName):Module
+    {
+        foreach ($this as $oModule)
+        {
+            if($oModule->getName() === $sModuleName)
+            {
+                return $oModule;
+            }
+        }
+        throw new NullPointerException("No module found that goes by the name {$sModuleName}");
+    }
 
     /**
      * @throws Exception
