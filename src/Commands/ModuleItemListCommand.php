@@ -28,11 +28,11 @@ class ModuleItemListCommand extends Command
         $oModuleItemCollection = $oCanvas->getModuleItems($iCourseId, $iModuleId, 100);
 
         $table = new Table($output);
-        $table->setHeaders(['Page id', 'Type', 'Title']);
+        $table->setHeaders(['Page id', 'Type', 'Page url', 'Title']);
 
         foreach ($oModuleItemCollection as $oModuleItem)
         {
-            $table->addRow([$oModuleItem->getId(), $oModuleItem->getType(), $oModuleItem->getTitle()]);
+            $table->addRow([$oModuleItem->getId(), $oModuleItem->getType(), $oModuleItem->getPageUrl(), $oModuleItem->getTitle()]);
         }
 
 
