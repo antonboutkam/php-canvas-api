@@ -10,13 +10,13 @@ class Module extends CanvasObject
     public ?int $id = null;
     public string $name;
     public ?int $position = null;
-    public ?string $unlockAt;
+    public ?string $itemsUrl = null;
+    public ?string $unlockAt = null;
     public ?bool $requireSequentialProgress = true;
     public ?bool $publishFinalGrade = false;
     public array $prerequisiteModuleIds = [];
-    public bool $published = true;
+    public bool $published = false;
     public ?int $itemsCount = null;
-    public string $itemsUrl;
 
 
     /**
