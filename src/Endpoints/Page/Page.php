@@ -136,7 +136,7 @@ class Page extends CanvasObject
      */
     public function getPageId(): ?int
     {
-        return $this->pageId;
+        return $this->pageId ?? null;
     }
 
     /**
