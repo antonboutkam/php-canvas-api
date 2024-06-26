@@ -29,6 +29,8 @@ abstract class CanvasObject
                 $keyName = Util::camelCaseToUnderscore($property->name);
 
             }
+            echo $property->name . PHP_EOL;
+            echo $property->getType() . PHP_EOL;
             print_r($property->getType());
             if($property->getType()->getName() === 'DateTime')
             {
