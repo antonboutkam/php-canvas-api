@@ -53,7 +53,7 @@ class Page extends CanvasObject
      * The User who last edited the page
      * @var mixed
      */
-    private $lastEditedBy;
+    private ?string $lastEditedBy = null;
 
     /**
      * The page content, in HTML
