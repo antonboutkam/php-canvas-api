@@ -158,16 +158,6 @@ class Page extends CanvasObject
     }
 
     /**
-     * @param string $url
-     * @return Page
-     */
-    public function setUrl(string $url): Page
-    {
-        $this->url = $url;
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getTitle(): string
