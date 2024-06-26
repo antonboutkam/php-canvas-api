@@ -207,7 +207,7 @@ class Canvas
 
         return $collection;
     }
-    public function storeModuleItem(int $iCourseId, int $iModuleId, int $iModuleItemId, ModuleItem $oModuleItem):array{
+    public function storeModuleItem(int $iCourseId, int $iModuleId, ModuleItem $oModuleItem):array{
         if($oModuleItem->getId())
         {
             return $this->updateModuleItem($iCourseId, $iModuleId, $oModuleItem->getId(), $oModuleItem);
