@@ -32,7 +32,7 @@ class ModuleCollection extends AbstractCollectionDataType
         }
         $oModule = new Module();
         $oModule->setName($sModuleName);
-        $oModule->setPublished(false);
+
         return $oModule;
     }
     /**
