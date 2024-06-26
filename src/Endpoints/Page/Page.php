@@ -152,9 +152,9 @@ class Page extends CanvasObject
     /**
      * @return string
      */
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
-        return $this->url;
+        return $this->url ?? null;
     }
 
     /**
