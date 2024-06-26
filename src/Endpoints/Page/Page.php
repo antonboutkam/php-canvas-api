@@ -53,7 +53,7 @@ class Page extends CanvasObject
      * The User who last edited the page
      * @var mixed
      */
-    private ?string $lastEditedBy = null;
+    private ?array $lastEditedBy = [];
 
     /**
      * The page content, in HTML
@@ -113,7 +113,7 @@ class Page extends CanvasObject
         $page->updatedAt = self::makeDate($data['updated_at']);
         $page->hideFromStudents = $data['hide_from_students'] ?? null;
         $page->editingRoles = $data['editing_roles'] ?? null;
-        $page->lastEditedBy = $data['last_edited_by'] ?? null;
+        $page->lastEditedBy = $data['last_edited_by'] ?? [];
         $page->body = $data['body'] ?? null;
         $page->published = $data['published'] ?? null;
         $page->publishAt = self::makeDate($data['publish_at']);
@@ -260,16 +260,16 @@ class Page extends CanvasObject
     /**
      * @return mixed
      */
-    public function getLastEditedBy()
+    public function getLastEditedBy():?array
     {
-        return $this->lastEditedBy;
+        return $this->lastEditedBy ?? [];
     }
 
     /**
      * @param mixed $lastEditedBy
      * @return Page
      */
-    public function setLastEditedBy($lastEditedBy)
+    public function setLastEditedBy(?array $lastEditedBy)
     {
         $this->lastEditedBy = $lastEditedBy;
         return $this;
