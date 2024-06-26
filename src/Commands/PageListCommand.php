@@ -27,11 +27,11 @@ class PageListCommand extends Command
         $oPageCollection = $oCanvas->getPages($iCourseId, 100);
 
         $table = new Table($output);
-        $table->setHeaders(['Page id', 'Title']);
+        $table->setHeaders(['Page id', 'Title', 'Page url']);
 
         foreach ($oPageCollection as $oPage)
         {
-            $table->addRow([$oPage->getPageId(), $oPage->getTitle()]);
+            $table->addRow([$oPage->getPageId(), $oPage->getTitle(), $oPage->getUrl()]);
         }
 
 
