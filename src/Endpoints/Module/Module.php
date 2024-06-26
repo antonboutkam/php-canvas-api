@@ -25,9 +25,6 @@ class Module extends CanvasObject
      * 2*/
     public static function fromCanvasArray(array $array): self
     {
-
-        print_r($array);
-
         $instance = new self();
 
         foreach ($array as $key => $value) {

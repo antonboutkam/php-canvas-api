@@ -105,7 +105,6 @@ class Page extends CanvasObject
      */
     public static function fromCanvasArray(array $data):self
     {
-        print_r($data);
         $page = new self();
         $page->pageId = $data['page_id'] ?? null;
         $page->url = $data['url'] ?? null;

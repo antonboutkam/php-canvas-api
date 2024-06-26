@@ -249,11 +249,11 @@ class Canvas
 
         $collection = AssignmentCollection::fromCanvasArray($data);
 
-
+/*
         foreach ($collection as $assignment) {
             echo $assignment->getName() . '----' . $assignment->getId() . ' ---- ' . $assignment->getHtmlUrl() . PHP_EOL;
         }
-
+*/
         return $collection;
     }
     /**
