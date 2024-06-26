@@ -92,13 +92,13 @@ class ModuleItem extends CanvasObject
      * Link to the Canvas API object, if applicable
      * @var string|null
      */
-    protected ?string $url;
+    protected ?string $url = null;
 
     /**
      * Unique locator for the linked wiki page (only for 'Page' type)
      * @var string|null
      */
-    protected ?string $pageUrl;
+    protected ?string $pageUrl = null;
 
     /**
      * External URL that the item points to (only for 'ExternalUrl' and 'ExternalTool' types)
