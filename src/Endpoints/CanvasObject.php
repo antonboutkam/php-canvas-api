@@ -29,6 +29,7 @@ abstract class CanvasObject
                 $keyName = Util::camelCaseToUnderscore($property->name);
 
             }
+            print_r($property->getType());
             if($property->getType()->getName() === 'DateTime')
             {
                 $value = self::formatDt($property->getValue($this));
