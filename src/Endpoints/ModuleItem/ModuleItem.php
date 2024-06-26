@@ -44,7 +44,7 @@ class ModuleItem extends CanvasObject
      * The unique identifier for the module item
      * @var int
      */
-    protected int $id;
+    protected ?int $id = null;
 
     /**
      * The id of the Module this item appears in
@@ -56,7 +56,7 @@ class ModuleItem extends CanvasObject
      * The position of this item in the module (1-based)
      * @var int
      */
-    protected int $position;
+    protected ?int $position = null;
 
     /**
      * The title of this item
@@ -68,7 +68,7 @@ class ModuleItem extends CanvasObject
      * 0-based indent level; module items may be indented to show a hierarchy
      * @var int
      */
-    protected int $indent;
+    protected ?int $indent = null;
 
     /**
      * The type of object referred to
@@ -86,7 +86,7 @@ class ModuleItem extends CanvasObject
      * Link to the item in Canvas
      * @var string
      */
-    protected string $htmlUrl;
+    protected ?string $htmlUrl = null;
 
     /**
      * Link to the Canvas API object, if applicable
@@ -104,31 +104,31 @@ class ModuleItem extends CanvasObject
      * External URL that the item points to (only for 'ExternalUrl' and 'ExternalTool' types)
      * @var string|null
      */
-    protected ?string $externalUrl;
+    protected ?string $externalUrl = null;
 
     /**
      * Whether the external tool opens in a new tab (only for 'ExternalTool' type)
      * @var bool|null
      */
-    protected ?bool $newTab;
+    protected ?bool $newTab = null;
 
     /**
      * Completion requirement for this module item
      * @var array|null
      */
-    protected ?array $completionRequirement;
+    protected ?array $completionRequirement  = [];
 
     /**
      * Additional details specific to the associated object
      * @var array|null
      */
-    protected ?array $contentDetails;
+    protected ?array $contentDetails = null;
 
     /**
      * Whether this module item is published
      * @var bool|null
      */
-    protected ?bool $published;
+    protected ?bool $published = null;
 
     // Getters and Setters with fluent interface
     public function getId(): ?int
