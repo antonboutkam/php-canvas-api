@@ -6,6 +6,10 @@ use Hurah\Types\Type\Url;
 
 class Config
 {
+    public static function getAccountId():string
+    {
+        return $_ENV['CANVAS_ACCOUNT_ID'];
+    }
 
     public static function getCanvasToken():string
     {

@@ -10,12 +10,15 @@ use Hurah\Canvas\Endpoints\Assignment\AssignmentCollection;
 use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroupCollection;
 use Hurah\Canvas\Endpoints\Course\Course;
 use Hurah\Canvas\Endpoints\Course\CourseCollection;
+use Hurah\Canvas\Endpoints\GradingStandard;
+use Hurah\Canvas\Endpoints\GradingStandard\GradingStandard;
 use Hurah\Canvas\Endpoints\Module\Module;
 use Hurah\Canvas\Endpoints\Module\ModuleCollection;
 use Hurah\Canvas\Endpoints\ModuleItem\ModuleItem;
 use Hurah\Canvas\Endpoints\ModuleItem\ModuleItemCollection;
 use Hurah\Canvas\Endpoints\Page\Page;
 use Hurah\Canvas\Endpoints\Page\PageCollection;
+use Hurah\Canvas\Endpoints\Submission\Submission;
 use Hurah\Canvas\Endpoints\Submission\SubmissionCollection;
 use Hurah\Types\Exception\InvalidArgumentException;
 use Hurah\Types\Util\JsonUtils;
@@ -80,15 +83,53 @@ class Canvas
         return SubmissionCollection::fromCanvasArray($data, $assignment);
     }
 
+    public function createGradingStandard(GradingStandard $oGradingStandard):array
+    {
+        $iAccountId = Config::getAccountId();
+        $url = "/api/v1/accounts/{$iAccountId}/grading_standards";
+        return $this->postItem($url, $oGradingStandard->toCanvasArray());
+    }
+
+    public function createCourse(Course $oCourse):array
+    {
+        $iAccountId = Config::getAccountId();
+        $url = "/api/v1/accounts/{$iAccountId}/courses";
+        return $this->postItem($url, $oCourse->toCanvasArray());
+
+    }
+    public function createSubmission(mixed $iCourseId, mixed $oAssignmentId, Submission $submission):array
+    {
+        $url = "/courses/{$iCourseId}/assignments/{$oAssignmentId}/submissions";
+        return $this->postItem($url, $submission->toCanvasArray());
+    }
+
     /**
      * PUT /api/v1/courses/:course_id/modules
      * @throws InvalidArgumentException
      * @throws GuzzleException
      * @throws Exception
      */
-    public function createAssignment(int $iCourseId, Assignment $assignment): array
+    public function createAssignment(int $iCourseId, Assignment $oAssignment): array
     {
-        return $this->postItem('/courses/' . $iCourseId . '/modules', $assignment->toCanvasArray());
+        return $this->postItem("/courses/{$iCourseId}/assignments", $oAssignment->toCanvasArray());
+    }
+
+    public function updateAssignment(int $iCourseId, Assignment $oAssignment):array
+    {
+        return $this->putItem("/courses/{$iCourseId}/assignments/{$oAssignment->getId()}", $oAssignment->toCanvasArray());
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     * @throws GuzzleException
+     */
+    public function storeAssignment(int $iCourseId, Assignment $oAssignment):array
+    {
+        if($oAssignment->getId())
+        {
+            return $this->updateAssignment($iCourseId, $oAssignment);
+        }
+        return $this->createAssignment($iCourseId, $oAssignment);
     }
 
     /**
@@ -395,4 +436,5 @@ class Canvas
         }
         return [];
     }
+
 }

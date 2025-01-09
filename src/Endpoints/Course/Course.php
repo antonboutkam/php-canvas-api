@@ -96,7 +96,7 @@ class Course extends CanvasObject
 
     }
 /*
-    public function toArray(): array
+    public function toProprietaryArray(): array
     {
         return [
             'id' => $this->getId(),

@@ -3,6 +3,7 @@ namespace Hurah\Canvas\Endpoints\Submission;
 
 use DateTime;
 use Hurah\Canvas\Endpoints\CanvasObject;
+use Hurah\Types\Exception\InvalidArgumentException;
 use Hurah\Types\Exception\NullPointerException;
 use Hurah\Canvas\Endpoints\Assignment\Assignment;
 use Hurah\Canvas\Endpoints\Course\Course;
@@ -11,6 +12,15 @@ use Hurah\Canvas\Util;
 
 
 class Submission extends CanvasObject {
+
+    public const TYPES = [
+        'online_text_entry',
+        'online_url',
+        'online_upload',
+        'media_recording',
+        'basic_lti_launch',
+        'student_annotation'
+    ];
     public int $id;
 
     public string $canvas_assignment_id;
@@ -401,11 +411,15 @@ class Submission extends CanvasObject {
     }
 
     /**
-     * @param string|null $submission_type
+     * @param string|null $submission_type valid options are: online_text_entry, online_url, online_upload, media_recording, basic_lti_launch, student_annotation
      * @return Submission
      */
     public function setSubmissionType(?string $submission_type): Submission
     {
+        if($submission_type && !in_array($submission_type, self::TYPES))
+        {
+            throw new InvalidArgumentException('Submission type must be one of ' . join(', ', self::TYPES));
+        }
         $this->submission_type = $submission_type;
         return $this;
     }

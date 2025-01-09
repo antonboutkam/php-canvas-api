@@ -12,13 +12,13 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class AssignmentCreateCommand extends Command
+class AssignmentUpdateCommand extends Command
 {
     function configure()
     {
-        $this->setDescription('Create a new assignment ');
-        $this->setHelp('XXX');
-        $this->setName('assignment:create');
+        $this->setDescription('Update an assignment');
+        $this->setHelp('See: https://canvas.instructure.com/doc/api/assignments.html#method.assignments_api.create');
+        $this->setName('assignment:update');
         $this->addArgument('course_id', InputArgument::REQUIRED, 'The canvas id of the course');
         $this->addArgument('name', InputArgument::REQUIRED, 'The name of the assignment');
         $this->addArgument('description', InputArgument::REQUIRED, 'A description of the assignment');
@@ -33,16 +33,13 @@ class AssignmentCreateCommand extends Command
     {
         $oCanvas = new Canvas();
         $iCourseId = $input->getArgument('course_id');
-
         $sName = $input->getArgument('name');
         $sDescription = $input->getArgument('description');
         $sType = $input->getArgument('submission_type');
-
         $oAssignment = new Assignment();
         $oAssignment->setName($sName);
         $oAssignment->setDescription($sDescription);
         $oAssignment->setSubmissionTypes([$sType]);
-
         $aResult = $oCanvas->createAssignment($iCourseId, $oAssignment);
 
         $table = new Table($output);
