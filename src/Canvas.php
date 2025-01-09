@@ -10,7 +10,6 @@ use Hurah\Canvas\Endpoints\Assignment\AssignmentCollection;
 use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroupCollection;
 use Hurah\Canvas\Endpoints\Course\Course;
 use Hurah\Canvas\Endpoints\Course\CourseCollection;
-use Hurah\Canvas\Endpoints\GradingStandard;
 use Hurah\Canvas\Endpoints\GradingStandard\GradingStandard;
 use Hurah\Canvas\Endpoints\Module\Module;
 use Hurah\Canvas\Endpoints\Module\ModuleCollection;
