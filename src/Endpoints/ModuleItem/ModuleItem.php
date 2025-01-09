@@ -8,6 +8,7 @@ use Hurah\Canvas\Util;
 class ModuleItem extends CanvasObject
 {
 
+
     /**
      * Create a ModuleItem object from an associative array.
      *
