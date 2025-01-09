@@ -14,6 +14,9 @@
             "Hurah\\Canvas\\" : "src/"
         }
     },
+    "autoload-dev" : {
+        "Hurah\\Canvas\\Tests\\" : "test/"
+    },
     "minimum-stability": "dev",
     "require": {
         "php" : "^8.2",

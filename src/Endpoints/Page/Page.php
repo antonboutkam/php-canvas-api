@@ -109,15 +109,15 @@ class Page extends CanvasObject
         $page->pageId = $data['page_id'] ?? null;
         $page->url = $data['url'] ?? null;
         $page->title = $data['title'] ?? null;
-        $page->createdAt = self::makeDate($data['created_at']);
-        $page->updatedAt = self::makeDate($data['updated_at']);
+        $page->createdAt = isset($data['created_at']) ? self::makeDate($data['created_at']) : null;
+        $page->updatedAt = isset($data['updated_at']) ? self::makeDate($data['updated_at']) : null;
         $page->hideFromStudents = $data['hide_from_students'] ?? null;
         $page->editingRoles = $data['editing_roles'] ?? null;
         $page->lastEditedBy = $data['last_edited_by'] ?? [];
         $page->body = $data['body'] ?? null;
         $page->published = $data['published'] ?? null;
-        $page->publishAt = self::makeDate($data['publish_at']);
-        $page->frontPage = $data['front_page'] ?? null;
+        $page->publishAt = isset($data['publish_at']) ? self::makeDate($data['publish_at']) : null;
+        $page->frontPage = $data['front_page'] ?? false;
         $page->lockedForUser = $data['locked_for_user'] ?? null;
         $page->lockInfo = $data['lock_info'] ?? null;
         $page->lockExplanation = $data['lock_explanation'] ?? null;
@@ -323,6 +323,13 @@ class Page extends CanvasObject
      * @return bool
      */
     public function isFrontPage(): bool
+    {
+        return $this->frontPage;
+    }
+    /**
+     * @return bool
+     */
+    public function getFrontPage(): bool
     {
         return $this->frontPage;
     }

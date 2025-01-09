@@ -34,11 +34,7 @@ abstract class CanvasObject
                 echo $property->name . ' has no type'. PHP_EOL;
             }
 
-            if(!isset($this->{$keyName}))
-            {
-                $aOut[$keyName] = null;
-            }
-            elseif($property->getType()->getName() === 'DateTime')
+            if($property->getType()->getName() === 'DateTime')
             {
                 $aOut[$keyName] = self::formatDt($property->getValue($this));
             }
