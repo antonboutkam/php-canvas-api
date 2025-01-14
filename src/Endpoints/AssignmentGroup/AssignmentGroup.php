@@ -11,7 +11,7 @@ use Hurah\Types\Exception\InvalidArgumentException;
 class AssignmentGroup extends CanvasObject
 {
     protected ?int $id = null;
-    protected string $name;
+    protected ?string $name;
     protected ?int $position = null;
     protected int $course_id;
     protected float $group_weight = 0;
@@ -43,12 +43,12 @@ class AssignmentGroup extends CanvasObject
         return array_filter($this->toArray());
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
         return $this;
