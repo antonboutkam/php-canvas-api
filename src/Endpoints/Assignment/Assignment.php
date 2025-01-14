@@ -28,17 +28,17 @@ class Assignment extends CanvasObject
     public string $htmlUrl = '';
     public string $submissionsDownloadUrl = '';
     public ?int $assignmentGroupId = null;
-    public bool $dueDateRequired;
-    public array $allowedExtensions;
-    public int $maxNameLength;
-    public bool $turnitinEnabled;
-    public bool $vericiteEnabled;
-    public $turnitinSettings; // Still unclear about this one
+    public bool $dueDateRequired = false;
+    public array $allowedExtensions = ['txt', 'php', 'js', 'pdf'];
+    public int $maxNameLength = 50;
+    public bool $turnitinEnabled = true;
+    public bool $vericiteEnabled = false;
+    public $turnitinSettings = null; // Still unclear about this one
     public bool $gradeGroupStudentsIndividually = true;
     public bool $graderNamesVisibleToGrader = true;
     public bool $graderNamesVisibleToFinalGrader = true;
 
-    public $externalToolTagAttributes; // Still unclear about this one
+    public $externalToolTagAttributes = null; // Still unclear about this one
     public bool $peerReviews = false;
     public bool $automaticPeerReviews = false;
     public int $peerReviewCount = 0;
@@ -50,10 +50,12 @@ class Assignment extends CanvasObject
     public bool $postToSis;
     public string $integrationId;
     public array $integrationData;
-    public float $pointsPossible;
+    public float $pointsPossible = 100;
     public array $submissionTypes;
     public bool $hasSubmittedSubmissions;
-    public string $gradingType;
+
+    // https://canvas.instructure.com/doc/api/assignments.html
+    public string $gradingType = 'points';
     public $gradingStandardId; // Still unclear about this one
     public bool $published;
     public bool $unpublishable;
@@ -991,10 +993,12 @@ class Assignment extends CanvasObject
     }
 
     /**
-     * @param string $gradingType
+     * @see https://canvas.instructure.com/doc/api/assignments.html
+     * pass_fail, percent, letter_grade, gpa_scale, points, not_graded
+     * @param string $gradingType = 'points'
      * @return Assignment
      */
-    public function setGradingType(string $gradingType): Assignment
+    public function setGradingType(string $gradingType = 'points'): Assignment
     {
         $this->gradingType = $gradingType;
         return $this;
