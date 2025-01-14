@@ -24,6 +24,11 @@ class AssignmentGroup extends CanvasObject
         echo __FILE__ . '::' . __LINE__ . PHP_EOL;
         print_r($canvasArray);
 
+        if(!$iCanvasCourseId && $canvasArray['course_id'])
+        {
+            $iCanvasCourseId = $canvasArray['course_id'];
+        }
+
         $assignmentGroup = new self();
         $assignmentGroup
             ->setName($canvasArray['name'])
