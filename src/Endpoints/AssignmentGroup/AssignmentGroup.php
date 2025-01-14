@@ -10,12 +10,11 @@ use Hurah\Types\Exception\InvalidArgumentException;
 
 class AssignmentGroup extends CanvasObject
 {
-    protected int $id;
+    protected ?int $id = null;
     protected string $name;
-    protected int $position;
+    protected ?int $position = null;
     protected int $course_id;
-    protected int $canvas_course_id;
-    protected float $group_weight;
+    protected ?float $group_weight = null;
     protected ?string $sis_source_id = null;
     protected array $integration_data;
 
@@ -67,7 +66,7 @@ class AssignmentGroup extends CanvasObject
         return $this->group_weight;
     }
 
-    public function setGroupWeight(float $group_weight): self
+    public function setGroupWeight(?float $group_weight = null): self
     {
         $this->group_weight = $group_weight;
         return $this;
@@ -91,25 +90,7 @@ class AssignmentGroup extends CanvasObject
     public function getAssignments(): AssignmentCollection
     {
         $canvas = new Canvas();
-        return $canvas->getAssignmentGroupAssignments($this->getCanvasCourseId(), $this->getId());
-    }
-
-    /**
-     * @return int
-     */
-    public function getCanvasCourseId(): int
-    {
-        return $this->canvas_course_id;
-    }
-
-    /**
-     * @param int $canvas_course_id
-     * @return AssignmentGroup
-     */
-    public function setCanvasCourseId(int $canvas_course_id): AssignmentGroup
-    {
-        $this->canvas_course_id = $canvas_course_id;
-        return $this;
+        return $canvas->getAssignmentGroupAssignments($this->getCourseId(), $this->getId());
     }
 
     public function getId(): int
