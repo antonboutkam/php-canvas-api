@@ -16,6 +16,13 @@ abstract class CanvasObject
             'assignment' => $this->toArray()
         ];
     }
+
+    /**
+     * Converts the object properties into an array.
+     *
+     * @param string $keyStyle The style in which the keys should be formatted (default is 'snake_case')
+     * @return array The array representation of the object properties
+     */
     public function toArray(string $keyStyle = 'snake_case'):array
     {
         $aOut = [];
@@ -27,7 +34,6 @@ abstract class CanvasObject
             if($keyStyle === 'snake_case')
             {
                 $keyName = Util::camelCaseToUnderscore($property->name);
-
             }
             if($property->getType() === null)
             {
