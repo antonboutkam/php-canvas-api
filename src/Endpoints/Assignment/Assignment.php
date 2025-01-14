@@ -105,6 +105,13 @@ class Assignment extends CanvasObject
         $this->updatedAt = new DateTime();
     }
 
+    public function toCanvasArray():array
+    {
+        return [
+            'assignment' => array_filter($this->toArray())
+        ];
+    }
+
     /**
      * @param array $array
      * @return self

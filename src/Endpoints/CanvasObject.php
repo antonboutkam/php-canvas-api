@@ -10,12 +10,7 @@ use ReflectionClass;
 abstract class CanvasObject
 {
 
-    public function toCanvasArray():array
-    {
-        return [
-            'assignment' => $this->toArray()
-        ];
-    }
+
 
     /**
      * Converts the object properties into an array.
