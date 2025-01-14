@@ -14,18 +14,20 @@ class AssignmentGroup extends CanvasObject
     protected string $name;
     protected ?int $position = null;
     protected int $course_id;
-    protected ?float $group_weight = null;
+    protected float $group_weight = 0;
     protected ?string $sis_source_id = null;
-    protected ?array $integration_data = null;
+    protected array $integration_data = [];
+    protected array $rules = [];
 
     public static function fromCanvasArray(array $canvasArray, int $iCanvasCourseId = null): self
     {
-
+print_r($canvasArray);
         $assignmentGroup = new self();
         $assignmentGroup
             ->setName($canvasArray['name'])
             ->setId($canvasArray['id'])
             ->setCourseId($iCanvasCourseId)
+            ->setRules($canvasArray['rules'])
             ->setPosition($canvasArray['position'])
             ->setGroupWeight($canvasArray['group_weight'])
             ->setSisSourceId($canvasArray['sis_source_id'])
@@ -47,6 +49,17 @@ class AssignmentGroup extends CanvasObject
     public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getRules(): array
+    {
+        return $this->rules;
+    }
+
+    public function setRules(array $rules): self
+    {
+        $this->rules = $rules;
         return $this;
     }
 
