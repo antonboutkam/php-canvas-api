@@ -19,9 +19,9 @@ class Assignment extends CanvasObject
     public string $description;
     public DateTime $createdAt;
     public DateTime $updatedAt;
-    public DateTime $dueAt;
-    public DateTime $lockAt;
-    public DateTime $unlockAt;
+    public ?DateTime $dueAt = null;
+    public ?DateTime $lockAt = null;
+    public ?DateTime $unlockAt = null;
     public bool $hasOverrides;
     public int $courseId;
     public string $htmlUrl;
@@ -41,7 +41,7 @@ class Assignment extends CanvasObject
     public bool $peerReviews;
     public bool $automaticPeerReviews;
     public int $peerReviewCount;
-    public DateTime $peerReviewsAssignAt;
+    public ?DateTime $peerReviewsAssignAt = null;
     public bool $intraGroupPeerReviews;
     public int $groupCategoryId;
     public int $needsGradingCount;
@@ -101,6 +101,11 @@ class Assignment extends CanvasObject
     protected ?self $previous = null;
     protected ?self $next = null;
 
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+        $this->updatedAt = new DateTime();
+    }
     /**
      * @param array $array
      * @return self
@@ -421,6 +426,10 @@ class Assignment extends CanvasObject
      */
     public function setUpdatedAt(DateTime $updatedAt): Assignment
     {
+        if($this->updatedAt === null)
+        {
+            $this->updatedAt = new DateTime();
+        }
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -430,6 +439,10 @@ class Assignment extends CanvasObject
      */
     public function getDueAt(): DateTime
     {
+        if($this->getId() === null)
+        {
+            $this->dueAt = new DateTime();
+        }
         return $this->dueAt;
     }
 
