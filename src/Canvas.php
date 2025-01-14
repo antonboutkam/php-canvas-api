@@ -138,7 +138,7 @@ class Canvas
      */
     public function getAssignmentGroup(int $iCourseId, int $iAssignmentGroup): AssignmentGroup
     {
-        $aAssignmentGroup = $this->getItem("/api/v1/courses/{$iCourseId}/assignment_groups/{$iAssignmentGroup}");
+        $aAssignmentGroup = $this->getItem("/courses/{$iCourseId}/assignment_groups/{$iAssignmentGroup}");
 
         echo __FILE__ . '::' . __LINE__ . PHP_EOL;
         print_r($aAssignmentGroup);
