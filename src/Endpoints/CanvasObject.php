@@ -37,7 +37,8 @@ abstract class CanvasObject
             }
             if($property->getType() === null)
             {
-                echo $property->name . ' has no type'. PHP_EOL;
+                echo 'Property: ' . $property->name . ' has no type'. PHP_EOL;
+                continue;
             }
 
             if($property->getType()->getName() === 'DateTime')

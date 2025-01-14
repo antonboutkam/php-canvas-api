@@ -44,59 +44,55 @@ class Assignment extends CanvasObject
     public int $peerReviewCount = 0;
     public ?DateTime $peerReviewsAssignAt = null;
     public bool $intraGroupPeerReviews = false;
-    public int $groupCategoryId;
-    public int $needsGradingCount;
-    public array $needsGradingCountBySection;
-    public bool $postToSis;
-    public string $integrationId;
-    public array $integrationData;
+    public ?int $groupCategoryId = 1;
+    public ?int $needsGradingCount = null;
+    public ?array $needsGradingCountBySection = null;
+    public bool $postToSis = false;
+    public ?string $integrationId = null;
+    public ?array $integrationData = null;
     public float $pointsPossible = 100;
-    public array $submissionTypes;
-    public bool $hasSubmittedSubmissions;
+
+    /* the types of submissions allowed for this assignment list containing one or
+    * more of the following: 'discussion_topic', 'online_quiz', 'on_paper', 'none',
+    * 'external_tool', 'online_text_entry', 'online_url', 'online_upload',
+     *  'media_recording', 'student_annotation'
+    */
+    public array $submissionTypes = ['online_text_entry'];
 
     // https://canvas.instructure.com/doc/api/assignments.html
     public string $gradingType = 'points';
     public $gradingStandardId; // Still unclear about this one
-    public bool $published;
-    public bool $unpublishable;
-    public bool $onlyVisibleToOverrides;
-    public bool $lockedForUser;
-    public string $lockExplanation;
-    public int $quizId;
-    public bool $anonymousSubmissions;
+    public bool $published = false;
+    public bool $unpublishable = false;
+    public bool $onlyVisibleToOverrides = false;
+    public bool $lockedForUser = false;
+    public string $lockExplanation = '';
+
     public bool $freezeOnCopy = false;
     public bool $frozen = false;
-    public array $frozenAttributes;
+
     public ?bool $submission = null;
-    public ?bool $useRubricForGrading = true;
-    public ?array $rubricSettings;
+    public ?bool $useRubricForGrading = false;
+    public ?array $rubricSettings = null;
     public ?array $rubric = null;
-    public array $assignmentVisibility;
+    public ?array $assignmentVisibility = null;
     public ?bool $overrides = null;
-    public bool $omitFromFinalGrade;
+    public bool $omitFromFinalGrade = true;
     public bool $hideInGradebook = true;
     public bool $moderatedGrading = false;
-    public int $graderCount;
-    public int $finalGraderId;
-    public bool $graderCommentsVisibleToGraders;
+    public ?int $graderCount = null;
+    public ?int $finalGraderId = null;
+    public bool $graderCommentsVisibleToGraders = false;
     public $scoreStatistics; // Possibly an object or an array, need more details
-    public bool $canSubmit;
-    public array $abGuid;
+    public bool $canSubmit = true;
+
     public $annotatableAttachmentId; // Possibly an int, need more details
-    public bool $anonymizeStudents;
-    public bool $requireLockdownBrowser;
-    public bool $importantDates;
 
     public bool $muted = false;
-    public string $originalAssignmentName;
-    public int $originalQuizId;
-    public string $workflowState;
     public int $allowedAttempts = 3;
 
-    public string $secureParams;
-    public string $ltiContextId;
-    public bool $canDuplicate;
-    public bool $visibleToEveryone;
+    public bool $canDuplicate = true;
+    public bool $visibleToEveryone = true;
 
     protected Course $course;
 
@@ -108,6 +104,7 @@ class Assignment extends CanvasObject
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
     }
+
     /**
      * @param array $array
      * @return self
@@ -143,6 +140,61 @@ class Assignment extends CanvasObject
 
         }
         return null;
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     * @throws GuzzleException
+     */
+    public function getCourse(): ?Course
+    {
+        if (!isset($this->course)) {
+            $canvas = new Canvas();
+            $this->course = $canvas->getCourse($this->getCourseId());
+        }
+
+        return $this->course;
+    }
+
+    /**
+     * Returns the local id of the course, not related to Canvas
+     * @return int
+     */
+    public function getCourseId(): int
+    {
+        return $this->courseId;
+    }
+
+    /**
+     * Sets the local id of the course, not related to Canvas
+     * @param int $courseId
+     * @return Assignment
+     */
+    public function setCourseId(int $courseId): Assignment
+    {
+        $oCanvas = new Canvas();
+        $this->course = $oCanvas->getCourse($courseId);
+
+        $this->courseId = $courseId;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return Assignment
+     */
+    public function setId(int $id): Assignment
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**
@@ -188,16 +240,7 @@ class Assignment extends CanvasObject
     {
         return $this->graderNamesVisibleToGrader;
     }
-    public function getGraderNamesVisibleToFinalGrader(): string
-    {
-        return $this->graderNamesVisibleToFinalGrader;
-    }
 
-    public function setGraderNamesVisibleToFinalGrader(bool $graderNamesVisibleToFinalGrader): Assignment
-    {
-        $this->graderNamesVisibleToFinalGrader = $graderNamesVisibleToFinalGrader;
-        return $this;
-    }
     /**
      * @param bool $graderNamesVisibleToGrader
      * @return Assignment
@@ -208,41 +251,17 @@ class Assignment extends CanvasObject
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getSecureParams(): string
+    public function getGraderNamesVisibleToFinalGrader(): string
     {
-        return $this->secureParams;
+        return $this->graderNamesVisibleToFinalGrader;
     }
 
-    /**
-     * @param array $secureParams
-     * @return Assignment
-     */
-    public function setSecureParams(string $secureParams): Assignment
+    public function setGraderNamesVisibleToFinalGrader(bool $graderNamesVisibleToFinalGrader): Assignment
     {
-        $this->secureParams = $secureParams;
+        $this->graderNamesVisibleToFinalGrader = $graderNamesVisibleToFinalGrader;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getLtiContextId(): string
-    {
-        return $this->ltiContextId;
-    }
-
-    /**
-     * @param string $ltiContextId
-     * @return Assignment
-     */
-    public function setLtiContextId(string $ltiContextId): Assignment
-    {
-        $this->ltiContextId = $ltiContextId;
-        return $this;
-    }
 
     /**
      * @return bool
@@ -277,59 +296,6 @@ class Assignment extends CanvasObject
     public function setVisibleToEveryone(bool $visibleToEveryone): Assignment
     {
         $this->visibleToEveryone = $visibleToEveryone;
-        return $this;
-    }
-
-
-    /**
-     * @throws InvalidArgumentException
-     * @throws GuzzleException
-     */
-    public function getCourse(): ?Course
-    {
-        if (!isset($this->course)) {
-            $canvas = new Canvas();
-            $this->course = $canvas->getCourse($this->getCourseId());
-        }
-
-        return $this->course;
-    }
-
-    /**
-     * Returns the local id of the course, not related to Canvas
-     * @return int
-     */
-    public function getCourseId(): int
-    {
-        return $this->courseId;
-    }
-
-    /**
-     * Sets the local id of the course, not related to Canvas
-     * @param int $courseId
-     * @return Assignment
-     */
-    public function setCourseId(int $courseId): Assignment
-    {
-        $this->courseId = $courseId;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return Assignment
-     */
-    public function setId(int $id): Assignment
-    {
-        $this->id = $id;
         return $this;
     }
 
@@ -401,8 +367,7 @@ class Assignment extends CanvasObject
      */
     public function getCreatedAt(): DateTime
     {
-        if($this->createdAt === null)
-        {
+        if ($this->createdAt === null) {
             $this->createdAt = new DateTime();
         }
         return $this->createdAt;
@@ -423,8 +388,7 @@ class Assignment extends CanvasObject
      */
     public function getUpdatedAt(): DateTime
     {
-        if($this->updatedAt === null)
-        {
+        if ($this->updatedAt === null) {
             $this->updatedAt = new DateTime();
         }
         return $this->updatedAt;
@@ -445,8 +409,7 @@ class Assignment extends CanvasObject
      */
     public function getDueAt(): DateTime
     {
-        if($this->getId() === null)
-        {
+        if ($this->getId() === null) {
             $this->dueAt = new DateTime();
         }
         return $this->dueAt;
@@ -957,6 +920,9 @@ class Assignment extends CanvasObject
     }
 
     /**
+     * 'discussion_topic', 'online_quiz', 'on_paper', 'none',
+     * 'external_tool', 'online_text_entry', 'online_url', 'online_upload',
+     *  'media_recording', 'student_annotation'
      * @param array $submissionTypes
      * @return Assignment
      */
@@ -966,23 +932,6 @@ class Assignment extends CanvasObject
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isHasSubmittedSubmissions(): bool
-    {
-        return $this->hasSubmittedSubmissions;
-    }
-
-    /**
-     * @param bool $hasSubmittedSubmissions
-     * @return Assignment
-     */
-    public function setHasSubmittedSubmissions(bool $hasSubmittedSubmissions): Assignment
-    {
-        $this->hasSubmittedSubmissions = $hasSubmittedSubmissions;
-        return $this;
-    }
 
     /**
      * @return string
@@ -1112,41 +1061,7 @@ class Assignment extends CanvasObject
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getQuizId(): int
-    {
-        return $this->quizId;
-    }
 
-    /**
-     * @param int $quizId
-     * @return Assignment
-     */
-    public function setQuizId(int $quizId): Assignment
-    {
-        $this->quizId = $quizId;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAnonymousSubmissions(): bool
-    {
-        return $this->anonymousSubmissions;
-    }
-
-    /**
-     * @param bool $anonymousSubmissions
-     * @return Assignment
-     */
-    public function setAnonymousSubmissions(bool $anonymousSubmissions): Assignment
-    {
-        $this->anonymousSubmissions = $anonymousSubmissions;
-        return $this;
-    }
 
     /**
      * @return bool
@@ -1184,23 +1099,6 @@ class Assignment extends CanvasObject
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getFrozenAttributes(): array
-    {
-        return $this->frozenAttributes;
-    }
-
-    /**
-     * @param array $frozenAttributes
-     * @return Assignment
-     */
-    public function setFrozenAttributes(array $frozenAttributes): Assignment
-    {
-        $this->frozenAttributes = $frozenAttributes;
-        return $this;
-    }
 
     /**
      * @return bool
@@ -1436,23 +1334,6 @@ class Assignment extends CanvasObject
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getAbGuid(): array
-    {
-        return $this->abGuid;
-    }
-
-    /**
-     * @param array $abGuid
-     * @return Assignment
-     */
-    public function setAbGuid(array $abGuid): Assignment
-    {
-        $this->abGuid = $abGuid;
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -1472,59 +1353,6 @@ class Assignment extends CanvasObject
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isAnonymizeStudents(): bool
-    {
-        return $this->anonymizeStudents;
-    }
-
-    /**
-     * @param bool $anonymizeStudents
-     * @return Assignment
-     */
-    public function setAnonymizeStudents(bool $anonymizeStudents): Assignment
-    {
-        $this->anonymizeStudents = $anonymizeStudents;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isRequireLockdownBrowser(): bool
-    {
-        return $this->requireLockdownBrowser;
-    }
-
-    /**
-     * @param bool $requireLockdownBrowser
-     * @return Assignment
-     */
-    public function setRequireLockdownBrowser(bool $requireLockdownBrowser): Assignment
-    {
-        $this->requireLockdownBrowser = $requireLockdownBrowser;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isImportantDates(): bool
-    {
-        return $this->importantDates;
-    }
-
-    /**
-     * @param bool $importantDates
-     * @return Assignment
-     */
-    public function setImportantDates(bool $importantDates): Assignment
-    {
-        $this->importantDates = $importantDates;
-        return $this;
-    }
 
     /**
      * @return bool
@@ -1544,59 +1372,7 @@ class Assignment extends CanvasObject
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getOriginalAssignmentName(): string
-    {
-        return $this->originalAssignmentName;
-    }
 
-    /**
-     * @param string $originalAssignmentName
-     * @return Assignment
-     */
-    public function setOriginalAssignmentName(string $originalAssignmentName): Assignment
-    {
-        $this->originalAssignmentName = $originalAssignmentName;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getOriginalQuizId(): int
-    {
-        return $this->originalQuizId;
-    }
-
-    /**
-     * @param int $originalQuizId
-     * @return Assignment
-     */
-    public function setOriginalQuizId(int $originalQuizId): Assignment
-    {
-        $this->originalQuizId = $originalQuizId;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getWorkflowState(): string
-    {
-        return $this->workflowState;
-    }
-
-    /**
-     * @param string $workflowState
-     * @return Assignment
-     */
-    public function setWorkflowState(string $workflowState): Assignment
-    {
-        $this->workflowState = $workflowState;
-        return $this;
-    }
 
 
 }
