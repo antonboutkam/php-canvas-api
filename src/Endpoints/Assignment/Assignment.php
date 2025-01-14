@@ -18,8 +18,8 @@ class Assignment extends CanvasObject
     public int $position;
     public string $name;
     public string $description;
-    public DateTime $createdAt;
-    public DateTime $updatedAt;
+    public ?DateTime $createdAt = null;
+    public ?DateTime $updatedAt = null;
     public ?DateTime $dueAt = null;
     public ?DateTime $lockAt = null;
     public ?DateTime $unlockAt = null;
