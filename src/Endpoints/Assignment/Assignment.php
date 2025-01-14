@@ -107,8 +107,11 @@ class Assignment extends CanvasObject
 
     public function toCanvasArray():array
     {
+        $aData =  array_filter($this->toArray());
+        unset($aData['course']);
+
         return [
-            'assignment' => array_filter($this->toArray())
+            'assignment' => $aData
         ];
     }
 
