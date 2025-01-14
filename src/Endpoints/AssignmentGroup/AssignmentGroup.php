@@ -21,7 +21,9 @@ class AssignmentGroup extends CanvasObject
 
     public static function fromCanvasArray(array $canvasArray, int $iCanvasCourseId = null): self
     {
-print_r($canvasArray);
+        echo __FILE__ . '::' . __LINE__ . PHP_EOL;
+        print_r($canvasArray);
+
         $assignmentGroup = new self();
         $assignmentGroup
             ->setName($canvasArray['name'])
