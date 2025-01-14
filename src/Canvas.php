@@ -136,9 +136,9 @@ class Canvas
      * @throws InvalidArgumentException
      * @throws GuzzleException
      */
-    public function getAssignmentGroup(int $iCourseId, Endpoints\AssignmentGroup\AssignmentGroup $oAssignmentGroup): AssignmentGroup
+    public function getAssignmentGroup(int $iCourseId, int $iAssignmentGroup): AssignmentGroup
     {
-        $aAssignmentGroup = $this->getItem("/api/v1/courses/{$iCourseId}/assignment_groups/{$oAssignmentGroup->getId()}");
+        $aAssignmentGroup = $this->getItem("/api/v1/courses/{$iCourseId}/assignment_groups/{$iAssignmentGroup}");
         return AssignmentGroup::fromCanvasArray($aAssignmentGroup);
     }
     /**
