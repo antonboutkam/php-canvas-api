@@ -96,10 +96,25 @@ class Canvas
         return $this->postItem($url, $oCourse->toCanvasArray());
 
     }
+
     public function createSubmission(mixed $iCourseId, mixed $oAssignmentId, Submission $submission):array
     {
         $url = "/courses/{$iCourseId}/assignments/{$oAssignmentId}/submissions";
         return $this->postItem($url, $submission->toCanvasArray());
+    }
+    /**
+     * PUT /api/v1/courses/:course_id/modules
+     * @throws InvalidArgumentException
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function createAssignmentGroup(int $iCourseId, Endpoints\AssignmentGroup\AssignmentGroup $oAssignmentGroup): array
+    {
+        return $this->postItem("/courses/{$iCourseId}/assignment_groups", $oAssignmentGroup->toCanvasArray());
+    }
+    public function updateAssignmentGroup(int $iCourseId, Endpoints\AssignmentGroup\AssignmentGroup $oAssignmentGroup): array
+    {
+        return $this->postItem("/courses/{$iCourseId}/assignment_groups/{$oAssignmentGroup->getId()}", $oAssignmentGroup->toCanvasArray());
     }
 
     /**

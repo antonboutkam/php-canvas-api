@@ -192,6 +192,10 @@ class Submission extends CanvasObject {
     
     protected ?string $preview_url = null;
 
+    public function toCanvasArray():array
+    {
+        return ['submission' => array_filter($this->toArray())];
+    }
     /**
      * @param array $array
      * @return self

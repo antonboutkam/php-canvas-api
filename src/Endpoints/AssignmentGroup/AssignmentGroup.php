@@ -35,6 +35,11 @@ class AssignmentGroup extends CanvasObject
         return $assignmentGroup;
     }
 
+    public function toCanvasArray():array
+    {
+        return array_filter($this->toArray());
+    }
+
     public function getName(): string
     {
         return $this->name;

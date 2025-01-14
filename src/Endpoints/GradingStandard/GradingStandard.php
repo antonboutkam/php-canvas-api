@@ -14,6 +14,10 @@ class GradingStandard extends CanvasObject{
     private float $scalingFactor;
     private array $gradingScheme;
 
+    public function toCanvasArray():array
+    {
+        return ['submission' => array_filter($this->toArray())];
+    }
     public static function fromArray(array $aGradingStandard): self
     {
         $instance = new self();

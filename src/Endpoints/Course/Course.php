@@ -95,6 +95,10 @@ class Course extends CanvasObject
         return $obj;
 
     }
+    public function toCanvasArray():array
+    {
+        return ['course' => array_filter($this->toArray())];
+    }
 /*
     public function toProprietaryArray(): array
     {
