@@ -103,6 +103,17 @@ class Canvas
         $url = "/courses/{$iCourseId}/assignments/{$oAssignmentId}/submissions";
         return $this->postItem($url, $submission->toCanvasArray());
     }
+
+    public function storeAssignmentGroup(int $iCourseId, Endpoints\AssignmentGroup\AssignmentGroup $oAssignmentGroup): array
+    {
+        if($oAssignmentGroup->getId())
+        {
+            $this->updateAssignmentGroup($iCourseId, $oAssignmentGroup);
+        }
+        return $this->createAssignmentGroup($iCourseId, $oAssignmentGroup);
+
+    }
+
     /**
      * PUT /api/v1/courses/:course_id/modules
      * @throws InvalidArgumentException
@@ -115,9 +126,12 @@ class Canvas
     }
     public function updateAssignmentGroup(int $iCourseId, Endpoints\AssignmentGroup\AssignmentGroup $oAssignmentGroup): array
     {
-        return $this->postItem("/courses/{$iCourseId}/assignment_groups/{$oAssignmentGroup->getId()}", $oAssignmentGroup->toCanvasArray());
+        return $this->putItem("/courses/{$iCourseId}/assignment_groups/{$oAssignmentGroup->getId()}", $oAssignmentGroup->toCanvasArray());
     }
-
+    public function deleteAssignmentGroup(int $iCourseId, int $iAssignmentGroups):array
+    {
+        return $this->deleteItem("/courses/{$iCourseId}/assignment_groups/{$iAssignmentGroups}");
+    }
     /**
      * @throws InvalidArgumentException
      * @throws GuzzleException
