@@ -93,7 +93,7 @@ class AssignmentGroup extends CanvasObject
         return $canvas->getAssignmentGroupAssignments($this->getCourseId(), $this->getId());
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
