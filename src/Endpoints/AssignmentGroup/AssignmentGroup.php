@@ -16,7 +16,7 @@ class AssignmentGroup extends CanvasObject
     protected int $course_id;
     protected ?float $group_weight = null;
     protected ?string $sis_source_id = null;
-    protected array $integration_data;
+    protected ?array $integration_data = null;
 
     public static function fromCanvasArray(array $canvasArray, int $iCanvasCourseId = null): self
     {
