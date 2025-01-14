@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Hurah\Canvas\Endpoints\Assignment\Assignment;
 use Hurah\Canvas\Endpoints\Assignment\AssignmentCollection;
+use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroup;
 use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroupCollection;
 use Hurah\Canvas\Endpoints\Course\Course;
 use Hurah\Canvas\Endpoints\Course\CourseCollection;
@@ -117,6 +118,15 @@ class Canvas
         return $this->postItem("/courses/{$iCourseId}/assignment_groups/{$oAssignmentGroup->getId()}", $oAssignmentGroup->toCanvasArray());
     }
 
+    /**
+     * @throws InvalidArgumentException
+     * @throws GuzzleException
+     */
+    public function getAssignmentGroup(int $iCourseId, Endpoints\AssignmentGroup\AssignmentGroup $oAssignmentGroup): AssignmentGroup
+    {
+        $aAssignmentGroup = $this->getItem("/api/v1/courses/{$iCourseId}/assignment_groups/{$oAssignmentGroup->getId()}");
+        return AssignmentGroup::fromCanvasArray($aAssignmentGroup);
+    }
     /**
      * PUT /api/v1/courses/:course_id/modules
      * @throws InvalidArgumentException
