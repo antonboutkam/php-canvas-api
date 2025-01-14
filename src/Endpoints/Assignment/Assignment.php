@@ -101,8 +101,7 @@ class Assignment extends CanvasObject
 
     public function __construct()
     {
-        $this->createdAt = new DateTime();
-        $this->updatedAt = new DateTime();
+
     }
 
     public function toCanvasArray():array
