@@ -15,6 +15,7 @@ use Hurah\Types\Exception\NullPointerException;
 class Assignment extends CanvasObject
 {
     public ?int $id = null;
+    public int $position;
     public string $name;
     public string $description;
     public DateTime $createdAt;
@@ -22,31 +23,30 @@ class Assignment extends CanvasObject
     public ?DateTime $dueAt = null;
     public ?DateTime $lockAt = null;
     public ?DateTime $unlockAt = null;
-    public bool $hasOverrides;
+    public bool $hasOverrides = false;
     public int $courseId;
-    public string $htmlUrl;
-    public string $submissionsDownloadUrl;
-    public int $assignmentGroupId;
+    public string $htmlUrl = '';
+    public string $submissionsDownloadUrl = '';
+    public ?int $assignmentGroupId = null;
     public bool $dueDateRequired;
     public array $allowedExtensions;
     public int $maxNameLength;
     public bool $turnitinEnabled;
     public bool $vericiteEnabled;
     public $turnitinSettings; // Still unclear about this one
-    public bool $gradeGroupStudentsIndividually;
-    public bool $graderNamesVisibleToGrader;
-    public bool $graderNamesVisibleToFinalGrader;
+    public bool $gradeGroupStudentsIndividually = true;
+    public bool $graderNamesVisibleToGrader = true;
+    public bool $graderNamesVisibleToFinalGrader = true;
 
     public $externalToolTagAttributes; // Still unclear about this one
-    public bool $peerReviews;
-    public bool $automaticPeerReviews;
-    public int $peerReviewCount;
+    public bool $peerReviews = false;
+    public bool $automaticPeerReviews = false;
+    public int $peerReviewCount = 0;
     public ?DateTime $peerReviewsAssignAt = null;
-    public bool $intraGroupPeerReviews;
+    public bool $intraGroupPeerReviews = false;
     public int $groupCategoryId;
     public int $needsGradingCount;
     public array $needsGradingCountBySection;
-    public int $position;
     public bool $postToSis;
     public string $integrationId;
     public array $integrationData;
@@ -62,18 +62,18 @@ class Assignment extends CanvasObject
     public string $lockExplanation;
     public int $quizId;
     public bool $anonymousSubmissions;
-    public bool $freezeOnCopy;
-    public bool $frozen;
+    public bool $freezeOnCopy = false;
+    public bool $frozen = false;
     public array $frozenAttributes;
-    public $submission; // Possibly an object or an array, need more details
-    public bool $useRubricForGrading;
-    public array $rubricSettings;
-    public $rubric; // Possibly an object or an array, need more details
+    public ?bool $submission = null;
+    public ?bool $useRubricForGrading = true;
+    public ?array $rubricSettings;
+    public ?array $rubric = null;
     public array $assignmentVisibility;
-    public $overrides; // Possibly an object or an
+    public ?bool $overrides = null;
     public bool $omitFromFinalGrade;
-    public bool $hideInGradebook;
-    public bool $moderatedGrading;
+    public bool $hideInGradebook = true;
+    public bool $moderatedGrading = false;
     public int $graderCount;
     public int $finalGraderId;
     public bool $graderCommentsVisibleToGraders;
@@ -85,11 +85,11 @@ class Assignment extends CanvasObject
     public bool $requireLockdownBrowser;
     public bool $importantDates;
 
-    public bool $muted;
+    public bool $muted = false;
     public string $originalAssignmentName;
     public int $originalQuizId;
     public string $workflowState;
-    public int $allowedAttempts;
+    public int $allowedAttempts = 3;
 
     public string $secureParams;
     public string $ltiContextId;
@@ -399,6 +399,10 @@ class Assignment extends CanvasObject
      */
     public function getCreatedAt(): DateTime
     {
+        if($this->createdAt === null)
+        {
+            $this->createdAt = new DateTime();
+        }
         return $this->createdAt;
     }
 
@@ -417,6 +421,10 @@ class Assignment extends CanvasObject
      */
     public function getUpdatedAt(): DateTime
     {
+        if($this->updatedAt === null)
+        {
+            $this->updatedAt = new DateTime();
+        }
         return $this->updatedAt;
     }
 
@@ -426,10 +434,6 @@ class Assignment extends CanvasObject
      */
     public function setUpdatedAt(DateTime $updatedAt): Assignment
     {
-        if($this->updatedAt === null)
-        {
-            $this->updatedAt = new DateTime();
-        }
         $this->updatedAt = $updatedAt;
         return $this;
     }
@@ -549,9 +553,9 @@ class Assignment extends CanvasObject
     /**
      * @return int
      */
-    public function getAssignmentGroupId(): int
+    public function getAssignmentGroupId(): ?int
     {
-        return $this->assignmentGroupId;
+        return $this->assignmentGroupId ?? null;
     }
 
     /**

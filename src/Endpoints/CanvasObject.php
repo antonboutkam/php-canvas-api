@@ -3,8 +3,8 @@
 namespace Hurah\Canvas\Endpoints;
 
 use DateTime;
+use DateTimeInterface;
 use Hurah\Canvas\Util;
-use Hurah\Types\Exception\NullPointerException;
 use ReflectionClass;
 
 abstract class CanvasObject
@@ -26,8 +26,8 @@ abstract class CanvasObject
     public function toArray(string $keyStyle = 'snake_case'):array
     {
         $aOut = [];
-        $refclass = new ReflectionClass($this);
-        foreach ($refclass->getProperties() as $property)
+        $reflector = new ReflectionClass($this);
+        foreach ($reflector->getProperties() as $property)
         {
 
             $keyName = $property->name;
@@ -55,11 +55,7 @@ abstract class CanvasObject
 
     protected static function formatDt(?DateTime $dt = null):?string
     {
-        if($dt)
-        {
-            return $dt->format(\DateTime::ATOM);
-        }
-        return null;
+        return $dt?->format(DateTimeInterface::ATOM);
     }
     protected static function makeDate(?string $dateTime = null):?DateTime
     {
@@ -73,12 +69,13 @@ abstract class CanvasObject
 
 
 
-    protected static function _setValue($instance, $key, $method, $value)
+    protected static function _setValue($instance, $key, $method, $value): void
     {
 
         if (empty($value)) {
             return;
         }
+
         if (!method_exists($instance, $method)) {
             echo '---- No method ' . get_class($instance) . ' -- ' . $method  . PHP_EOL;
             return;
@@ -89,8 +86,6 @@ abstract class CanvasObject
                 return;
             }
 
-        }elseif (empty($value)) {
-            return;
         }
 
         $instance->$method($value);
