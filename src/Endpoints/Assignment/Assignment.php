@@ -15,61 +15,62 @@ use Hurah\Types\Exception\NullPointerException;
 class Assignment extends CanvasObject
 {
     public ?int $id = null;
-    public int $position;
+    public ?int $position = null;
     public string $name;
-    public string $description;
+    public ?string $description = null;
     public ?DateTime $createdAt = null;
     public ?DateTime $updatedAt = null;
     public ?DateTime $dueAt = null;
     public ?DateTime $lockAt = null;
     public ?DateTime $unlockAt = null;
     public bool $hasOverrides = false;
-    public int $courseId;
+    public ?int $courseId = null;
     public string $htmlUrl = '';
     public string $submissionsDownloadUrl = '';
     public ?int $assignmentGroupId = null;
     public bool $dueDateRequired = false;
-    public array $allowedExtensions = ['txt', 'php', 'js', 'pdf'];
-    public int $maxNameLength = 50;
-    public bool $turnitinEnabled = true;
-    public bool $vericiteEnabled = false;
+    public ?array $allowedExtensions = null;
+    public ?int $maxNameLength = null;
+    public ?bool $turnitinEnabled = null;
+    public ?bool $vericiteEnabled = null;
     public $turnitinSettings = null; // Still unclear about this one
-    public bool $gradeGroupStudentsIndividually = true;
-    public bool $graderNamesVisibleToGrader = true;
-    public bool $graderNamesVisibleToFinalGrader = true;
+    public ?bool $gradeGroupStudentsIndividually = null;
+    public ?bool $graderNamesVisibleToGrader = null;
+    public ?bool $graderNamesVisibleToFinalGrader = null;
 
     public $externalToolTagAttributes = null; // Still unclear about this one
-    public bool $peerReviews = false;
-    public bool $automaticPeerReviews = false;
-    public int $peerReviewCount = 0;
+    public ?bool $peerReviews = false;
+    public ?bool $automaticPeerReviews = null;
+    public ?int $peerReviewCount = null;
     public ?DateTime $peerReviewsAssignAt = null;
     public bool $intraGroupPeerReviews = false;
     public ?int $groupCategoryId = 1;
     public ?int $needsGradingCount = null;
     public ?array $needsGradingCountBySection = null;
-    public bool $postToSis = false;
+    public ?bool $postToSis = null;
     public ?string $integrationId = null;
     public ?array $integrationData = null;
-    public float $pointsPossible = 100;
+    public ?float $pointsPossible = null;
 
     /* the types of submissions allowed for this assignment list containing one or
     * more of the following: 'discussion_topic', 'online_quiz', 'on_paper', 'none',
     * 'external_tool', 'online_text_entry', 'online_url', 'online_upload',
      *  'media_recording', 'student_annotation'
     */
-    public array $submissionTypes = ['online_text_entry'];
+    public ?string $submissionTypes = null;
 
     // https://canvas.instructure.com/doc/api/assignments.html
-    public string $gradingType = 'points';
+    public ?string $gradingType = null;
     public $gradingStandardId; // Still unclear about this one
-    public bool $published = false;
-    public bool $unpublishable = false;
-    public bool $onlyVisibleToOverrides = false;
-    public bool $lockedForUser = false;
-    public string $lockExplanation = '';
+    public ?bool $published = null;
+    public ?bool $unpublishable = null;
+    public ?bool $onlyVisibleToOverrides = null;
+    public ?bool $lockedForUser = null;
+    public ?string $lockExplanation = null;
 
-    public bool $freezeOnCopy = false;
-    public bool $frozen = false;
+    public ?bool $freezeOnCopy = null;
+    public ?bool $frozen = null;
+
 
     public ?bool $submission = null;
     public ?bool $useRubricForGrading = false;
@@ -77,24 +78,21 @@ class Assignment extends CanvasObject
     public ?array $rubric = null;
     public ?array $assignmentVisibility = null;
     public ?bool $overrides = null;
-    public bool $omitFromFinalGrade = true;
-    public bool $hideInGradebook = true;
-    public bool $moderatedGrading = false;
+    public ?bool $omitFromFinalGrade = null;
+    public ?bool $hideInGradebook = null;
+    public ?bool $moderatedGrading = null;
     public ?int $graderCount = null;
     public ?int $finalGraderId = null;
-    public bool $graderCommentsVisibleToGraders = false;
-    public $scoreStatistics; // Possibly an object or an array, need more details
-    public bool $canSubmit = true;
+    public ?bool $graderCommentsVisibleToGraders = null;
+    public $scoreStatistics = null;
+    public ?bool $canSubmit = null;
 
-    public $annotatableAttachmentId; // Possibly an int, need more details
+    public $annotatableAttachmentId = null;
+    public ?bool $muted = null;
+    public ?int $allowedAttempts = null;
 
-    public bool $muted = false;
-    public int $allowedAttempts = 3;
-
-    public bool $canDuplicate = true;
-    public bool $visibleToEveryone = true;
-
-    protected Course $course;
+    public ?bool $canDuplicate = null;
+    public ?bool $visibleToEveryone = null;
 
     protected ?self $previous = null;
     protected ?self $next = null;
@@ -108,7 +106,18 @@ class Assignment extends CanvasObject
     {
         $aData =  array_filter($this->toArray());
         unset($aData['course']);
-
+        /*
+        if(!empty($aData['submission_types']))
+        {
+            $aSubmissionTypes = $aData['submission_types'];
+            unset($aData['submission_types']);
+            foreach($aSubmissionTypes as $index => $sType)
+            {
+                $aData['submission_types_' . $index] = $sType;
+            }
+        }
+        */
+        // print_r($aData);
         return [
             'assignment' => $aData
         ];
@@ -137,7 +146,9 @@ class Assignment extends CanvasObject
             return $this->next;
         }
         $bNextMatch = false;
-        $aAllCourseAssignments = $this->getCourse()->getAllAssignments();
+        $oCanvas = new Canvas();
+        $aAllCourseAssignments = $oCanvas->getCourse($this->getCourseId())->getAllAssignments();
+
         foreach ($aAllCourseAssignments as $assignment) {
             if ($bNextMatch) {
                 $this->next = $assignment;
@@ -151,19 +162,7 @@ class Assignment extends CanvasObject
         return null;
     }
 
-    /**
-     * @throws InvalidArgumentException
-     * @throws GuzzleException
-     */
-    public function getCourse(): ?Course
-    {
-        if (!isset($this->course)) {
-            $canvas = new Canvas();
-            $this->course = $canvas->getCourse($this->getCourseId());
-        }
 
-        return $this->course;
-    }
 
     /**
      * Returns the local id of the course, not related to Canvas
@@ -181,9 +180,6 @@ class Assignment extends CanvasObject
      */
     public function setCourseId(int $courseId): Assignment
     {
-        $oCanvas = new Canvas();
-        $this->course = $oCanvas->getCourse($courseId);
-
         $this->courseId = $courseId;
         return $this;
     }
@@ -318,7 +314,9 @@ class Assignment extends CanvasObject
             return $this->previous;
         }
         $previous = null;
-        $aAllCourseAssignments = $this->getCourse()->getAllAssignments();
+        $oCanvas = new Canvas();
+        $aAllCourseAssignments = $oCanvas->getCourse($this->getCourseId())->getAllAssignments();
+
         foreach ($aAllCourseAssignments as $assignment) {
             if ($assignment->getId() === $this->getId()) {
                 $this->previous = $previous;
@@ -833,7 +831,7 @@ class Assignment extends CanvasObject
     /**
      * @return int
      */
-    public function getPosition(): int
+    public function getPosition(): ?int
     {
         return $this->position;
     }
@@ -923,7 +921,7 @@ class Assignment extends CanvasObject
     /**
      * @return array
      */
-    public function getSubmissionTypes(): array
+    public function getSubmissionTypes(): string
     {
         return $this->submissionTypes;
     }
@@ -935,9 +933,17 @@ class Assignment extends CanvasObject
      * @param array $submissionTypes
      * @return Assignment
      */
-    public function setSubmissionTypes(array $submissionTypes): Assignment
+    public function setSubmissionTypes(mixed $submissionTypes): Assignment
     {
-        $this->submissionTypes = $submissionTypes;
+        if(is_array($submissionTypes))
+        {
+            $this->submissionTypes = join(',', $submissionTypes);
+        }
+        else
+        {
+            $this->submissionTypes = $submissionTypes;
+        }
+
         return $this;
     }
 

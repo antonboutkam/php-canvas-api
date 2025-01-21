@@ -108,7 +108,7 @@ class Canvas
     {
         if($oAssignmentGroup->getId())
         {
-            $this->updateAssignmentGroup($iCourseId, $oAssignmentGroup);
+            $this->updateAssignmentGroup($iCourseId, $oAssignmentGroup->getId(), $oAssignmentGroup);
         }
         return $this->createAssignmentGroup($iCourseId, $oAssignmentGroup);
 
@@ -124,13 +124,13 @@ class Canvas
     {
         return $this->postItem("/courses/{$iCourseId}/assignment_groups", $oAssignmentGroup->toCanvasArray());
     }
-    public function updateAssignmentGroup(int $iCourseId, Endpoints\AssignmentGroup\AssignmentGroup $oAssignmentGroup): array
+    public function updateAssignmentGroup(int $iCourseId, int $iAssignmentGroupId, Endpoints\AssignmentGroup\AssignmentGroup $oAssignmentGroup): array
     {
-        return $this->putItem("/courses/{$iCourseId}/assignment_groups/{$oAssignmentGroup->getId()}", $oAssignmentGroup->toCanvasArray());
+        return $this->putItem("/courses/{$iCourseId}/assignment_groups/{$iAssignmentGroupId}", $oAssignmentGroup->toCanvasArray());
     }
-    public function deleteAssignmentGroup(int $iCourseId, int $iAssignmentGroups):array
+    public function deleteAssignmentGroup(int $iCourseId, int $iAssignmentGroupId):array
     {
-        return $this->deleteItem("/courses/{$iCourseId}/assignment_groups/{$iAssignmentGroups}");
+        return $this->deleteItem("/courses/{$iCourseId}/assignment_groups/{$iAssignmentGroupId}");
     }
     /**
      * @throws InvalidArgumentException
@@ -151,12 +151,13 @@ class Canvas
      */
     public function createAssignment(int $iCourseId, Assignment $oAssignment): array
     {
+        print_r($oAssignment->toCanvasArray());
         return $this->postItem("/courses/{$iCourseId}/assignments", $oAssignment->toCanvasArray());
     }
 
-    public function updateAssignment(int $iCourseId, Assignment $oAssignment):array
+    public function updateAssignment(int $iCourseId, int $iAssignmentId, Assignment $oAssignment):array
     {
-        return $this->putItem("/courses/{$iCourseId}/assignments/{$oAssignment->getId()}", $oAssignment->toCanvasArray());
+        return $this->putItem("/courses/{$iCourseId}/assignments/{$iAssignmentId}", $oAssignment->toCanvasArray());
     }
 
     /**
@@ -167,7 +168,7 @@ class Canvas
     {
         if($oAssignment->getId())
         {
-            return $this->updateAssignment($iCourseId, $oAssignment);
+            return $this->updateAssignment($iCourseId, $oAssignment->getId(), $oAssignment);
         }
         return $this->createAssignment($iCourseId, $oAssignment);
     }
