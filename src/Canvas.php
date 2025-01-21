@@ -140,8 +140,6 @@ class Canvas
     {
         $aAssignmentGroup = $this->getItem("/courses/{$iCourseId}/assignment_groups/{$iAssignmentGroup}");
         $aAssignmentGroup['course_id'] = $iCourseId;
-        echo __FILE__ . '::' . __LINE__ . PHP_EOL;
-        print_r($aAssignmentGroup);
 
         return AssignmentGroup::fromCanvasArray($aAssignmentGroup);
     }
