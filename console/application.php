@@ -16,6 +16,10 @@ $oDir = Path::make(__DIR__)->dirname(1)->extend('src', 'commands');
 $oFinder = $oDir->getFinder()->name('*Command.php');
 
 foreach ($oFinder as $oFile) {
+    if(str_ends_with('Trait', $oFile->getBasename('.php')))
+    {
+        continue;
+    }
     $sClassName = 'Hurah\\Canvas\\Commands\\' . $oFile->getBasename('.php');
     $application->add(new $sClassName());
 }
