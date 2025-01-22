@@ -16,8 +16,8 @@ $oDir = Path::make(__DIR__)->dirname(1)->extend('src', 'commands');
 $oFinder = $oDir->getFinder()->name('*Command.php');
 
 foreach ($oFinder as $oFile) {
-    echo 'Autoload: ' . $oFile->getBasename('.php') . PHP_EOL;
-    if(str_ends_with('Trait', $oFile->getBasename('.php')))
+    // echo 'Autoload: ' . $oFile->getBasename('.php') . PHP_EOL;
+    if(str_ends_with($oFile->getBasename('.php'), 'Trait'))
     {
         continue;
     }
