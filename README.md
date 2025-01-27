@@ -2,7 +2,9 @@
 
 [![Latest Stable Version](https://poser.pugx.org/hurah/canvas-api/v/stable)](https://packagist.org/packages/hurah/canvas-api)
 [![License](https://poser.pugx.org/hurah/canvas-api/license)](https://packagist.org/packages/hurah/canvas-api)
+[![CircleCI Build](http://poser.pugx.org/phpunit/phpunit/circleci)](https://packagist.org/packages/phpunit/phpunit)
 
+---
 This library is a PHP SDK for the Instructure Canvas API, designed to simplify communication with Canvas by providing statically typed classes for most API endpoints. It supports both collection and single entity operations. The SDK is still in development but is already being used in small production environments.
 
 ---
