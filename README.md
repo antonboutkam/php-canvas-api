@@ -1,4 +1,4 @@
-**# Canvas API SDK for PHP
+# Canvas API SDK for PHP
 
 [![Latest Stable Version](https://poser.pugx.org/hurah/canvas-api/v/stable)](https://packagist.org/packages/hurah/canvas-api)
 [![License](https://poser.pugx.org/hurah/canvas-api/license)](https://packagist.org/packages/hurah/canvas-api)
