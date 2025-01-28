@@ -94,7 +94,7 @@ class Assignment extends CanvasObject
     public ?bool $canDuplicate = null;
     public ?bool $visibleToEveryone = null;
     public ?string $secureParams = null;
-    public ?int $ltiContextId = null;
+    public ?string $ltiContextId = null;
     public ?bool $hasSubmittedSubmissions = null;
     public ?bool $gradedSubmissionsExist = null;
     public ?string $workflowState = null;
@@ -1400,7 +1400,7 @@ class Assignment extends CanvasObject
         return $this;
     }
 
-    public function setLtiContextId(?int $ltiContextId): self {
+    public function setLtiContextId(?string $ltiContextId): self {
         $this->ltiContextId = $ltiContextId;
         return $this;
     }
