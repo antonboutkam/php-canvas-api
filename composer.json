@@ -15,7 +15,7 @@
         }
     },
     "autoload-dev" : {
-        "Hurah\\Canvas\\Tests\\" : "test/"
+        "Hurah\\Canvas\\Test\\" : "test/"
     },
     "minimum-stability": "dev",
     "require": {
@@ -27,7 +27,7 @@
         "symfony/routing": "5.4.x-dev",
         "symfony/http-foundation": "5.4.x-dev",
         "guzzlehttp/guzzle": "8.0.x-dev",
-        "symfony/console": "5.4.x-dev",
+        "symfony/console": ">=5.4",
         "vlucas/phpdotenv": "5.6.x-dev"
     },
     "require-dev": {
