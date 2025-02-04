@@ -155,6 +155,7 @@ class Submission extends CanvasObject {
      */
     
     protected ?string $sticker = null;
+    protected ?string $attachments = null;
 
     /**
      * @var bool|null
@@ -196,6 +197,17 @@ class Submission extends CanvasObject {
     {
         return ['submission' => array_filter($this->toArray())];
     }
+
+    public function setAttachments(string $sAttachments):self
+    {
+        $this->attachments = $sAttachments;
+        return $this;
+    }
+    public function getAttachments():array
+    {
+        return json_decode($this->attachments);
+    }
+
     /**
      * @param array $array
      * @return self
