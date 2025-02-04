@@ -2,25 +2,26 @@
 
 namespace Hurah\Canvas\Endpoints\Attachment;
 
+use Exception;
 use Hurah\Types\Type\AbstractCollectionDataType;
 
 
 class AttachmentCollection extends AbstractCollectionDataType
 {
-        /**
-     * @throws \Exception
+    /**
+     * @throws Exception
      */
     public static function fromCanvasArray(array $canvasCollection): AttachmentCollection
     {
         $out = new self();
-        foreach($canvasCollection as $attachment)
-        {
+        foreach ($canvasCollection as $attachment) {
             $out->addArray($attachment);
         }
         return $out;
     }
+
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function addArray(array $attachment): self
     {
@@ -34,7 +35,7 @@ class AttachmentCollection extends AbstractCollectionDataType
         $this->array[] = $attachment;
     }
 
-    public function current():Attachment
+    public function current(): Attachment
     {
         return $this->array[$this->position];
     }
