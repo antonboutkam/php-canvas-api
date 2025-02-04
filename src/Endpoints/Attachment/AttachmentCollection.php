@@ -2,7 +2,6 @@
 
 namespace Hurah\Canvas\Endpoints\Attachment;
 
-use Hurah\Canvas\Endpoints\Course\Course;
 use Hurah\Types\Type\AbstractCollectionDataType;
 
 
@@ -35,7 +34,7 @@ class AttachmentCollection extends AbstractCollectionDataType
         $this->array[] = $attachment;
     }
 
-    public function current():Course
+    public function current():Attachment
     {
         return $this->array[$this->position];
     }
