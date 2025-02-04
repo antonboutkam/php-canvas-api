@@ -198,9 +198,9 @@ class Submission extends CanvasObject {
         return ['submission' => array_filter($this->toArray())];
     }
 
-    public function setAttachments(string $sAttachments):self
+    public function setAttachments(array $aAttachments):self
     {
-        $this->attachments = $sAttachments;
+        $this->attachments = json_encode($aAttachments);
         return $this;
     }
     public function getAttachments():array
