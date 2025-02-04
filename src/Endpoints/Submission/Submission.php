@@ -203,7 +203,7 @@ class Submission extends CanvasObject {
         $this->attachments = json_encode($aAttachments);
         return $this;
     }
-    public function getAttachments():array
+    public function getAttachments():?array
     {
         return json_decode($this->attachments);
     }
