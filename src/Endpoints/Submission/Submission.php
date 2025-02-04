@@ -211,12 +211,12 @@ class Submission extends CanvasObject {
             $method = 'set' . Util::underscoreToCamelCase($key, true);
             if(is_array($value))
             {
-                echo $key . '--->'  . $method . ' -----> ' . json_encode($value) . PHP_EOL;
-                // self::_setValue($instance, $key, $method, $value);
+                // echo $key . '--->'  . $method . ' -----> ' . json_encode($value) . PHP_EOL;
+                self::_setValue($instance, $key, $method, $value);
             }
             else
             {
-                echo $key . '--->'  . $method . ' -----> ' . $value . PHP_EOL;
+                // echo $key . '--->'  . $method . ' -----> ' . $value . PHP_EOL;
                 self::_setValue($instance, $key, $method, $value);
             }
 

@@ -37,6 +37,9 @@ class Assignment extends CanvasObject
     public ?bool $gradeGroupStudentsIndividually = null;
     public ?bool $graderNamesVisibleToGrader = null;
     public ?bool $graderNamesVisibleToFinalGrader = null;
+    public ?string $url = null;
+
+
 
     public $externalToolTagAttributes = null; // Still unclear about this one
     public ?bool $peerReviews = false;
