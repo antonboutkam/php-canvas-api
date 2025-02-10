@@ -2,6 +2,8 @@
 namespace Hurah\Canvas\Endpoints\Submission;
 
 use DateTime;
+use Hurah\Canvas\Endpoints\Attachment\Attachment;
+use Hurah\Canvas\Endpoints\Attachment\AttachmentCollection;
 use Hurah\Canvas\Endpoints\CanvasObject;
 use Hurah\Types\Exception\InvalidArgumentException;
 use Hurah\Types\Exception\NullPointerException;
@@ -155,6 +157,7 @@ class Submission extends CanvasObject {
      */
     
     protected ?string $sticker = null;
+    protected AttachmentCollection $attachments;
 
     /**
      * @var bool|null
@@ -192,10 +195,28 @@ class Submission extends CanvasObject {
     
     protected ?string $preview_url = null;
 
+    public function __construct()
+    {
+        $this->attachments = new AttachmentCollection();
+    }
     public function toCanvasArray():array
     {
         return ['submission' => array_filter($this->toArray())];
     }
+
+    public function setAttachments(array $aAttachments):self
+    {
+        foreach($aAttachments as $attachment)
+        {
+            $this->attachments->add(Attachment::fromCanvasArray($attachment));
+        }
+        return $this;
+    }
+    public function getAttachments():AttachmentCollection
+    {
+        return $this->attachments;
+    }
+
     /**
      * @param array $array
      * @return self
@@ -211,12 +232,12 @@ class Submission extends CanvasObject {
             $method = 'set' . Util::underscoreToCamelCase($key, true);
             if(is_array($value))
             {
-                echo $key . '--->'  . $method . ' -----> ' . json_encode($value) . PHP_EOL;
-                // self::_setValue($instance, $key, $method, $value);
+                // echo $key . '--->'  . $method . ' -----> ' . json_encode($value) . PHP_EOL;
+                self::_setValue($instance, $key, $method, $value);
             }
             else
             {
-                echo $key . '--->'  . $method . ' -----> ' . $value . PHP_EOL;
+                // echo $key . '--->'  . $method . ' -----> ' . $value . PHP_EOL;
                 self::_setValue($instance, $key, $method, $value);
             }
 

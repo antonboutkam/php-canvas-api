@@ -37,6 +37,9 @@ class Assignment extends CanvasObject
     public ?bool $gradeGroupStudentsIndividually = null;
     public ?bool $graderNamesVisibleToGrader = null;
     public ?bool $graderNamesVisibleToFinalGrader = null;
+    public ?string $url = null;
+
+
 
     public $externalToolTagAttributes = null; // Still unclear about this one
     public ?bool $peerReviews = false;
@@ -93,6 +96,15 @@ class Assignment extends CanvasObject
 
     public ?bool $canDuplicate = null;
     public ?bool $visibleToEveryone = null;
+    public ?string $secureParams = null;
+    public ?string $ltiContextId = null;
+    public ?bool $hasSubmittedSubmissions = null;
+    public ?bool $gradedSubmissionsExist = null;
+    public ?string $workflowState = null;
+    public ?int $originalCourseId = null;
+    public ?int $originalAssignmentId = null;
+    public ?string $originalAssignmentName = null;
+
 
     protected ?self $previous = null;
     protected ?self $next = null;
@@ -1386,8 +1398,75 @@ class Assignment extends CanvasObject
         $this->muted = $muted;
         return $this;
     }
+    public function setSecureParams(?string $secureParams): self {
+        $this->secureParams = $secureParams;
+        return $this;
+    }
 
+    public function setLtiContextId(?string $ltiContextId): self {
+        $this->ltiContextId = $ltiContextId;
+        return $this;
+    }
 
+    public function setHasSubmittedSubmissions(?bool $hasSubmittedSubmissions): self {
+        $this->hasSubmittedSubmissions = $hasSubmittedSubmissions;
+        return $this;
+    }
 
+    public function setGradedSubmissionsExist(?bool $gradedSubmissionsExist): self {
+        $this->gradedSubmissionsExist = $gradedSubmissionsExist;
+        return $this;
+    }
+
+    public function setWorkflowState(?string $workflowState): self {
+        $this->workflowState = $workflowState;
+        return $this;
+    }
+
+    public function setOriginalCourseId(?int $originalCourseId): self {
+        $this->originalCourseId = $originalCourseId;
+        return $this;
+    }
+
+    public function setOriginalAssignmentId(?int $originalAssignmentId): self {
+        $this->originalAssignmentId = $originalAssignmentId;
+        return $this;
+    }
+
+    public function setOriginalAssignmentName(?string $originalAssignmentName): self {
+        $this->originalAssignmentName = $originalAssignmentName;
+        return $this;
+    }
+    public function getSecureParams(): ?string {
+        return $this->secureParams;
+    }
+
+    public function getLtiContextId(): ?int {
+        return $this->ltiContextId;
+    }
+
+    public function getHasSubmittedSubmissions(): ?bool {
+        return $this->hasSubmittedSubmissions;
+    }
+
+    public function getGradedSubmissionsExist(): ?bool {
+        return $this->gradedSubmissionsExist;
+    }
+
+    public function getWorkflowState(): ?string {
+        return $this->workflowState;
+    }
+
+    public function getOriginalCourseId(): ?int {
+        return $this->originalCourseId;
+    }
+
+    public function getOriginalAssignmentId(): ?int {
+        return $this->originalAssignmentId;
+    }
+
+    public function getOriginalAssignmentName(): ?string {
+        return $this->originalAssignmentName;
+    }
 
 }

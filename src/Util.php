@@ -6,7 +6,9 @@ class Util
 {
     public static function underscoreToCamelCase($string, $capitalizeFirstCharacter = false): array|string
     {
-        $str = str_replace(' ', '', ucwords(str_replace('_', ' ', $string)));
+        $string = str_replace('-', ' ', $string);
+        $string = str_replace('_', ' ', $string);
+        $str = str_replace(' ', '', ucwords($string));
 
         if (!$capitalizeFirstCharacter) {
             $str[0] = strtolower($str[0]);
