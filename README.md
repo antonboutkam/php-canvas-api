@@ -2,10 +2,14 @@
 
 [![Latest Stable Version](https://poser.pugx.org/hurah/canvas-api/v/stable)](https://packagist.org/packages/hurah/canvas-api)
 [![License](https://poser.pugx.org/hurah/canvas-api/license)](https://packagist.org/packages/hurah/canvas-api)
-[![CircleCI Build](http://poser.pugx.org/hurah/php-canvas-api/circleci)](https://packagist.org/packages/hurah/php-canvas-api)
+[![CircleCI Build](https://poser.pugx.org/hurah/php-canvas-api/circleci)](https://packagist.org/packages/hurah/php-canvas-api)
+
 
 ---
-This library is a PHP SDK for the Instructure Canvas API, designed to simplify communication with Canvas by providing statically typed classes for most API endpoints. It supports both collection and single entity operations. The SDK is still in development but is already being used in small production environments.
+This library is a PHP SDK for the Instructure Canvas API, designed to simplify 
+communication with Canvas by providing statically typed classes for most API 
+endpoints. It supports both collection and single entity operations. The SDK is 
+still in development but is already being used in small production environments.
 
 ---
 
@@ -84,3 +88,5 @@ Contributions and feedback are welcome! Please keep in mind that this software i
 ***
 ## Author
 [Anton Boutkam](https://antonboutkam.nl) - Teacher Software Development at ROC Amstelland
+
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/antonboutkam/php-canvas-api/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/antonboutkam/php-canvas-api/tree/main)
