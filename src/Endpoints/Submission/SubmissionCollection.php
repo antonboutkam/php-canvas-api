@@ -5,6 +5,9 @@ namespace Hurah\Canvas\Endpoints\Submission;
 use Hurah\Canvas\Endpoints\Assignment\Assignment;
 use Hurah\Types\Type\AbstractCollectionDataType;
 
+/**
+ *
+ */
 class SubmissionCollection extends AbstractCollectionDataType
 {
 
@@ -29,11 +32,18 @@ class SubmissionCollection extends AbstractCollectionDataType
         return $this;
     }
 
+    /**
+     * @param Submission $submission
+     * @return void
+     */
     public function add(Submission $submission)
     {
         $this->array[] = $submission;
     }
 
+    /**
+     * @return Submission
+     */
     public function current():Submission
     {
         return $this->array[$this->position];

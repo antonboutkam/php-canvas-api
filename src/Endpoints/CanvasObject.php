@@ -11,6 +11,27 @@ abstract class CanvasObject
 {
 
 
+    /**
+     * Converts a snake_case string to lowerCamelCase.
+     *
+     * @param string $string
+     * @return string
+     */
+    protected static function snakeToCamel(string $string): string
+    {
+        return lcfirst(str_replace('_', '', ucwords($string, '_')));
+    }
+
+    /**
+     * Converts a snake_case string to lowerCamelCase.
+     *
+     * @param string $string
+     * @return string
+     */
+    protected static function snakeToSetter(string $string): string
+    {
+        return 'set' . ucfirst(str_replace('_', '', ucwords($string, '_')));
+    }
 
     /**
      * Converts the object properties into an array.

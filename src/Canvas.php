@@ -18,11 +18,16 @@ use Hurah\Canvas\Endpoints\ModuleItem\ModuleItem;
 use Hurah\Canvas\Endpoints\ModuleItem\ModuleItemCollection;
 use Hurah\Canvas\Endpoints\Page\Page;
 use Hurah\Canvas\Endpoints\Page\PageCollection;
+use Hurah\Canvas\Endpoints\Quiz\Quiz;
+use Hurah\Canvas\Endpoints\Quiz\QuizCollection;
+use Hurah\Canvas\Endpoints\QuizQuestion\QuizQuestion;
+use Hurah\Canvas\Endpoints\QuizQuestionGroup\QuizQuestionGroup;
 use Hurah\Canvas\Endpoints\Submission\Submission;
 use Hurah\Canvas\Endpoints\Submission\SubmissionCollection;
 use Hurah\Types\Exception\InvalidArgumentException;
 use Hurah\Types\Util\JsonUtils;
 use Hurah\Types\Type\Url;
+use Symfony\Component\Console\Question\Question;
 
 class Canvas
 {
@@ -151,7 +156,7 @@ class Canvas
      */
     public function createAssignment(int $iCourseId, Assignment $oAssignment): array
     {
-        print_r($oAssignment->toCanvasArray());
+
         return $this->postItem("/courses/{$iCourseId}/assignments", $oAssignment->toCanvasArray());
     }
 
@@ -172,6 +177,110 @@ class Canvas
         }
         return $this->createAssignment($iCourseId, $oAssignment);
     }
+
+    /**
+     * @param int $iCourseId
+     * @param int $iLimit
+     * @return QuizCollection
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @seee https://canvas.instructure.com/doc/api/quizzes.html#method.quizzes/quizzes_api.index
+     */
+    public function getQuizzes(int $iCourseId, int $iLimit = 100): QuizCollection
+    {
+
+        $sUrl = "/courses/{$iCourseId}/quizzes";
+        $data = $this->getCollection($sUrl, $iLimit);
+
+        return QuizCollection::fromCanvasArray($data);
+    }
+
+    public function createQuizQuestion(int $iCourseId, int $iQuizId, QuizQuestion $oQuizQuestion):array
+    {
+        return $this->postItem("/courses/{$iCourseId}/quizzes/{$iQuizId}/questions", $oQuizQuestion->toCanvasArray());
+    }
+
+    public function updateQuestion(int $iCourseId, int $iQuizId, int $iQuizQuestionId, QuizQuestion $oQuizQuestion):array
+    {
+        return $this->putItem("/courses/{$iCourseId}/quizzes/{$iQuizId}/questions/{$iQuizQuestionId}", $oQuizQuestion->toCanvasArray());
+    }
+    public function storeQuizQuestion(int $iCourseId, int $iQuizId, QuizQuestion $oQuizQuestion):array
+    {
+        if($oQuizQuestion->getId())
+        {
+            $this->updateQuestion($iCourseId, $iQuizId, $oQuizQuestion->getId(), $oQuizQuestion);
+        }
+        return $this->storeQuizQuestion($iCourseId, $iQuizId, $oQuizQuestion);
+    }
+
+
+    /**
+     * @param int $iCourseId
+     * @param int $iQuizId
+     * @param int $iQuizQuestionId
+     * @return array
+     * @see https://canvas.instructure.com/doc/api/quizzes.html#method.quizzes/quizzes_api.destroy
+     */
+    public function deleteQuizQuestion(int $iCourseId, int $iQuizId, int $iQuizQuestionId):array
+    {
+        return $this->deleteItem("/courses/{$iCourseId}/quizzes/{$iQuizId}/questions/{$iQuizQuestionId}");
+    }
+
+    /**
+     * @param int $iCourseId
+     * @param Quiz $oQuiz
+     * @return array
+     * @see https://canvas.instructure.com/doc/api/new_quizzes.html#method.new_quizzes/quizzes_api.create
+     */
+    public function createQuiz(int $iCourseId, Quiz $oQuiz):array
+    {
+        return $this->postItem("/courses/{$iCourseId}/quizzes", $oQuiz->toCanvasArray());
+    }
+
+    /**
+     * @param int $iCourseId
+     * @param int $iQuizId
+     * @param Quiz $oQuiz
+     * @return array
+     * @see https://canvas.instructure.com/doc/api/quizzes.html#method.quizzes/quizzes_api.update
+     */
+    public function updateQuiz(int $iCourseId, int $iQuizId, Quiz $oQuiz):array
+    {
+        return $this->postItem("/courses/{$iCourseId}/quizzes/{$iQuizId}", $oQuiz->toCanvasArray());
+    }
+    public function storeQuiz(int $iCourseId, Quiz $oQuiz):array
+    {
+        if($oQuiz->getId())
+        {
+            $this->updateQuiz($iCourseId, $oQuiz->getId(), $oQuiz);
+        }
+        return $this->createQuiz($iCourseId, $oQuiz);
+    }
+    public function deleteQuiz(int $iCourseId, int $iQuizId):array
+    {
+        return $this->deleteItem("courses/{$iCourseId}/quizzes/{$iQuizId}");
+    }
+
+    public function createQuizQuestionGroup(int $iCourseId, int $iQuizId, QuizQuestionGroup $oQuizQuestionGroup):array
+    {
+        return $this->postItem("/courses/{$iCourseId}/quizzes/{$iQuizId}/groups", $oQuizQuestionGroup->toCanvasArray());
+    }
+    public function updateQuizQuestionGroup(int $iCourseId, int $iQuizId, int $iQuizGroupId, QuizQuestionGroup
+    $oQuizQuestionGroup):array
+    {
+        return $this->putItem("/courses/{$iCourseId}/quizzes/{$iQuizId}/groups/{$iQuizGroupId}", $oQuizQuestionGroup->toCanvasArray
+        ());
+    }
+    public function storeQuizQuestionGroup(int $iCourseId, int $iQuizId, QuizQuestionGroup $oQuizQuestionGroup):array
+    {
+        if($oQuizQuestionGroup->getId())
+        {
+            return $this->updateQuizQuestionGroup($iCourseId, $iQuizId, $oQuizQuestionGroup->getId(),
+                $oQuizQuestionGroup);
+        }
+        return $this->createQuizQuestionGroup($iCourseId, $iQuizId, $oQuizQuestionGroup);
+    }
+
 
     /**
      * Creates or updates a module depending on the existence of a module id in the Module object

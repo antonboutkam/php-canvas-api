@@ -12,9 +12,14 @@ use Hurah\Canvas\Endpoints\Course\Course;
 use Hurah\Canvas\Util;
 
 
-
+/**
+ *
+ */
 class Submission extends CanvasObject {
 
+    /**
+     *
+     */
     public const TYPES = [
         'online_text_entry',
         'online_url',
@@ -23,10 +28,22 @@ class Submission extends CanvasObject {
         'basic_lti_launch',
         'student_annotation'
     ];
+    /**
+     * @var int
+     */
     public int $id;
 
+    /**
+     * @var string
+     */
     public string $canvas_assignment_id;
+    /**
+     * @var string
+     */
     public string $course_id;
+    /**
+     * @var string
+     */
     public string $assignment_id;
     /**
      * @var string|null
@@ -157,6 +174,9 @@ class Submission extends CanvasObject {
      */
     
     protected ?string $sticker = null;
+    /**
+     * @var AttachmentCollection
+     */
     protected AttachmentCollection $attachments;
 
     /**
@@ -195,15 +215,26 @@ class Submission extends CanvasObject {
     
     protected ?string $preview_url = null;
 
+    /**
+     *
+     */
     public function __construct()
     {
         $this->attachments = new AttachmentCollection();
     }
+
+    /**
+     * @return array
+     */
     public function toCanvasArray():array
     {
         return ['submission' => array_filter($this->toArray())];
     }
 
+    /**
+     * @param array $aAttachments
+     * @return $this
+     */
     public function setAttachments(array $aAttachments):self
     {
         foreach($aAttachments as $attachment)
@@ -212,6 +243,10 @@ class Submission extends CanvasObject {
         }
         return $this;
     }
+
+    /**
+     * @return AttachmentCollection
+     */
     public function getAttachments():AttachmentCollection
     {
         return $this->attachments;
