@@ -87,7 +87,7 @@ Contributions and feedback are welcome! Please keep in mind that this software i
 
 ***
 ## Author
-[Anton Boutkam](https://antonboutkam.nl) - Teacher Software Development at ROC Amstelland
+[Anton Boutkam](https://antonboutkam.nl) - Teacher Software Development at [ROC Amstelland](https://www.rocva.nl/MBO-onderwijs/MBO-Colleges/MBO-College-Amstelland)
 
 ## CicleCI build status
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/antonboutkam/php-canvas-api/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/antonboutkam/php-canvas-api/tree/main)
