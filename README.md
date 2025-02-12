@@ -94,3 +94,4 @@ Contributions and feedback are welcome! Please keep in mind that this software i
 
 v1.0.3 added Quiz
 v1.0.5 updated Quiz
+v1.0.6 updated QuizQuestionGroup

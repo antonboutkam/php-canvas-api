@@ -63,7 +63,7 @@ class QuizQuestionGroup extends CanvasObject
      */
     public function toCanvasArray():array
     {
-        return ['quiz_groups' => [array_filter($this->toArray())]];
+        return ['quiz_groups[]' => array_filter($this->toArray())];
     }
 
     // Getters and fluent setters for all properties
