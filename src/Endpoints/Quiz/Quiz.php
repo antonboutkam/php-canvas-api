@@ -176,6 +176,7 @@ class Quiz extends CanvasObject
      *
      * @param array $canvasArray The Canvas API response array.
      * @return self The populated Quiz object.
+     * @throws ImplementationException
      */
     public static function fromCanvasArray(array $canvasArray): self
     {
@@ -205,7 +206,6 @@ class Quiz extends CanvasObject
             ->setPointsPossible($canvasArray['points_possible'] ?? null)
             ->setCantGoBack($canvasArray['cant_go_back'] ?? false)
             ->setAccessCode($canvasArray['access_code'] ?? null)
-            ->setIpFilter($canvasArray['ip_filter'] ?? null)
             ->setDueAt(isset($canvasArray['due_at']) ? $quiz->makeDate($canvasArray['due_at']) : null)
             ->setLockAt(isset($canvasArray['lock_at']) ? $quiz->makeDate($canvasArray['lock_at']) : null)
             ->setUnlockAt(isset($canvasArray['unlock_at']) ? $quiz->makeDate($canvasArray['unlock_at']) : null)
@@ -960,5 +960,17 @@ class Quiz extends CanvasObject
         $this->allDates = $allDates;
         return $this;
     }
+
+
+    public function setAccessCode(?string $accessCode = null)
+    {
+        $this->accessCode = $accessCode;
+        return $this;
+    }
+    public function getAccessCode():?string
+    {
+        return $this->accessCode;
+    }
+
 
 }
