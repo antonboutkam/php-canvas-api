@@ -181,49 +181,48 @@ class Quiz extends CanvasObject
     {
         $quiz = new self();
 
-        $quiz->id = $canvasArray['id'] ?? null;
-        $quiz->title = $canvasArray['title'] ?? null;
-        $quiz->htmlUrl = $canvasArray['html_url'] ?? null;
-        $quiz->mobileUrl = $canvasArray['mobile_url'] ?? null;
-        $quiz->previewUrl = $canvasArray['preview_url'] ?? null;
-        $quiz->description = $canvasArray['description'] ?? null;
-        $quiz->quizType = $canvasArray['quiz_type'] ?? null;
-        $quiz->assignmentGroupId = $canvasArray['assignment_group_id'] ?? null;
-        $quiz->timeLimit = $canvasArray['time_limit'] ?? null;
-        $quiz->shuffleAnswers = $canvasArray['shuffle_answers'] ?? false;
-        $quiz->hideResults = $canvasArray['hide_results'] ?? null;
-        $quiz->showCorrectAnswers = $canvasArray['show_correct_answers'] ?? true;
-        $quiz->showCorrectAnswersLastAttempt = $canvasArray['show_correct_answers_last_attempt'] ?? false;
-        $quiz->showCorrectAnswersAt = isset($canvasArray['show_correct_answers_at']) ? $quiz->makeDate($canvasArray['show_correct_answers_at']) : null;
-        $quiz->hideCorrectAnswersAt = isset($canvasArray['hide_correct_answers_at']) ? $quiz->makeDate($canvasArray['hide_correct_answers_at']) : null;
-        $quiz->oneTimeResults = $canvasArray['one_time_results'] ?? false;
-        $quiz->scoringPolicy = $canvasArray['scoring_policy'] ?? null;
-        $quiz->allowedAttempts = $canvasArray['allowed_attempts'] ?? 1;
-        $quiz->oneQuestionAtATime = $canvasArray['one_question_at_a_time'] ?? false;
-        $quiz->questionCount = $canvasArray['question_count'] ?? null;
-        $quiz->pointsPossible = $canvasArray['points_possible'] ?? null;
-        $quiz->cantGoBack = $canvasArray['cant_go_back'] ?? false;
-        $quiz->accessCode = $canvasArray['access_code'] ?? null;
-        $quiz->ipFilter = $canvasArray['ip_filter'] ?? null;
-        $quiz->dueAt = isset($canvasArray['due_at']) ? $quiz->makeDate($canvasArray['due_at']) : null;
-        $quiz->lockAt = isset($canvasArray['lock_at']) ? $quiz->makeDate($canvasArray['lock_at']) : null;
-        $quiz->unlockAt = isset($canvasArray['unlock_at']) ? $quiz->makeDate($canvasArray['unlock_at']) : null;
-        $quiz->published = $canvasArray['published'] ?? false;
-        $quiz->unpublishable = $canvasArray['unpublishable'] ?? true;
-        $quiz->lockedForUser = $canvasArray['locked_for_user'] ?? false;
-        $quiz->lockInfo = $canvasArray['lock_info'] ?? null;
-        $quiz->lockExplanation = $canvasArray['lock_explanation'] ?? null;
-        $quiz->speedgraderUrl = $canvasArray['speedgrader_url'] ?? null;
-        $quiz->quizExtensionsUrl = $canvasArray['quiz_extensions_url'] ?? null;
-        $quiz->permissions = $canvasArray['permissions'] ?? null;
-        $quiz->allDates = $canvasArray['all_dates'] ?? null;
-        $quiz->versionNumber = $canvasArray['version_number'] ?? null;
-        $quiz->questionTypes = $canvasArray['question_types'] ?? null;
-        $quiz->anonymousSubmissions = $canvasArray['anonymous_submissions'] ?? false;
-
-
-        return $quiz;
+        return $quiz
+            ->setId($canvasArray['id'] ?? null)
+            ->setTitle($canvasArray['title'] ?? null)
+            ->setHtmlUrl($canvasArray['html_url'] ?? null)
+            ->setMobileUrl($canvasArray['mobile_url'] ?? null)
+            ->setPreviewUrl($canvasArray['preview_url'] ?? null)
+            ->setDescription($canvasArray['description'] ?? null)
+            ->setQuizType($canvasArray['quiz_type'] ?? null)
+            ->setAssignmentGroupId($canvasArray['assignment_group_id'] ?? null)
+            ->setTimeLimit($canvasArray['time_limit'] ?? null)
+            ->setShuffleAnswers($canvasArray['shuffle_answers'] ?? false)
+            ->setHideResults($canvasArray['hide_results'] ?? null)
+            ->setShowCorrectAnswers($canvasArray['show_correct_answers'] ?? true)
+            ->setShowCorrectAnswersLastAttempt($canvasArray['show_correct_answers_last_attempt'] ?? false)
+            ->setShowCorrectAnswersAt(isset($canvasArray['show_correct_answers_at']) ? $quiz->makeDate($canvasArray['show_correct_answers_at']) : null)
+            ->setHideCorrectAnswersAt(isset($canvasArray['hide_correct_answers_at']) ? $quiz->makeDate($canvasArray['hide_correct_answers_at']) : null)
+            ->setOneTimeResults($canvasArray['one_time_results'] ?? false)
+            ->setScoringPolicy($canvasArray['scoring_policy'] ?? null)
+            ->setAllowedAttempts($canvasArray['allowed_attempts'] ?? 1)
+            ->setOneQuestionAtATime($canvasArray['one_question_at_a_time'] ?? false)
+            ->setQuestionCount($canvasArray['question_count'] ?? null)
+            ->setPointsPossible($canvasArray['points_possible'] ?? null)
+            ->setCantGoBack($canvasArray['cant_go_back'] ?? false)
+            ->setAccessCode($canvasArray['access_code'] ?? null)
+            ->setIpFilter($canvasArray['ip_filter'] ?? null)
+            ->setDueAt(isset($canvasArray['due_at']) ? $quiz->makeDate($canvasArray['due_at']) : null)
+            ->setLockAt(isset($canvasArray['lock_at']) ? $quiz->makeDate($canvasArray['lock_at']) : null)
+            ->setUnlockAt(isset($canvasArray['unlock_at']) ? $quiz->makeDate($canvasArray['unlock_at']) : null)
+            ->setPublished($canvasArray['published'] ?? false)
+            ->setUnpublishable($canvasArray['unpublishable'] ?? true)
+            ->setLockedForUser($canvasArray['locked_for_user'] ?? false)
+            ->setLockInfo($canvasArray['lock_info'] ?? null)
+            ->setLockExplanation($canvasArray['lock_explanation'] ?? null)
+            ->setSpeedgraderUrl($canvasArray['speedgrader_url'] ?? null)
+            ->setQuizExtensionsUrl($canvasArray['quiz_extensions_url'] ?? null)
+            ->setPermissions($canvasArray['permissions'] ?? null)
+            ->setAllDates($canvasArray['all_dates'] ?? null)
+            ->setVersionNumber($canvasArray['version_number'] ?? null)
+            ->setQuestionTypes($canvasArray['question_types'] ?? null)
+            ->setAnonymousSubmissions($canvasArray['anonymous_submissions'] ?? false);
     }
+
 
     /**
      * Convert object properties to an array formatted for Canvas API.
