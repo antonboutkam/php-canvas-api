@@ -1,12 +1,14 @@
 <?php
+namespace Hurah\Canvas\Test\Endpoints\Assignment;
 
 use PHPUnit\Framework\TestCase;
+use Hurah\Canvas\Endpoints\Assignment\Assignment;
 
 class AssignmentTest extends TestCase
 {
 	public function testToCanvasArray()
 	{
-		$oAssignment = new  Hurah\Canvas\Endpoints\Assignment\Assignment();
+		$oAssignment = new Assignment();
 		$oAssignment->setName('x');
 		$oAssignment->setCourseId(12);
 		$oAssignment->setPosition(1);

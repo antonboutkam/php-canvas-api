@@ -3,13 +3,15 @@
 namespace Hurah\Canvas\Endpoints\AssignmentGroup;
 
 
+use Exception;
 use Hurah\Types\Type\AbstractCollectionDataType;
+use ReturnTypeWillChange;
 
 class AssignmentGroupCollection extends AbstractCollectionDataType
 {
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public static function fromCanvasArray(array $canvasCollection, int $iCanvasCourseId): self
     {
@@ -21,7 +23,7 @@ class AssignmentGroupCollection extends AbstractCollectionDataType
         return $out;
     }
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function addArray(array $assignment_group, int $iCanvasCourseId): self
     {
@@ -33,7 +35,7 @@ class AssignmentGroupCollection extends AbstractCollectionDataType
     {
         $this->array[] = $assignment_group;
     }
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current():AssignmentGroup
     {
         return $this->array[$this->position];
