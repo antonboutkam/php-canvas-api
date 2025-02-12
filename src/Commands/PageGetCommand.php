@@ -2,6 +2,7 @@
 
 namespace Hurah\Canvas\Commands;
 
+use DateTime;
 use Hurah\Canvas\Canvas;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -35,9 +36,9 @@ class PageGetCommand extends Command
 
         foreach ($aPage as $key => $value)
         {
-            if($value instanceof \DateTime)
+            if ($value instanceof DateTime)
             {
-                $value = $value->format(\DateTime::ATOM);
+                $value = $value->format(DateTime::ATOM);
             }
             elseif(is_array($value))
             {

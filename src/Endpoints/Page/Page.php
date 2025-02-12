@@ -2,8 +2,8 @@
 
 namespace Hurah\Canvas\Endpoints\Page;
 
-use Hurah\Canvas\Endpoints\CanvasObject;
 use DateTime;
+use Hurah\Canvas\Endpoints\CanvasObject;
 
 class Page extends CanvasObject
 {

@@ -3,13 +3,10 @@
 namespace Hurah\Canvas\Endpoints\Assignment;
 
 use DateTime;
-use GuzzleHttp\Exception\GuzzleException;
 use Hurah\Canvas\Canvas;
 use Hurah\Canvas\Endpoints\CanvasObject;
-use Hurah\Canvas\Endpoints\Course\Course;
 use Hurah\Canvas\Endpoints\Submission\SubmissionCollection;
 use Hurah\Canvas\Util;
-use Hurah\Types\Exception\InvalidArgumentException;
 use Hurah\Types\Exception\NullPointerException;
 
 class Assignment extends CanvasObject

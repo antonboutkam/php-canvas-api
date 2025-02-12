@@ -25,9 +25,8 @@ use Hurah\Canvas\Endpoints\QuizQuestionGroup\QuizQuestionGroup;
 use Hurah\Canvas\Endpoints\Submission\Submission;
 use Hurah\Canvas\Endpoints\Submission\SubmissionCollection;
 use Hurah\Types\Exception\InvalidArgumentException;
-use Hurah\Types\Util\JsonUtils;
 use Hurah\Types\Type\Url;
-use Symfony\Component\Console\Question\Question;
+use Hurah\Types\Util\JsonUtils;
 
 class Canvas
 {

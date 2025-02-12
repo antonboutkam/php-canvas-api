@@ -3,14 +3,13 @@
 namespace Hurah\Canvas\Endpoints\Course;
 
 use DateTime;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use Hurah\Canvas\Canvas;
 use Hurah\Canvas\Endpoints\Assignment\Assignment;
 use Hurah\Canvas\Endpoints\Assignment\AssignmentCollection;
-use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroup;
 use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroupCollection;
 use Hurah\Canvas\Endpoints\CanvasObject;
-use Hurah\Canvas\Endpoints\Module\Module;
 use Hurah\Types\Exception\InvalidArgumentException;
 
 
@@ -72,7 +71,7 @@ class Course extends CanvasObject
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public static function fromArray(array $course): self
     {

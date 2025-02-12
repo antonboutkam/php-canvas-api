@@ -4,10 +4,8 @@ namespace Hurah\Canvas\Commands;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Hurah\Canvas\Canvas;
-use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroup;
 use Hurah\Types\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

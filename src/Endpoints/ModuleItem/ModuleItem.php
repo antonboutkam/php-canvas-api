@@ -3,7 +3,6 @@
 namespace Hurah\Canvas\Endpoints\ModuleItem;
 
 use Hurah\Canvas\Endpoints\CanvasObject;
-use Hurah\Canvas\Util;
 
 class ModuleItem extends CanvasObject
 {

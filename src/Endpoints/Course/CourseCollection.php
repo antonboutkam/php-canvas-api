@@ -2,13 +2,14 @@
 
 namespace Hurah\Canvas\Endpoints\Course;
 
+use Exception;
 use Hurah\Types\Type\AbstractCollectionDataType;
 
 
 class CourseCollection extends AbstractCollectionDataType
 {
         /**
-     * @throws \Exception
+         * @throws Exception
      */
     public static function fromCanvasArray(array $canvasCollection): CourseCollection
     {
@@ -20,7 +21,7 @@ class CourseCollection extends AbstractCollectionDataType
         return $out;
     }
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function addArray(array $course): self
     {

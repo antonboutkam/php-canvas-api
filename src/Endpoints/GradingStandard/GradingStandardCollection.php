@@ -2,14 +2,14 @@
 
 namespace Hurah\Canvas\Endpoints\GradingStandard;
 
-use Hurah\Canvas\Endpoints\GradingStandard\GradingStandard;
+use Exception;
 use Hurah\Types\Type\AbstractCollectionDataType;
 
 
 class GradingStandardCollection extends AbstractCollectionDataType
 {
         /**
-     * @throws \Exception
+         * @throws Exception
      */
     public static function fromCanvasArray(array $canvasCollection): GradingStandardCollection
     {
@@ -21,7 +21,7 @@ class GradingStandardCollection extends AbstractCollectionDataType
         return $out;
     }
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function addArray(array $gradingStandard): self
     {

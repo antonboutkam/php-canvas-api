@@ -1,15 +1,14 @@
 <?php
 namespace Hurah\Canvas\Endpoints\Submission;
 
-use DateTime;
+use DateTimeInterface;
+use Hurah\Canvas\Endpoints\Assignment\Assignment;
 use Hurah\Canvas\Endpoints\Attachment\Attachment;
 use Hurah\Canvas\Endpoints\Attachment\AttachmentCollection;
 use Hurah\Canvas\Endpoints\CanvasObject;
+use Hurah\Canvas\Util;
 use Hurah\Types\Exception\InvalidArgumentException;
 use Hurah\Types\Exception\NullPointerException;
-use Hurah\Canvas\Endpoints\Assignment\Assignment;
-use Hurah\Canvas\Endpoints\Course\Course;
-use Hurah\Canvas\Util;
 
 
 /**
@@ -68,10 +67,10 @@ class Submission extends CanvasObject {
     protected ?float $score = null;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
-    
-    protected ?\DateTimeInterface $submitted_at = null;
+
+    protected ?DateTimeInterface $submitted_at = null;
 
     /**
      * @var ?int
@@ -98,10 +97,10 @@ class Submission extends CanvasObject {
     protected ?bool $grade_matches_current_submission = null;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
-    
-    protected ?\DateTimeInterface $graded_at = null;
+
+    protected ?DateTimeInterface $graded_at = null;
 
     /**
      * @var int|null
@@ -116,10 +115,10 @@ class Submission extends CanvasObject {
     protected ?int $attempt = null;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
-    
-    protected ?\DateTimeInterface $cached_due_date = null;
+
+    protected ?DateTimeInterface $cached_due_date = null;
 
     /**
      * @var bool|null
@@ -152,10 +151,10 @@ class Submission extends CanvasObject {
     protected ?int $extra_attempts = null;
 
     /**
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
-    
-    protected ?\DateTimeInterface $posted_at = null;
+
+    protected ?DateTimeInterface $posted_at = null;
 
     /**
      * @var string|null
@@ -427,18 +426,18 @@ class Submission extends CanvasObject {
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getSubmittedAt(): ?\DateTimeInterface
+    public function getSubmittedAt(): ?DateTimeInterface
     {
         return $this->submitted_at;
     }
 
     /**
-     * @param \DateTimeInterface|null $submitted_at
+     * @param DateTimeInterface|null $submitted_at
      * @return Submission
      */
-    public function setSubmittedAt(?\DateTimeInterface $submitted_at): Submission
+    public function setSubmittedAt(?DateTimeInterface $submitted_at): Submission
     {
         $this->submitted_at = $submitted_at;
         return $this;
@@ -521,18 +520,18 @@ class Submission extends CanvasObject {
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getGradedAt(): ?\DateTimeInterface
+    public function getGradedAt(): ?DateTimeInterface
     {
         return $this->graded_at;
     }
 
     /**
-     * @param \DateTimeInterface|null $graded_at
+     * @param DateTimeInterface|null $graded_at
      * @return Submission
      */
-    public function setGradedAt(?\DateTimeInterface $graded_at): Submission
+    public function setGradedAt(?DateTimeInterface $graded_at): Submission
     {
         $this->graded_at = $graded_at;
         return $this;
@@ -575,18 +574,18 @@ class Submission extends CanvasObject {
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getCachedDueDate(): ?\DateTimeInterface
+    public function getCachedDueDate(): ?DateTimeInterface
     {
         return $this->cached_due_date;
     }
 
     /**
-     * @param \DateTimeInterface|null $cached_due_date
+     * @param DateTimeInterface|null $cached_due_date
      * @return Submission
      */
-    public function setCachedDueDate(?\DateTimeInterface $cached_due_date): Submission
+    public function setCachedDueDate(?DateTimeInterface $cached_due_date): Submission
     {
         $this->cached_due_date = $cached_due_date;
         return $this;
@@ -683,18 +682,18 @@ class Submission extends CanvasObject {
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getPostedAt(): ?\DateTimeInterface
+    public function getPostedAt(): ?DateTimeInterface
     {
         return $this->posted_at;
     }
 
     /**
-     * @param \DateTimeInterface|null $posted_at
+     * @param DateTimeInterface|null $posted_at
      * @return Submission
      */
-    public function setPostedAt(?\DateTimeInterface $posted_at): Submission
+    public function setPostedAt(?DateTimeInterface $posted_at): Submission
     {
         $this->posted_at = $posted_at;
         return $this;

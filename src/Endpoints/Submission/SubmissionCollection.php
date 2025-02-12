@@ -2,6 +2,7 @@
 
 namespace Hurah\Canvas\Endpoints\Submission;
 
+use Exception;
 use Hurah\Canvas\Endpoints\Assignment\Assignment;
 use Hurah\Types\Type\AbstractCollectionDataType;
 
@@ -12,7 +13,7 @@ class SubmissionCollection extends AbstractCollectionDataType
 {
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public static function fromCanvasArray(array $canvasCollection, Assignment $assignment): SubmissionCollection
     {
@@ -24,7 +25,7 @@ class SubmissionCollection extends AbstractCollectionDataType
         return $out;
     }
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function addArray(array $submission, Assignment $assignment): self
     {

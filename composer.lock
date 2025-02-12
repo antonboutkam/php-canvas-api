@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/GrahamCampbell/Result-Type.git",
-                "reference": "3ba905c11371512af9d9bdd27d99b782216b6945"
+              "reference": "9d6c1d7ce69a3329936e603617e59ba205ab0a66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GrahamCampbell/Result-Type/zipball/3ba905c11371512af9d9bdd27d99b782216b6945",
-                "reference": "3ba905c11371512af9d9bdd27d99b782216b6945",
+              "url": "https://api.github.com/repos/GrahamCampbell/Result-Type/zipball/9d6c1d7ce69a3329936e603617e59ba205ab0a66",
+              "reference": "9d6c1d7ce69a3329936e603617e59ba205ab0a66",
                 "shasum": ""
             },
             "require": {
@@ -25,7 +25,7 @@
                 "phpoption/phpoption": "^1.9.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.5.39 || ^9.6.20 || ^10.5.28"
+              "phpunit/phpunit": "^8.5.41 || ^9.6.22 || ^10.5.45 || ^11.5.7"
             },
             "default-branch": true,
             "type": "library",
@@ -55,7 +55,7 @@
             ],
             "support": {
                 "issues": "https://github.com/GrahamCampbell/Result-Type/issues",
-                "source": "https://github.com/GrahamCampbell/Result-Type/tree/v1.1.3"
+              "source": "https://github.com/GrahamCampbell/Result-Type/tree/1.1"
             },
             "funding": [
                 {
@@ -67,7 +67,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-20T21:45:45+00:00"
+          "time": "2025-02-09T22:43:44+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -198,12 +198,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455"
+              "reference": "90c5be4a7c8374e8079c06232b07eb6e5cbbfdf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
-                "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
+              "url": "https://api.github.com/repos/guzzle/promises/zipball/90c5be4a7c8374e8079c06232b07eb6e5cbbfdf3",
+              "reference": "90c5be4a7c8374e8079c06232b07eb6e5cbbfdf3",
                 "shasum": ""
             },
             "require": {
@@ -258,7 +258,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.0.4"
+              "source": "https://github.com/guzzle/promises/tree/2.0"
             },
             "funding": [
                 {
@@ -274,7 +274,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-17T10:06:22+00:00"
+          "time": "2025-02-03T10:48:03+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -282,12 +282,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "a70f5c95fb43bc83f07c9c948baa0dc1829bf201"
+              "reference": "ca06f23f35cf0b70a6f56d3d95c51bbc1062fade"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/a70f5c95fb43bc83f07c9c948baa0dc1829bf201",
-                "reference": "a70f5c95fb43bc83f07c9c948baa0dc1829bf201",
+              "url": "https://api.github.com/repos/guzzle/psr7/zipball/ca06f23f35cf0b70a6f56d3d95c51bbc1062fade",
+              "reference": "ca06f23f35cf0b70a6f56d3d95c51bbc1062fade",
                 "shasum": ""
             },
             "require": {
@@ -375,7 +375,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.7.0"
+              "source": "https://github.com/guzzle/psr7/tree/2.7"
             },
             "funding": [
                 {
@@ -391,7 +391,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-18T11:15:46+00:00"
+          "time": "2025-02-03T10:49:42+00:00"
         },
         {
             "name": "hurah/data-types",
@@ -399,12 +399,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/antonboutkam/data-types.git",
-                "reference": "3e8f3c7edbec0da2a7aa6ebbe786079eee441a30"
+              "reference": "da06b63a5bea549b73a07b6a839cca323f2d45fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antonboutkam/data-types/zipball/3e8f3c7edbec0da2a7aa6ebbe786079eee441a30",
-                "reference": "3e8f3c7edbec0da2a7aa6ebbe786079eee441a30",
+              "url": "https://api.github.com/repos/antonboutkam/data-types/zipball/da06b63a5bea549b73a07b6a839cca323f2d45fd",
+              "reference": "da06b63a5bea549b73a07b6a839cca323f2d45fd",
                 "shasum": ""
             },
             "require": {
@@ -440,9 +440,9 @@
             "description": "Collection of general purpose data types, corresponding collections, validators, utilities and some control statements represented by objects to allow more strict type checking",
             "support": {
                 "issues": "https://github.com/antonboutkam/data-types/issues",
-                "source": "https://github.com/antonboutkam/data-types/tree/v1.0.155"
+              "source": "https://github.com/antonboutkam/data-types/tree/main"
             },
-            "time": "2024-12-03T08:32:59+00:00"
+          "time": "2025-02-10T12:46:59+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -1838,12 +1838,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "a7d5c0d97495de8ffb1a8f057377e96c0c9df675"
+              "reference": "8ec66b1425f6506905f6880a8c7cd85ba8537b00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/a7d5c0d97495de8ffb1a8f057377e96c0c9df675",
-                "reference": "a7d5c0d97495de8ffb1a8f057377e96c0c9df675",
+              "url": "https://api.github.com/repos/doctrine/instantiator/zipball/8ec66b1425f6506905f6880a8c7cd85ba8537b00",
+              "reference": "8ec66b1425f6506905f6880a8c7cd85ba8537b00",
                 "shasum": ""
             },
             "require": {
@@ -1900,7 +1900,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-25T00:52:04+00:00"
+          "time": "2025-02-11T07:45:10+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1908,12 +1908,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "4764e040f8743e92b86c36f488f32d0265dd1dae"
+              "reference": "024473a478be9df5fdaca2c793f2232fe788e414"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/4764e040f8743e92b86c36f488f32d0265dd1dae",
-                "reference": "4764e040f8743e92b86c36f488f32d0265dd1dae",
+              "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/024473a478be9df5fdaca2c793f2232fe788e414",
+              "reference": "024473a478be9df5fdaca2c793f2232fe788e414",
                 "shasum": ""
             },
             "require": {
@@ -1953,7 +1953,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.x"
+              "source": "https://github.com/myclabs/DeepCopy/tree/1.13.0"
             },
             "funding": [
                 {
@@ -1961,7 +1961,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-26T13:04:49+00:00"
+          "time": "2025-02-12T12:17:51+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -2465,12 +2465,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6eb6bed5755f409894e58a4cc6c6addde8a4e62e"
+              "reference": "ef7f9eecb0042f842b1ee755a48bef81ebcc6623"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6eb6bed5755f409894e58a4cc6c6addde8a4e62e",
-                "reference": "6eb6bed5755f409894e58a4cc6c6addde8a4e62e",
+              "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ef7f9eecb0042f842b1ee755a48bef81ebcc6623",
+              "reference": "ef7f9eecb0042f842b1ee755a48bef81ebcc6623",
                 "shasum": ""
             },
             "require": {
@@ -2560,7 +2560,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-22T12:26:52+00:00"
+          "time": "2025-02-08T09:10:46+00:00"
         },
         {
             "name": "sebastian/cli-parser",
