@@ -179,7 +179,7 @@ class QuizQuestion extends CanvasObject
     public function setQuestionType(?string $questionType): self
     {
         if (!in_array($questionType, self::getSupportedQuestionTypes())) {
-            throw new InvalidArgumentException("Question of tyope $questionType is not supported.");
+            throw new InvalidArgumentException("Question of type $questionType is not supported.");
         }
         $this->questionType = $questionType;
         return $this;
