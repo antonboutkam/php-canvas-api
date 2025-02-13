@@ -1,8 +1,8 @@
 <?php
 namespace Hurah\Canvas\Test\Endpoints\Assignment;
 
-use PHPUnit\Framework\TestCase;
 use Hurah\Canvas\Endpoints\Assignment\Assignment;
+use PHPUnit\Framework\TestCase;
 
 class AssignmentTest extends TestCase
 {
