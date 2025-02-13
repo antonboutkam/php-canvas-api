@@ -29,6 +29,11 @@ class QuizQuestion extends CanvasObject
     /**
      * @var int|null
      */
+    private ?int $quizGroupId = null;
+
+    /**
+     * @var int|null
+     */
     private ?int $position = null;
     /**
      * @var string|null
@@ -128,6 +133,24 @@ class QuizQuestion extends CanvasObject
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
+    public function getQuizGroupId(): ?int
+    {
+        return $this->quizGroupId;
+    }
+
+    /**
+     * @param int|null $quizId
+     * @return $this
+     */
+    public function setQuizGroupId(?int $quizGroupId): self
+    {
+        $this->quizGroupId = $quizGroupId;
+        return $this;
+    }
+    
     /**
      * @return int|null
      */
