@@ -35,7 +35,7 @@ class QuizCreateCommand extends Command
         $oQuiz->setTitle($input->getArgument('title'));
         $oQuiz->setAssignmentGroupId($input->getArgument('assignment_group_id'));
         $oQuiz->setPointsPossible($input->getArgument('points_possible'));
-        $oQuiz->setGradingType($input->getArgument('percent'));
+        $oQuiz->setScoringPolicy($input->getArgument('percent'));
 
         $output->write("Creating new Quiz <info>{$oQuiz->getTitle()}</info> in a course <comment>{$iCourseId}</comment> ");
         $aCreatedQuiz = $oCanvas->createQuiz($iCourseId, $oQuiz);
