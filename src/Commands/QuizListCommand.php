@@ -23,25 +23,16 @@ class QuizListCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $oCanvas = new Canvas();
-        $oQuiz = new Quiz();
-        // $oCanvas->createQuiz()
+
         $iCourseId = $input->getArgument('course_id');
-        $iQuizId = $input->getArgument('quiz_id');
-
-        $oQuiz->setTitle($input->getArgument('title'));
-        $oQuiz->setAssignmentGroupId($input->getArgument('assignment_group_id'));
-        $oQuiz->setPointsPossible($input->getArgument('points_possible'));
-        $oQuiz->setGradingType($input->getArgument('percent'));
-
-        $output->write("Updating Quiz <comment>{$iQuizId}</comment> <info>{$oQuiz->getTitle()}</info> in course <comment>{$iCourseId}</comment> ");
-        $aCreatedQuiz = $oCanvas->getQuizzes($iCourseId);
+        $oQuizCollection = $oCanvas->getQuizzes($iCourseId);
 
         $table = new Table($output);
-        $table->setHeaders(['Key', 'Value']);
+        $table->setHeaders(['Id', 'Name']);
 
-        foreach ($aCreatedQuiz as $key => $value)
+        foreach ($oQuizCollection as $key => $oQuiz)
         {
-            $table->addRow([$key, $value]);
+            $table->addRow([$key, $oQuiz->getTitle()]);
         }
         $table->render();
 

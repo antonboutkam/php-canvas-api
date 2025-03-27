@@ -14,9 +14,9 @@ class QuizUpdateCommand extends Command
 {
     function configure()
     {
-        $this->setDescription('Create a new Quiz in a Course');
+        $this->setDescription('Change new Quiz in a Course');
         $this->setHelp('XXX');
-        $this->setName('quiz:create');
+        $this->setName('quiz:update');
         $this->addArgument('course_id', InputArgument::REQUIRED, 'The id of the course.');
         $this->addArgument('assignment_group_id', InputArgument::REQUIRED, 'The assignment group id.');
         $this->addArgument('quiz_id', InputArgument::REQUIRED, 'The id of the quiz.');
@@ -36,7 +36,7 @@ class QuizUpdateCommand extends Command
         $oQuiz->setTitle($input->getArgument('title'));
         $oQuiz->setAssignmentGroupId($input->getArgument('assignment_group_id'));
         $oQuiz->setPointsPossible($input->getArgument('points_possible'));
-        $oQuiz->setGradingType($input->getArgument('percent'));
+        $oQuiz->setGradingType($input->getArgument('grading_type'));
 
         $output->write("Updating Quiz <comment>{$iQuizId}</comment> <info>{$oQuiz->getTitle()}</info> in course <comment>{$iCourseId}</comment> ");
         $aCreatedQuiz = $oCanvas->updateQuiz($iCourseId, $iQuizId, $oQuiz);

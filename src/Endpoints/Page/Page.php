@@ -101,7 +101,7 @@ class Page extends CanvasObject
      * Create a Page object from an associative array.
      *
      * @param array $data
-     * @return Page
+     * @return Student
      */
     public static function fromCanvasArray(array $data):self
     {
@@ -141,9 +141,9 @@ class Page extends CanvasObject
 
     /**
      * @param int|null $pageId
-     * @return Page
+     * @return Student
      */
-    public function setPageId(?int $pageId): Page
+    public function setPageId(?int $pageId): Student
     {
         $this->pageId = $pageId;
         return $this;
@@ -167,9 +167,9 @@ class Page extends CanvasObject
 
     /**
      * @param string $title
-     * @return Page
+     * @return Student
      */
-    public function setTitle(string $title): Page
+    public function setTitle(string $title): Student
     {
         $this->title = $title;
         return $this;
@@ -185,9 +185,9 @@ class Page extends CanvasObject
 
     /**
      * @param DateTime|null $createdAt
-     * @return Page
+     * @return Student
      */
-    public function setCreatedAt(?DateTime $createdAt): Page
+    public function setCreatedAt(?DateTime $createdAt): Student
     {
         $this->createdAt = $createdAt;
         return $this;
@@ -203,9 +203,9 @@ class Page extends CanvasObject
 
     /**
      * @param DateTime|null $updatedAt
-     * @return Page
+     * @return Student
      */
-    public function setUpdatedAt(?DateTime $updatedAt): Page
+    public function setUpdatedAt(?DateTime $updatedAt): Student
     {
         $this->updatedAt = $updatedAt;
         return $this;
@@ -221,9 +221,9 @@ class Page extends CanvasObject
 
     /**
      * @param bool|null $hideFromStudents
-     * @return Page
+     * @return Student
      */
-    public function setHideFromStudents(?bool $hideFromStudents): Page
+    public function setHideFromStudents(?bool $hideFromStudents): Student
     {
         $this->hideFromStudents = $hideFromStudents;
         return $this;
@@ -239,9 +239,9 @@ class Page extends CanvasObject
 
     /**
      * @param string|null $editingRoles
-     * @return Page
+     * @return Student
      */
-    public function setEditingRoles(?string $editingRoles): Page
+    public function setEditingRoles(?string $editingRoles): Student
     {
         $this->editingRoles = $editingRoles;
         return $this;
@@ -257,7 +257,7 @@ class Page extends CanvasObject
 
     /**
      * @param mixed $lastEditedBy
-     * @return Page
+     * @return Student
      */
     public function setLastEditedBy(?array $lastEditedBy)
     {
@@ -275,9 +275,9 @@ class Page extends CanvasObject
 
     /**
      * @param string|null $body
-     * @return Page
+     * @return Student
      */
-    public function setBody(?string $body): Page
+    public function setBody(?string $body): Student
     {
         $this->body = $body;
         return $this;
@@ -293,9 +293,9 @@ class Page extends CanvasObject
 
     /**
      * @param bool|null $published
-     * @return Page
+     * @return Student
      */
-    public function setPublished(?bool $published): Page
+    public function setPublished(?bool $published): Student
     {
         $this->published = $published;
         return $this;
@@ -311,9 +311,9 @@ class Page extends CanvasObject
 
     /**
      * @param DateTime|null $publishAt
-     * @return Page
+     * @return Student
      */
-    public function setPublishAt(?DateTime $publishAt): Page
+    public function setPublishAt(?DateTime $publishAt): Student
     {
         $this->publishAt = $publishAt;
         return $this;
@@ -336,9 +336,9 @@ class Page extends CanvasObject
 
     /**
      * @param bool $frontPage
-     * @return Page
+     * @return Student
      */
-    public function setFrontPage(bool $frontPage): Page
+    public function setFrontPage(bool $frontPage): Student
     {
         $this->frontPage = $frontPage;
         return $this;
@@ -354,9 +354,9 @@ class Page extends CanvasObject
 
     /**
      * @param bool|null $lockedForUser
-     * @return Page
+     * @return Student
      */
-    public function setLockedForUser(?bool $lockedForUser): Page
+    public function setLockedForUser(?bool $lockedForUser): Student
     {
         $this->lockedForUser = $lockedForUser;
         return $this;
@@ -372,9 +372,9 @@ class Page extends CanvasObject
 
     /**
      * @param string|null $lockInfo
-     * @return Page
+     * @return Student
      */
-    public function setLockInfo(?string $lockInfo): Page
+    public function setLockInfo(?string $lockInfo): Student
     {
         $this->lockInfo = $lockInfo;
         return $this;
@@ -390,9 +390,9 @@ class Page extends CanvasObject
 
     /**
      * @param string|null $lockExplanation
-     * @return Page
+     * @return Student
      */
-    public function setLockExplanation(?string $lockExplanation): Page
+    public function setLockExplanation(?string $lockExplanation): Student
     {
         $this->lockExplanation = $lockExplanation;
         return $this;

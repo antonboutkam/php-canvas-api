@@ -2,17 +2,17 @@
 
 namespace Hurah\Canvas\Test\Endpoints\Page;
 
-use Hurah\Canvas\Endpoints\Page\Page;
+use Hurah\Canvas\Endpoints\Page\Student;
 use PHPUnit\Framework\TestCase;
 
 class PageTest extends TestCase
 {
     private string $sUrl = '/adfs/sadfasd';
     private string $sTitle = 'Test';
-    private Page $oPage;
+    private Student $oPage;
     public function setUp(): void
     {
-        $this->oPage = Page::fromCanvasArray([
+        $this->oPage = Student::fromCanvasArray([
             'title' => $this->sTitle,
             'url' => $this->sUrl,
             'front_page' => true
@@ -27,12 +27,12 @@ class PageTest extends TestCase
     public function testFromCanvasArray()
     {
 		 $sTitle = 'Test';
-        $oPage = Page::fromCanvasArray([
+        $oPage = Student::fromCanvasArray([
             'title' => $sTitle,
             'url' => $this->sUrl,
             'front_page' => true
         ]);
-		  static::assertInstanceOf(Page::class, $oPage);
+		  static::assertInstanceOf(Student::class, $oPage);
 		  static::assertEquals($sTitle, $oPage->getTitle());
     }
 

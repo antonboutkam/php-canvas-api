@@ -17,13 +17,15 @@ use Hurah\Canvas\Endpoints\Module\ModuleCollection;
 use Hurah\Canvas\Endpoints\ModuleItem\ModuleItem;
 use Hurah\Canvas\Endpoints\ModuleItem\ModuleItemCollection;
 use Hurah\Canvas\Endpoints\Page\Page;
-use Hurah\Canvas\Endpoints\Page\PageCollection;
+use Hurah\Canvas\Endpoints\Student\Student;
+use Hurah\Canvas\Endpoints\Student\StudentCollection;
 use Hurah\Canvas\Endpoints\Quiz\Quiz;
 use Hurah\Canvas\Endpoints\Quiz\QuizCollection;
 use Hurah\Canvas\Endpoints\QuizQuestion\QuizQuestion;
 use Hurah\Canvas\Endpoints\QuizQuestionGroup\QuizQuestionGroup;
 use Hurah\Canvas\Endpoints\Submission\Submission;
 use Hurah\Canvas\Endpoints\Submission\SubmissionCollection;
+use Hurah\Canvas\Endpoints\User\UserCollection;
 use Hurah\Types\Exception\InvalidArgumentException;
 use Hurah\Types\Type\Url;
 use Hurah\Types\Util\JsonUtils;
@@ -87,6 +89,41 @@ class Canvas
         return SubmissionCollection::fromCanvasArray($data, $assignment);
     }
 
+    /**
+     * @throws InvalidArgumentException
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function getStudentsInCourse(int $iCourseId):StudentCollection
+    {
+        $url = "/courses/{$iCourseId}/users";
+        return StudentCollection::fromCanvasArray($this->getCollection($url)) ;
+    }
+    /**
+     * @throws InvalidArgumentException
+     * @throws GuzzleException
+     */
+    public function getUserProfile(int $iUserId):array
+    {
+        $url = "/users/{$iUserId}/profile";
+        return $this->getItem($url);
+    }
+    /**
+     * @throws InvalidArgumentException
+     * @throws GuzzleException
+     */
+    public function getUsersInAccount():UserCollection
+    {
+        $iAccountId = Config::getAccountId();
+        $url = "/accounts/self/users";
+        $aUsers = $this->getCollection($url);
+        return UserCollection::fromCanvasArray($aUsers);
+    }
+
+    /**
+     * @param GradingStandard $oGradingStandard
+     * @return array
+     */
     public function createGradingStandard(GradingStandard $oGradingStandard):array
     {
         $iAccountId = Config::getAccountId();
@@ -102,12 +139,25 @@ class Canvas
 
     }
 
+    /**
+     * @param mixed $iCourseId
+     * @param mixed $oAssignmentId
+     * @param Submission $submission
+     * @return array
+     */
     public function createSubmission(mixed $iCourseId, mixed $oAssignmentId, Submission $submission):array
     {
         $url = "/courses/{$iCourseId}/assignments/{$oAssignmentId}/submissions";
         return $this->postItem($url, $submission->toCanvasArray());
     }
 
+    /**
+     * @param int $iCourseId
+     * @param AssignmentGroup $oAssignmentGroup
+     * @return array
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     */
     public function storeAssignmentGroup(int $iCourseId, Endpoints\AssignmentGroup\AssignmentGroup $oAssignmentGroup): array
     {
         if($oAssignmentGroup->getId())
@@ -128,14 +178,28 @@ class Canvas
     {
         return $this->postItem("/courses/{$iCourseId}/assignment_groups", $oAssignmentGroup->toCanvasArray());
     }
+
+    /**
+     * @param int $iCourseId
+     * @param int $iAssignmentGroupId
+     * @param AssignmentGroup $oAssignmentGroup
+     * @return array
+     */
     public function updateAssignmentGroup(int $iCourseId, int $iAssignmentGroupId, Endpoints\AssignmentGroup\AssignmentGroup $oAssignmentGroup): array
     {
         return $this->putItem("/courses/{$iCourseId}/assignment_groups/{$iAssignmentGroupId}", $oAssignmentGroup->toCanvasArray());
     }
+
+    /**
+     * @param int $iCourseId
+     * @param int $iAssignmentGroupId
+     * @return array
+     */
     public function deleteAssignmentGroup(int $iCourseId, int $iAssignmentGroupId):array
     {
         return $this->deleteItem("/courses/{$iCourseId}/assignment_groups/{$iAssignmentGroupId}");
     }
+
     /**
      * @throws InvalidArgumentException
      * @throws GuzzleException
@@ -159,6 +223,12 @@ class Canvas
         return $this->postItem("/courses/{$iCourseId}/assignments", $oAssignment->toCanvasArray());
     }
 
+    /**
+     * @param int $iCourseId
+     * @param int $iAssignmentId
+     * @param Assignment $oAssignment
+     * @return array
+     */
     public function updateAssignment(int $iCourseId, int $iAssignmentId, Assignment $oAssignment):array
     {
         return $this->putItem("/courses/{$iCourseId}/assignments/{$iAssignmentId}", $oAssignment->toCanvasArray());
@@ -194,11 +264,24 @@ class Canvas
         return QuizCollection::fromCanvasArray($data);
     }
 
+    /**
+     * @param int $iCourseId
+     * @param int $iQuizId
+     * @param QuizQuestion $oQuizQuestion
+     * @return array
+     */
     public function createQuizQuestion(int $iCourseId, int $iQuizId, QuizQuestion $oQuizQuestion):array
     {
         return $this->postItem("/courses/{$iCourseId}/quizzes/{$iQuizId}/questions", $oQuizQuestion->toCanvasArray());
     }
 
+    /**
+     * @param int $iCourseId
+     * @param int $iQuizId
+     * @param int $iQuizQuestionId
+     * @param QuizQuestion $oQuizQuestion
+     * @return array
+     */
     public function updateQuestion(int $iCourseId, int $iQuizId, int $iQuizQuestionId, QuizQuestion $oQuizQuestion):array
     {
         return $this->putItem("/courses/{$iCourseId}/quizzes/{$iQuizId}/questions/{$iQuizQuestionId}", $oQuizQuestion->toCanvasArray());
@@ -247,6 +330,12 @@ class Canvas
     {
         return $this->postItem("/courses/{$iCourseId}/quizzes/{$iQuizId}", $oQuiz->toCanvasArray());
     }
+
+    /**
+     * @param int $iCourseId
+     * @param Quiz $oQuiz
+     * @return array
+     */
     public function storeQuiz(int $iCourseId, Quiz $oQuiz):array
     {
         if($oQuiz->getId())
@@ -255,21 +344,48 @@ class Canvas
         }
         return $this->createQuiz($iCourseId, $oQuiz);
     }
+
+    /**
+     * @param int $iCourseId
+     * @param int $iQuizId
+     * @return array
+     */
     public function deleteQuiz(int $iCourseId, int $iQuizId):array
     {
         return $this->deleteItem("courses/{$iCourseId}/quizzes/{$iQuizId}");
     }
 
+    /**
+     * @param int $iCourseId
+     * @param int $iQuizId
+     * @param QuizQuestionGroup $oQuizQuestionGroup
+     * @return array
+     */
     public function createQuizQuestionGroup(int $iCourseId, int $iQuizId, QuizQuestionGroup $oQuizQuestionGroup):array
     {
         return $this->postItem("/courses/{$iCourseId}/quizzes/{$iQuizId}/groups", $oQuizQuestionGroup->toCanvasArray());
     }
+
+    /**
+     * @param int $iCourseId
+     * @param int $iQuizId
+     * @param int $iQuizGroupId
+     * @param QuizQuestionGroup $oQuizQuestionGroup
+     * @return array
+     */
     public function updateQuizQuestionGroup(int $iCourseId, int $iQuizId, int $iQuizGroupId, QuizQuestionGroup
     $oQuizQuestionGroup):array
     {
         return $this->putItem("/courses/{$iCourseId}/quizzes/{$iQuizId}/groups/{$iQuizGroupId}", $oQuizQuestionGroup->toCanvasArray
         ());
     }
+
+    /**
+     * @param int $iCourseId
+     * @param int $iQuizId
+     * @param QuizQuestionGroup $oQuizQuestionGroup
+     * @return array
+     */
     public function storeQuizQuestionGroup(int $iCourseId, int $iQuizId, QuizQuestionGroup $oQuizQuestionGroup):array
     {
         if($oQuizQuestionGroup->getId())
@@ -297,6 +413,7 @@ class Canvas
         }
         return $this->createModule($iCourseId, $module);
     }
+
     /**
      * PUT /api/v1/courses/:course_id/modules
      * @throws InvalidArgumentException
@@ -307,6 +424,7 @@ class Canvas
     {
         return $this->putItem('/courses/' . $iCourseId . '/modules/' . $iModuleId, $module->toCanvasArray());
     }
+
     /**
      * PUT /api/v1/courses/:course_id/modules
      * @throws InvalidArgumentException
@@ -317,15 +435,35 @@ class Canvas
     {
         return $this->postItem('/courses/' . $iCourseId . '/modules', $module->toCanvasArray());
     }
-    public function getPage(int $iCourseId, int $iPageId):Page
+
+    /**
+     * @param int $iCourseId
+     * @param int $iPageId
+     * @return Student
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     */
+    public function getPage(int $iCourseId, int $iPageId):Student
     {
         $data = $this->getItem("/courses/{$iCourseId}/pages/{$iPageId}");
-        return Page::fromCanvasArray($data);
+        return Student::fromCanvasArray($data);
     }
+
+    /**
+     * @param int $iCourseId
+     * @param int $iPageId
+     * @return array
+     */
     public function deletePage(int $iCourseId, int $iPageId):array
     {
         return $this->deleteItem("/courses/{$iCourseId}/pages/{$iPageId}");
     }
+
+    /**
+     * @param int $iCourseId
+     * @param Page $oPage
+     * @return array
+     */
     public function storePage(int $iCourseId, Page $oPage):array
     {
         if($oPage->getPageId())
@@ -342,10 +480,10 @@ class Canvas
     {
         return $this->putItem("/courses/{$iCourseId}/pages/{$oPage->getPageId()}", $oPage->toCanvasArray());
     }
-    public function getPages(int $iCourseId, int $iLimit = 100):PageCollection
+    public function getPages(int $iCourseId, int $iLimit = 100):StudentCollection
     {
         $data = $this->getCollection("/courses/{$iCourseId}/pages", $iLimit);
-        $collection = PageCollection::fromCanvasArray($data);
+        $collection = StudentCollection::fromCanvasArray($data);
         return $collection;
     }
     public function deleteModule(int $iCourseId, int $iModuleId):array

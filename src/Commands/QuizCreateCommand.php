@@ -23,7 +23,9 @@ class QuizCreateCommand extends Command
         $this->addArgument('assignment_group_id', InputArgument::REQUIRED, 'The assignment group id.');
         $this->addArgument('title', InputArgument::REQUIRED, 'The title of the quiz.');
         $this->addArgument('points_possible', InputArgument::REQUIRED, 'The total point value given to the quiz. Must be positive.');
-        $this->addArgument('grading_type', InputArgument::REQUIRED, 'The type of grading the assignment receives. (pass_fail, percent, letter_grade, gpa_scale, points)');
+        // $this->addArgument('grading_type', InputArgument::REQUIRED, 'The type of grading the assignment receives. (pass_fail, percent, letter_grade, gpa_scale, points)');
+        $this->addArgument('scoring_policy', InputArgument::OPTIONAL, 'Required and only valid if allowed_attempts > 1. Scoring policy for a quiz that students can take multiple times. Defaults to “keep_highest”.. (keep_highest, keep_latest)');
+
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
