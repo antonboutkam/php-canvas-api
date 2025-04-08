@@ -120,6 +120,13 @@ class Canvas
         $aUsers = $this->getCollection($url);
         return UserCollection::fromCanvasArray($aUsers);
     }
+    public function getUserCourses(int $iUserId):CourseCollection
+    {
+        $url = "/users/{$iUserId}/courses";
+        $aCourses = $this->getCollection($url);
+        return CourseCollection::fromCanvasArray($aCourses);
+    }
+
 
     /**
      * @param GradingStandard $oGradingStandard
