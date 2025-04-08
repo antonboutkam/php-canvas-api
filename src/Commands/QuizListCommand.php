@@ -3,7 +3,6 @@
 namespace Hurah\Canvas\Commands;
 
 use Hurah\Canvas\Canvas;
-use Hurah\Canvas\Endpoints\Quiz\Quiz;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
@@ -28,11 +27,11 @@ class QuizListCommand extends Command
         $oQuizCollection = $oCanvas->getQuizzes($iCourseId);
 
         $table = new Table($output);
-        $table->setHeaders(['Id', 'Name']);
+        $table->setHeaders(['Id', 'Name', 'PointsPossible']);
 
         foreach ($oQuizCollection as $key => $oQuiz)
         {
-            $table->addRow([$key, $oQuiz->getTitle()]);
+            $table->addRow([$oQuiz->getId(), $oQuiz->getTitle(), $oQuiz->getPointsPossible()]);
         }
         $table->render();
 

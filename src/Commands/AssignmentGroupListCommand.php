@@ -36,7 +36,7 @@ class AssignmentGroupListCommand extends Command
         $aResult = $oCanvas->getAssignmentGroups($iCourseId);
         
         $table = new Table($output);
-        $table->setHeaders(['Id', 'Name', 'Position', 'GroupWeight', 'Course Id']);
+        $table->setHeaders(['Id', 'Name', 'Position', 'GroupWeight']);
 
         foreach ($aResult as $key => $oAssignmentGroup)
         {
@@ -46,8 +46,7 @@ class AssignmentGroupListCommand extends Command
                     $oAssignmentGroup->getId(),
                     $oAssignmentGroup->getName(),
                     $oAssignmentGroup->getPosition(),
-                    $oAssignmentGroup->getGroupWeight(),
-                    $oAssignmentGroup->getCourseId()
+                    $oAssignmentGroup->getGroupWeight()
                 ]);
             }
         }

@@ -2,7 +2,6 @@
 
 namespace Hurah\Canvas\Endpoints\Student;
 
-use DateTime;
 use Hurah\Canvas\Endpoints\CanvasObject;
 
 class Student extends CanvasObject

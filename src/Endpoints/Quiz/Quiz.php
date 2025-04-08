@@ -97,7 +97,7 @@ class Quiz extends CanvasObject
     /**
      * @var int|null
      */
-    private ?int $pointsPossible = null;
+    private ?float $pointsPossible = null;
     /**
      * @var bool|null
      */
@@ -212,7 +212,7 @@ class Quiz extends CanvasObject
             ->setPublished($canvasArray['published'] ?? false)
             ->setUnpublishable($canvasArray['unpublishable'] ?? true)
             ->setLockedForUser($canvasArray['locked_for_user'] ?? false)
-            ->setLockInfo($canvasArray['lock_info'] ?? null)
+            ->setLockInfo(empty($canvasArray['lock_info']) ? null : json_encode($canvasArray['lock_info']))
             ->setLockExplanation($canvasArray['lock_explanation'] ?? null)
             ->setSpeedgraderUrl($canvasArray['speedgrader_url'] ?? null)
             ->setQuizExtensionsUrl($canvasArray['quiz_extensions_url'] ?? null)
@@ -802,7 +802,7 @@ class Quiz extends CanvasObject
     /**
      * @return int|null
      */
-    public function getPointsPossible(): ?int
+    public function getPointsPossible(): ?float
     {
         return $this->pointsPossible;
     }
@@ -811,7 +811,7 @@ class Quiz extends CanvasObject
      * @param int|null $pointsPossible
      * @return $this
      */
-    public function setPointsPossible(?int $pointsPossible): self
+    public function setPointsPossible(?float $pointsPossible): self
     {
         $this->pointsPossible = $pointsPossible;
         return $this;

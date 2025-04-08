@@ -27,11 +27,22 @@ class AssignmentListCommand extends Command
         $oAssignmentCollection = $oCanvas->getAssignments($iCourseId, 100);
 
         $table = new Table($output);
-        $table->setHeaders(['Page id', 'Title']);
+        $table->setHeaders([
+            'Page id',
+            'Title',
+            'AssignmentGroupId',
+            'PointsPossible']);
 
         foreach ($oAssignmentCollection as $oAssignment)
         {
-            $table->addRow([$oAssignment->getId(), $oAssignment->getName()]);
+            $table->addRow([
+                $oAssignment->getId(),
+                $oAssignment->getName(),
+                $oAssignment->getAssignmentGroupId(),
+                $oAssignment->getPointsPossible()
+
+
+            ]);
         }
 
 

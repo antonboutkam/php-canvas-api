@@ -50,7 +50,7 @@ class QuizQuestion extends CanvasObject
     /**
      * @var int|null
      */
-    private ?int $pointsPossible = null;
+    private ?float $pointsPossible = null;
     /**
      * @var string|null
      */
@@ -64,9 +64,69 @@ class QuizQuestion extends CanvasObject
      */
     private ?string $neutralComments = null;
     /**
+     * @var string|null
+     */
+    private ?string $correctCommentsHtml = null;
+    /**
+     * @var string|null
+     */
+    private ?string $incorrectCommentsHtml = null;
+    /**
+     * @var string|null
+     */
+    private ?string $assessmentQuestionId = null;
+    /**
      * @var array|null
      */
     private ?array $answers = null;
+
+
+    /**
+     * @param int|null $quizId
+     * @return $this
+     */
+    public function setAssessmentQuestionId(?string $assessmentQuestionId): self
+    {
+        $this->assessmentQuestionId = $assessmentQuestionId;
+        return $this;
+    }
+
+    /**
+     * @param int|null $quizId
+     * @return $this
+     */
+    public function setCorrectCommentsHtml(?string $correctCommentsHtml): self
+    {
+        $this->correctCommentsHtml = $correctCommentsHtml;
+        return $this;
+    }
+
+    /**
+     * @param int|null $quizId
+     * @return $this
+     */
+    public function setIncorrectCommentsHtml(?string $incorrectCommentsHtml): self
+    {
+        $this->incorrectCommentsHtml = $incorrectCommentsHtml;
+        return $this;
+    }
+
+    public function getCorrectCommentsHtml(): ?string
+    {
+        return $this->correctCommentsHtml;
+    }
+
+    public function getIncorrectCommentsHtml(): ?string
+    {
+        return $this->incorrectCommentsHtml;
+    }
+
+    public function getAssessmentQuestionId(): ?string
+    {
+        return $this->assessmentQuestionId;
+    }
+
+
 
     /**
      * Static constructor from an associative array.
@@ -235,7 +295,7 @@ class QuizQuestion extends CanvasObject
     /**
      * @return int|null
      */
-    public function getPointsPossible(): ?int
+    public function getPointsPossible(): ?float
     {
         return $this->pointsPossible;
     }
@@ -244,7 +304,7 @@ class QuizQuestion extends CanvasObject
      * @param int|null $pointsPossible
      * @return $this
      */
-    public function setPointsPossible(?int $pointsPossible): self
+    public function setPointsPossible(?float $pointsPossible): self
     {
         $this->pointsPossible = $pointsPossible;
         return $this;

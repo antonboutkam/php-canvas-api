@@ -17,12 +17,13 @@ use Hurah\Canvas\Endpoints\Module\ModuleCollection;
 use Hurah\Canvas\Endpoints\ModuleItem\ModuleItem;
 use Hurah\Canvas\Endpoints\ModuleItem\ModuleItemCollection;
 use Hurah\Canvas\Endpoints\Page\Page;
-use Hurah\Canvas\Endpoints\Student\Student;
-use Hurah\Canvas\Endpoints\Student\StudentCollection;
 use Hurah\Canvas\Endpoints\Quiz\Quiz;
 use Hurah\Canvas\Endpoints\Quiz\QuizCollection;
 use Hurah\Canvas\Endpoints\QuizQuestion\QuizQuestion;
+use Hurah\Canvas\Endpoints\QuizQuestion\QuizQuestionCollection;
 use Hurah\Canvas\Endpoints\QuizQuestionGroup\QuizQuestionGroup;
+use Hurah\Canvas\Endpoints\Student\Student;
+use Hurah\Canvas\Endpoints\Student\StudentCollection;
 use Hurah\Canvas\Endpoints\Submission\Submission;
 use Hurah\Canvas\Endpoints\Submission\SubmissionCollection;
 use Hurah\Canvas\Endpoints\User\UserCollection;
@@ -264,6 +265,31 @@ class Canvas
         return QuizCollection::fromCanvasArray($data);
     }
 
+    /**
+     * @param int $iCourseId
+     * @param int $iQuizId
+     * @param QuizQuestion $oQuizQuestion
+     * @return QuizQuestionCollection
+     * @throws Exception
+     */
+    public function getQuizQuestions(int $iCourseId, int $iQuizId): QuizQuestionCollection
+    {
+        $aQuizQuestionCollection = $this->getItem("/courses/{$iCourseId}/quizzes/{$iQuizId}/questions");
+        return QuizQuestionCollection::fromCanvasArray($aQuizQuestionCollection);
+    }
+
+    /**
+     * @param int $iCourseId
+     * @param int $iQuizId
+     * @param QuizQuestion $oQuizQuestion
+     * @return array
+     * @throws GuzzleException
+     */
+    public function getQuizQuestion(int $iCourseId, int $iQuizId, int $iQuizQuestionId): QuizQuestion
+    {
+        $aQuizQuestion = $this->getItem("/courses/{$iCourseId}/quizzes/{$iQuizId}/questions/{$iQuizQuestionId}");
+        return QuizQuestion::fromCanvasArray($aQuizQuestion);
+    }
     /**
      * @param int $iCourseId
      * @param int $iQuizId

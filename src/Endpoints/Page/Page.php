@@ -101,7 +101,7 @@ class Page extends CanvasObject
      * Create a Page object from an associative array.
      *
      * @param array $data
-     * @return Student
+     * @return Page
      */
     public static function fromCanvasArray(array $data):self
     {

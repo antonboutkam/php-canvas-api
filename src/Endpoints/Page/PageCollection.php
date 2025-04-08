@@ -15,7 +15,7 @@ class PageCollection extends AbstractCollectionDataType
     public function addArray(array $module): self
     {
 
-        $this->array[] = Student::fromCanvasArray($module);
+        $this->array[] = Page::fromCanvasArray($module);
         return $this;
     }
 
@@ -33,7 +33,7 @@ class PageCollection extends AbstractCollectionDataType
     }
 
 
-    public function current(): Student
+    public function current(): Page
     {
         return $this->array[$this->position];
     }
