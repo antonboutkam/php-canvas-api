@@ -120,6 +120,13 @@ class Canvas
         $aUsers = $this->getCollection($url);
         return UserCollection::fromCanvasArray($aUsers);
     }
+
+    /**
+     * @param int $iUserId
+     * @return CourseCollection
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     */
     public function getUserCourses(int $iUserId):CourseCollection
     {
         $url = "/users/{$iUserId}/courses";
