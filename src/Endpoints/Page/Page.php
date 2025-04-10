@@ -23,7 +23,7 @@ class Page extends CanvasObject
      * The title of the page
      * @var string
      */
-    private string $title;
+    private ?string $title;
 
     /**
      * The creation date for the page
@@ -157,7 +157,7 @@ class Page extends CanvasObject
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -166,7 +166,7 @@ class Page extends CanvasObject
      * @param string $title
      * @return Page
      */
-    public function setTitle(string $title): Page
+    public function setTitle(?string $title): Page
     {
         $this->title = $title;
         return $this;
@@ -406,7 +406,7 @@ class Page extends CanvasObject
         return $this;
     }
 
-    private function setHideFromStudents(bool $hideFromStudents): static
+    private function setHideFromStudents(?bool $hideFromStudents): static
     {
         $this->hideFromStudents = $hideFromStudents;
         return $this;
