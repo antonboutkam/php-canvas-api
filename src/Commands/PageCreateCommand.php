@@ -3,7 +3,7 @@
 namespace Hurah\Canvas\Commands;
 
 use Hurah\Canvas\Canvas;
-use Hurah\Canvas\Endpoints\Page\Student;
+use Hurah\Canvas\Endpoints\Page\Page;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PageCreateCommand extends Command
 {
-    function configure()
+    function configure(): void
     {
         $this->setDescription('Create a modules within a course');
         $this->setHelp('XXX');
@@ -20,7 +20,7 @@ class PageCreateCommand extends Command
     }
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $oPage = new Student();
+        $oPage = new Page();
         $oPage->setTitle('"Testing 123"');
         $oPage->setBody('<h2>Hoi hoi hoi</h2>');
        //  $oPage->setPublished(true);

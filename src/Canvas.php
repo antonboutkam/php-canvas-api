@@ -17,6 +17,7 @@ use Hurah\Canvas\Endpoints\Module\ModuleCollection;
 use Hurah\Canvas\Endpoints\ModuleItem\ModuleItem;
 use Hurah\Canvas\Endpoints\ModuleItem\ModuleItemCollection;
 use Hurah\Canvas\Endpoints\Page\Page;
+use Hurah\Canvas\Endpoints\Page\PageCollection;
 use Hurah\Canvas\Endpoints\Quiz\Quiz;
 use Hurah\Canvas\Endpoints\Quiz\QuizCollection;
 use Hurah\Canvas\Endpoints\QuizQuestion\QuizQuestion;
@@ -520,10 +521,11 @@ class Canvas
     {
         return $this->putItem("/courses/{$iCourseId}/pages/{$oPage->getPageId()}", $oPage->toCanvasArray());
     }
-    public function getPages(int $iCourseId, int $iLimit = 100):StudentCollection
+
+    public function getPages(int $iCourseId, int $iLimit = 100): PageCollection
     {
         $data = $this->getCollection("/courses/{$iCourseId}/pages", $iLimit);
-        $collection = StudentCollection::fromCanvasArray($data);
+        $collection = PageCollection::fromCanvasArray($data);
         return $collection;
     }
     public function deleteModule(int $iCourseId, int $iModuleId):array

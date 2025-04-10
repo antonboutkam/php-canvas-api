@@ -43,6 +43,8 @@ class Page extends CanvasObject
      */
     private ?bool $hideFromStudents = false;
 
+    private ?bool $hideFromPages = false;
+
     /**
      * Roles allowed to edit the page; comma-separated list
      * @var string
@@ -97,32 +99,27 @@ class Page extends CanvasObject
      */
     private ?string $lockExplanation = '';
 
-    /**
-     * Create a Page object from an associative array.
-     *
-     * @param array $data
-     * @return Page
-     */
-    public static function fromCanvasArray(array $data):self
+    public static function fromCanvasArray(array $data): self
     {
         $page = new self();
-        $page->pageId = $data['page_id'] ?? null;
-        $page->url = $data['url'] ?? null;
-        $page->title = $data['title'] ?? null;
-        $page->createdAt = isset($data['created_at']) ? self::makeDate($data['created_at']) : null;
-        $page->updatedAt = isset($data['updated_at']) ? self::makeDate($data['updated_at']) : null;
-        $page->hideFromStudents = $data['hide_from_students'] ?? null;
-        $page->editingRoles = $data['editing_roles'] ?? null;
-        $page->lastEditedBy = $data['last_edited_by'] ?? [];
-        $page->body = $data['body'] ?? null;
-        $page->published = $data['published'] ?? null;
-        $page->publishAt = isset($data['publish_at']) ? self::makeDate($data['publish_at']) : null;
-        $page->frontPage = $data['front_page'] ?? false;
-        $page->lockedForUser = $data['locked_for_user'] ?? null;
-        $page->lockInfo = $data['lock_info'] ?? null;
-        $page->lockExplanation = $data['lock_explanation'] ?? null;
+        $page->setPageId($data['page_id'] ?? null);
+        $page->setUrl($data['url'] ?? null);
+        $page->setTitle($data['title'] ?? null);
+        $page->setCreatedAt(isset($data['created_at']) ? self::makeDate($data['created_at']) : null);
+        $page->setUpdatedAt(isset($data['updated_at']) ? self::makeDate($data['updated_at']) : null);
+        $page->setHideFromStudents($data['hide_from_students'] ?? null);
+        $page->setEditingRoles($data['editing_roles'] ?? null);
+        $page->setLastEditedBy($data['last_edited_by'] ?? []);
+        $page->setBody($data['body'] ?? null);
+        $page->setPublished($data['published'] ?? null);
+        $page->setPublishAt(isset($data['publish_at']) ? self::makeDate($data['publish_at']) : null);
+        $page->setFrontPage($data['front_page'] ?? false);
+        $page->setLockedForUser($data['locked_for_user'] ?? null);
+        $page->setLockInfo($data['lock_info'] ?? null);
+        $page->setLockExplanation($data['lock_explanation'] ?? null);
         return $page;
     }
+
 
     public function toCanvasArray():array
     {
@@ -141,9 +138,9 @@ class Page extends CanvasObject
 
     /**
      * @param int|null $pageId
-     * @return Student
+     * @return Page
      */
-    public function setPageId(?int $pageId): Student
+    public function setPageId(?int $pageId): Page
     {
         $this->pageId = $pageId;
         return $this;
@@ -167,9 +164,9 @@ class Page extends CanvasObject
 
     /**
      * @param string $title
-     * @return Student
+     * @return Page
      */
-    public function setTitle(string $title): Student
+    public function setTitle(string $title): Page
     {
         $this->title = $title;
         return $this;
@@ -185,9 +182,9 @@ class Page extends CanvasObject
 
     /**
      * @param DateTime|null $createdAt
-     * @return Student
+     * @return Page
      */
-    public function setCreatedAt(?DateTime $createdAt): Student
+    public function setCreatedAt(?DateTime $createdAt): Page
     {
         $this->createdAt = $createdAt;
         return $this;
@@ -203,9 +200,9 @@ class Page extends CanvasObject
 
     /**
      * @param DateTime|null $updatedAt
-     * @return Student
+     * @return Page
      */
-    public function setUpdatedAt(?DateTime $updatedAt): Student
+    public function setUpdatedAt(?DateTime $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
         return $this;
@@ -214,18 +211,23 @@ class Page extends CanvasObject
     /**
      * @return bool|null
      */
-    public function getHideFromStudents(): ?bool
+    public function gethideFromPages(): ?bool
+    {
+        return $this->hideFromPages;
+    }
+
+    public function hideFromStudents(): ?bool
     {
         return $this->hideFromStudents;
     }
 
     /**
-     * @param bool|null $hideFromStudents
-     * @return Student
+     * @param bool|null $hideFromPages
+     * @return Page
      */
-    public function setHideFromStudents(?bool $hideFromStudents): Student
+    public function setHideFromPages(?bool $hideFromPages): static
     {
-        $this->hideFromStudents = $hideFromStudents;
+        $this->hideFromPages = $hideFromPages;
         return $this;
     }
 
@@ -239,9 +241,9 @@ class Page extends CanvasObject
 
     /**
      * @param string|null $editingRoles
-     * @return Student
+     * @return Page
      */
-    public function setEditingRoles(?string $editingRoles): Student
+    public function setEditingRoles(?string $editingRoles): static
     {
         $this->editingRoles = $editingRoles;
         return $this;
@@ -257,7 +259,7 @@ class Page extends CanvasObject
 
     /**
      * @param mixed $lastEditedBy
-     * @return Student
+     * @return Page
      */
     public function setLastEditedBy(?array $lastEditedBy)
     {
@@ -275,9 +277,9 @@ class Page extends CanvasObject
 
     /**
      * @param string|null $body
-     * @return Student
+     * @return Page
      */
-    public function setBody(?string $body): Student
+    public function setBody(?string $body): static
     {
         $this->body = $body;
         return $this;
@@ -293,9 +295,9 @@ class Page extends CanvasObject
 
     /**
      * @param bool|null $published
-     * @return Student
+     * @return Page
      */
-    public function setPublished(?bool $published): Student
+    public function setPublished(?bool $published): static
     {
         $this->published = $published;
         return $this;
@@ -311,9 +313,9 @@ class Page extends CanvasObject
 
     /**
      * @param DateTime|null $publishAt
-     * @return Student
+     * @return Page
      */
-    public function setPublishAt(?DateTime $publishAt): Student
+    public function setPublishAt(?DateTime $publishAt): static
     {
         $this->publishAt = $publishAt;
         return $this;
@@ -336,9 +338,9 @@ class Page extends CanvasObject
 
     /**
      * @param bool $frontPage
-     * @return Student
+     * @return Page
      */
-    public function setFrontPage(bool $frontPage): Student
+    public function setFrontPage(bool $frontPage): static
     {
         $this->frontPage = $frontPage;
         return $this;
@@ -354,9 +356,9 @@ class Page extends CanvasObject
 
     /**
      * @param bool|null $lockedForUser
-     * @return Student
+     * @return Page
      */
-    public function setLockedForUser(?bool $lockedForUser): Student
+    public function setLockedForUser(?bool $lockedForUser): static
     {
         $this->lockedForUser = $lockedForUser;
         return $this;
@@ -372,9 +374,9 @@ class Page extends CanvasObject
 
     /**
      * @param string|null $lockInfo
-     * @return Student
+     * @return Page
      */
-    public function setLockInfo(?string $lockInfo): Student
+    public function setLockInfo(?string $lockInfo): static
     {
         $this->lockInfo = $lockInfo;
         return $this;
@@ -390,11 +392,23 @@ class Page extends CanvasObject
 
     /**
      * @param string|null $lockExplanation
-     * @return Student
+     * @return Page
      */
-    public function setLockExplanation(?string $lockExplanation): Student
+    public function setLockExplanation(?string $lockExplanation): static
     {
         $this->lockExplanation = $lockExplanation;
+        return $this;
+    }
+
+    private function setUrl(?string $url): static
+    {
+        $this->url = $url;
+        return $this;
+    }
+
+    private function setHideFromStudents(bool $hideFromStudents): static
+    {
+        $this->hideFromStudents = $hideFromStudents;
         return $this;
     }
 
