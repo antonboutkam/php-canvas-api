@@ -2,12 +2,14 @@
 
 namespace Hurah\Canvas\Endpoints\Assignment;
 
+use AllowDynamicProperties;
 use DateTime;
 use Hurah\Canvas\Canvas;
 use Hurah\Canvas\Endpoints\CanvasObject;
 use Hurah\Canvas\Endpoints\Submission\SubmissionCollection;
 use Hurah\Canvas\Util;
 use Hurah\Types\Exception\NullPointerException;
+use Hurah\Types\Type\Url;
 
 class Assignment extends CanvasObject
 {
@@ -35,8 +37,8 @@ class Assignment extends CanvasObject
     public ?bool $graderNamesVisibleToGrader = null;
     public ?bool $graderNamesVisibleToFinalGrader = null;
     public ?string $url = null;
-
-
+    public ?array $frozenAttributes;
+    public ?int $originalLtiResourceLinkId = null;
     public $externalToolTagAttributes = null; // Still unclear about this one
     public ?bool $peerReviews = false;
     public ?bool $automaticPeerReviews = null;
@@ -126,10 +128,46 @@ class Assignment extends CanvasObject
         }
         return $instance;
     }
-
-    public function setOriginalLtiResourceLinkId()
+    public function getUrl():?Url
     {
+        if($this->url)
+        {
+            return new Url($this->url);
+        }
+        return null;
 
+    }
+
+    /**
+     * @param string|null $url
+     * @return $this
+     */
+    public function setUrl(?string $url):static
+    {
+        $this->url = $url;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getOriginalLtiResourceLinkId():?int{
+        return $this->originalLtiResourceLinkId;
+    }
+
+    /**
+     * @param int|null $originalLtiResourceLinkId
+     * @return $this
+     */
+    public function setOriginalLtiResourceLinkId(?int $originalLtiResourceLinkId):static
+    {
+        $this->originalLtiResourceLinkId = $originalLtiResourceLinkId;
+        return $this;
+    }
+    public function setFrozenAttributes(?array $aFrozenAttributes):static
+    {
+        $this->frozenAttributes = $aFrozenAttributes;
+        return $this;
     }
 
     public function toCanvasArray(): array
