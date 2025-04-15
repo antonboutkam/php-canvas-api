@@ -37,7 +37,6 @@ class Assignment extends CanvasObject
     public ?string $url = null;
 
 
-
     public $externalToolTagAttributes = null; // Still unclear about this one
     public ?bool $peerReviews = false;
     public ?bool $automaticPeerReviews = null;
@@ -111,9 +110,31 @@ class Assignment extends CanvasObject
 
     }
 
-    public function toCanvasArray():array
+    /**
+     * @param array $array
+     * @return self
+     * @throws NullPointerException
+     */
+    public static function fromCanvasArray(array $array): self
     {
-        $aData =  array_filter($this->toArray());
+
+        $instance = new self();
+
+        foreach ($array as $key => $value) {
+            $method = 'set' . Util::underscoreToCamelCase($key, true);
+            self::_setValue($instance, $key, $method, $value);
+        }
+        return $instance;
+    }
+
+    public function setOriginalLtiResourceLinkId()
+    {
+
+    }
+
+    public function toCanvasArray(): array
+    {
+        $aData = array_filter($this->toArray());
         unset($aData['course']);
         /*
         if(!empty($aData['submission_types']))
@@ -130,23 +151,6 @@ class Assignment extends CanvasObject
         return [
             'assignment' => $aData
         ];
-    }
-
-    /**
-     * @param array $array
-     * @return self
-     * @throws NullPointerException
-     */
-    public static function fromCanvasArray(array $array): self
-    {
-
-        $instance = new self();
-
-        foreach ($array as $key => $value) {
-            $method = 'set' . Util::underscoreToCamelCase($key, true);
-            self::_setValue($instance, $key, $method, $value);
-        }
-        return $instance;
     }
 
     public function getNext(): ?Assignment
@@ -170,7 +174,6 @@ class Assignment extends CanvasObject
         }
         return null;
     }
-
 
 
     /**
@@ -944,12 +947,9 @@ class Assignment extends CanvasObject
      */
     public function setSubmissionTypes(mixed $submissionTypes): Assignment
     {
-        if(is_array($submissionTypes))
-        {
+        if (is_array($submissionTypes)) {
             $this->submissionTypes = join(',', $submissionTypes);
-        }
-        else
-        {
+        } else {
             $this->submissionTypes = $submissionTypes;
         }
 
@@ -1084,7 +1084,6 @@ class Assignment extends CanvasObject
         $this->lockExplanation = $lockExplanation;
         return $this;
     }
-
 
 
     /**
@@ -1395,75 +1394,93 @@ class Assignment extends CanvasObject
         $this->muted = $muted;
         return $this;
     }
-    public function setSecureParams(?string $secureParams): self {
+
+    public function getSecureParams(): ?string
+    {
+        return $this->secureParams;
+    }
+
+    public function setSecureParams(?string $secureParams): self
+    {
         $this->secureParams = $secureParams;
         return $this;
     }
 
-    public function setLtiContextId(?string $ltiContextId): self {
+    public function getLtiContextId(): ?int
+    {
+        return $this->ltiContextId;
+    }
+
+    public function setLtiContextId(?string $ltiContextId): self
+    {
         $this->ltiContextId = $ltiContextId;
         return $this;
     }
 
-    public function setHasSubmittedSubmissions(?bool $hasSubmittedSubmissions): self {
+    public function getHasSubmittedSubmissions(): ?bool
+    {
+        return $this->hasSubmittedSubmissions;
+    }
+
+    public function setHasSubmittedSubmissions(?bool $hasSubmittedSubmissions): self
+    {
         $this->hasSubmittedSubmissions = $hasSubmittedSubmissions;
         return $this;
     }
 
-    public function setGradedSubmissionsExist(?bool $gradedSubmissionsExist): self {
+    public function getGradedSubmissionsExist(): ?bool
+    {
+        return $this->gradedSubmissionsExist;
+    }
+
+    public function setGradedSubmissionsExist(?bool $gradedSubmissionsExist): self
+    {
         $this->gradedSubmissionsExist = $gradedSubmissionsExist;
         return $this;
     }
 
-    public function setWorkflowState(?string $workflowState): self {
+    public function getWorkflowState(): ?string
+    {
+        return $this->workflowState;
+    }
+
+    public function setWorkflowState(?string $workflowState): self
+    {
         $this->workflowState = $workflowState;
         return $this;
     }
 
-    public function setOriginalCourseId(?int $originalCourseId): self {
+    public function getOriginalCourseId(): ?int
+    {
+        return $this->originalCourseId;
+    }
+
+    public function setOriginalCourseId(?int $originalCourseId): self
+    {
         $this->originalCourseId = $originalCourseId;
         return $this;
     }
 
-    public function setOriginalAssignmentId(?int $originalAssignmentId): self {
+    public function getOriginalAssignmentId(): ?int
+    {
+        return $this->originalAssignmentId;
+    }
+
+    public function setOriginalAssignmentId(?int $originalAssignmentId): self
+    {
         $this->originalAssignmentId = $originalAssignmentId;
         return $this;
     }
 
-    public function setOriginalAssignmentName(?string $originalAssignmentName): self {
+    public function getOriginalAssignmentName(): ?string
+    {
+        return $this->originalAssignmentName;
+    }
+
+    public function setOriginalAssignmentName(?string $originalAssignmentName): self
+    {
         $this->originalAssignmentName = $originalAssignmentName;
         return $this;
-    }
-    public function getSecureParams(): ?string {
-        return $this->secureParams;
-    }
-
-    public function getLtiContextId(): ?int {
-        return $this->ltiContextId;
-    }
-
-    public function getHasSubmittedSubmissions(): ?bool {
-        return $this->hasSubmittedSubmissions;
-    }
-
-    public function getGradedSubmissionsExist(): ?bool {
-        return $this->gradedSubmissionsExist;
-    }
-
-    public function getWorkflowState(): ?string {
-        return $this->workflowState;
-    }
-
-    public function getOriginalCourseId(): ?int {
-        return $this->originalCourseId;
-    }
-
-    public function getOriginalAssignmentId(): ?int {
-        return $this->originalAssignmentId;
-    }
-
-    public function getOriginalAssignmentName(): ?string {
-        return $this->originalAssignmentName;
     }
 
 }

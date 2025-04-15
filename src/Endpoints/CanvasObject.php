@@ -50,7 +50,8 @@ abstract class CanvasObject
         }
 
         if (!method_exists($instance, $method)) {
-            echo '---- No method ' . get_class($instance) . ' -- ' . $method . PHP_EOL;
+            echo '---- No method ' . get_class($instance) . ' -- ' . $method  . ' to set value ' . gettype($value) .
+            PHP_EOL;
             return;
         }
         if (str_ends_with($method, 'At')) {

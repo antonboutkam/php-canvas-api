@@ -634,9 +634,9 @@ class Canvas
     public function getCourse(int $iCourseId): Course
     {
         $data = $this->getItem("/courses/{$iCourseId}" );
-
         return Course::fromArray($data);
     }
+
     /**
      * @throws InvalidArgumentException
      * @throws GuzzleException
