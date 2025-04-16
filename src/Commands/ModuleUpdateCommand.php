@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ModuleUpdateCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Update a modules within a course');
         $this->setHelp('XXX');

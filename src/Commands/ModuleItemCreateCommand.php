@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ModuleItemCreateCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Create a new module item ');
         $this->setHelp('XXX');

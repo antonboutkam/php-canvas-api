@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PageListCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('List all pages with their title and canvas Id');
         $this->setHelp('XXX');

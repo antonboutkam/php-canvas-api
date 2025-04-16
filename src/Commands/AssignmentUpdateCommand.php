@@ -15,7 +15,7 @@ class AssignmentUpdateCommand extends Command
 {
     use ItemPrintTrait;
 
-    function configure()
+    function configure():void
     {
         $this->setDescription('Create a new assignment ');
         $this->setHelp('XXX');

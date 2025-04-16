@@ -9,13 +9,13 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CourseGetCommand extends Command
+class CourseGetUsersCommand extends Command
 {
     function configure():void
     {
-        $this->setDescription('Get a single course by id');
+        $this->setDescription('Get all users assigned to a course');
         $this->setHelp('XXX');
-        $this->setName('course:get');
+        $this->setName('course:get:users');
         $this->addArgument('course_id', InputArgument::REQUIRED, 'The canvas id of the course');
 
     }
@@ -24,10 +24,12 @@ class CourseGetCommand extends Command
         $oCanvas = new Canvas();
         $iCourseId = $input->getArgument('course_id');
 
-        $oCourse = $oCanvas->getCourse($iCourseId);
+        $oCourse = $oCanvas->getCourseUsers($iCourseId);
 
-        $aCourse = $oCourse->toArray();
-
+        $aUsers = $oCourse->toArray();
+print_r($aUsers);
+        return Command::SUCCESS;
+        /*
         $table = new Table($output);
         $table->setHeaders(['Key', 'Value']);
 
@@ -39,5 +41,6 @@ class CourseGetCommand extends Command
         $table->render();
 
         return Command::SUCCESS;
+        */
     }
 }

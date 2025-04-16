@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GradingStandardCreateCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Create a new course');
         $this->setHelp('XXX');

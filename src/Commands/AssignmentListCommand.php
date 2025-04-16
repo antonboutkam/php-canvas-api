@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AssignmentListCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('List all assignments of a ');
         $this->setHelp('XXX');

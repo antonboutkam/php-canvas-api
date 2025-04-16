@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SubmissionCreateCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Create a new submission ');
         $this->setHelp('XXX');

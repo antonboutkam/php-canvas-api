@@ -15,7 +15,7 @@ class AssignmentGroupUpdateCommand extends Command
 {
     use ItemPrintTrait;
 
-    function configure()
+    function configure():void
     {
         $this->setDescription('List all assignment groups that belong to a course');
         $this->setHelp('XXX');

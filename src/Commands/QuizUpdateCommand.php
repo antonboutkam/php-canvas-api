@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class QuizUpdateCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Change new Quiz in a Course');
         $this->setHelp('XXX');

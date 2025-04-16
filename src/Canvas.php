@@ -636,6 +636,11 @@ class Canvas
         $data = $this->getItem("/courses/{$iCourseId}" );
         return Course::fromArray($data);
     }
+    public function getCourseUsers(int $iCourseId, int $iLimit = 100):UserCollection
+    {
+        $data = $this->getCollection('/courses/' . $iCourseId . '/users', $iLimit);
+        return UserCollection::fromCanvasArray($data);
+    }
 
     /**
      * @throws InvalidArgumentException

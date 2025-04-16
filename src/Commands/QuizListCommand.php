@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class QuizListCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Show quizzes in a course');
         $this->setHelp('XXX');

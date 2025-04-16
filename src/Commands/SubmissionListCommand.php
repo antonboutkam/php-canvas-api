@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SubmissionListCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('List all submission of an assignment ');
         $this->setHelp('XXX');

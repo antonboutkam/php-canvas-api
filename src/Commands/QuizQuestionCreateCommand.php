@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class QuizQuestionCreateCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Create a new Quiz question in a Course');
         $this->setHelp('XXX');

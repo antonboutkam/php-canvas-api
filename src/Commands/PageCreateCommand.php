@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PageCreateCommand extends Command
 {
-    function configure(): void
+    function configure():void
     {
         $this->setDescription('Create a modules within a course');
         $this->setHelp('XXX');

@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ModuleItemDeleteCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Delete a module item by id');
         $this->setHelp('XXX');

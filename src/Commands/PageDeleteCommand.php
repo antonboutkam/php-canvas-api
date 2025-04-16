@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PageDeleteCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Delete a page by id');
         $this->setHelp('XXX');

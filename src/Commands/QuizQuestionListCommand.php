@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class QuizQuestionListCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Get a info about a question in a Course');
         $this->setHelp('XXX');

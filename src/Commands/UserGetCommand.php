@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UserGetCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Get a user by it\'s canvas ID.');
         $this->setHelp('XXX');

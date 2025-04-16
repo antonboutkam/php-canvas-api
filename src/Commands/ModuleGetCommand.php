@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ModuleGetCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Get a module from a course');
         $this->setHelp('XXX');

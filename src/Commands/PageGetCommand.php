@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PageGetCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Get a single course by id');
         $this->setHelp('XXX');

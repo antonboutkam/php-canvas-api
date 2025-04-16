@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CourseListCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('List all courses with their Canvas Id');
         $this->setHelp('XXX');

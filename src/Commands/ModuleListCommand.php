@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ModuleListCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('List all modules within a course');
         $this->setHelp('XXX');

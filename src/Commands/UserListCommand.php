@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UserListCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('Get a list of user by it\'s canvas ID.');
         $this->setHelp('XXX');

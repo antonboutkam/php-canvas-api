@@ -14,7 +14,7 @@ class AssignmentGroupDeleteCommand extends Command
 {
     use ItemPrintTrait;
 
-    function configure()
+    function configure():void
     {
         $this->setDescription('Deletes an assignent group');
         $this->setHelp('XXX');

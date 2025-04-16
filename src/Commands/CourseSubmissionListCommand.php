@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CourseSubmissionListCommand extends Command
 {
-    function configure()
+    function configure():void
     {
         $this->setDescription('List all open submissions that belong to a course ');
         $this->setHelp('XXX');

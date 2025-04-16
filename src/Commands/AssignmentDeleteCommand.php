@@ -16,7 +16,7 @@ class AssignmentDeleteCommand extends Command
 {
     use ItemPrintTrait;
 
-    function configure()
+    function configure():void
     {
         $this->setDescription('Delete an assignment ');
         $this->setHelp('XXX');
