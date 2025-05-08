@@ -2,7 +2,6 @@
 
 namespace Hurah\Canvas\Endpoints\Assignment;
 
-use AllowDynamicProperties;
 use DateTime;
 use Hurah\Canvas\Canvas;
 use Hurah\Canvas\Endpoints\CanvasObject;

@@ -14,10 +14,16 @@ still in development but is already being used in small production environments.
 ---
 
 ## Features
-- **Statically Typed Classes**: Provides typed classes for most API endpoints.
-- **Collections and Entities**: Easily handle both collections and single entities.
-- **Centralized Communication**: All communication goes through an instance of the `Canvas` object.
-- **Symfony Console Commands**: Includes commands for manual communication with the API, offering examples and testing tools.
+
+- **Statically typed classes**: Provides typed classes for most API endpoints.
+- **Collections and entities**: Easily handle both collections and single entities in a clean object-oriented manner
+  implementing php's Iterator and ArrayAccess interfaces.
+- **Centralized communication**: All communication goes through an instance of the `Canvas` object.
+- **[Symfony Console](https://symfony.com/doc/current/components/console.html) Commands**: Includes commands
+  for manual communication with the API, offering
+  examples, [excellent](https://symfony.com/doc/current/components/console.html)
+  documentation and
+  testing tools.
 
 ---
 
@@ -56,7 +62,7 @@ $oCourse = $canvas->getCourse(123);
 echo $course->getName();
 ```
 
-## Example: Create a new Entity
+## Example: Create a new Course
 ```php
 $oCourse = new Course();
 $oCourse->setName('Some name');
@@ -70,7 +76,6 @@ $oCourse->getId()
 
 ```
 
-
 ## Contributing
 Contributions and feedback are welcome! Please keep in mind that this software is in beta and comes as is. Use it at your own risk.
 
@@ -82,7 +87,8 @@ Contributions and feedback are welcome! Please keep in mind that this software i
 
 ***
 ## Links
-* [Packagist Page](https://packagist.org/hurah/canvas-api)
+
+* [Packagist Page](https://packagist.org/packages/hurah/canvas-api)
 * [Instructure Canvas API Documentation](https://canvas.instructure.com/doc/api/)
 
 ***
@@ -97,3 +103,13 @@ v1.0.5 updated Quiz
 v1.0.6 updated QuizQuestionGroup
 v1.0.7 updated QuizQuestionGroup
 v1.0.8 updated QuizQuestion
+v1.0.9 added QuizQuestion
+v1.0.10 added QuizQuestionGetCommand, QuizQuestionListCommand
+v1.0.11 added Canvas::getUserCourses(int $iCanvasId):CourseCollection
+v1.0.12 added Lots of endpoints
+v1.0.13 bugfix Made setters nullable
+v1.0.15 bugfix Added missing properties to Assignment endpoint
+v1.0.16 added Assignments, AssignmentGroups, CourseCommands, CourseSubmissionCommands, PageCommands,
+QuizQuestionCommands
+v1.0.17 removed Account part due to insufficient privileges on my Canvas account.
+v1.0.18 improved README.md
