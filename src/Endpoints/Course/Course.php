@@ -6,7 +6,7 @@ use DateTime;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use Hurah\Canvas\Canvas;
-use Hurah\Canvas\Endpoints\Assignment\Account;
+use Hurah\Canvas\Endpoints\Assignment\Assignment;
 use Hurah\Canvas\Endpoints\Assignment\AssignmentCollection;
 use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroupCollection;
 use Hurah\Canvas\Endpoints\CanvasObject;
@@ -49,7 +49,7 @@ class Course extends CanvasObject
         return $aMatches[1] ?? substr($this->getCourseCode(),0,5);
     }
 
-    public function getAssignment(int $canvas_id): Account
+    public function getAssignment(int $canvas_id): Assignment
     {
         if (!isset($this->assignments[$canvas_id])) {
             throw new \InvalidArgumentException("Assignment is not found in this course.");

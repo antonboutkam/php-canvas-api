@@ -24,7 +24,7 @@
         "ext-curl": "*",
         "ext-iconv": "*",
         "hurah/data-types": "dev-main",
-        "symfony/routing": "5.4.x-dev",
+        "symfony/routing": ">=5.4",
         "symfony/http-foundation": "5.4.x-dev",
         "guzzlehttp/guzzle": "8.0.x-dev",
         "symfony/console": ">=5.4",
