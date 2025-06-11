@@ -98,18 +98,19 @@ Contributions and feedback are welcome! Please keep in mind that this software i
 ## CicleCI build status
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/antonboutkam/php-canvas-api/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/antonboutkam/php-canvas-api/tree/main)
 
-v1.0.3 added Quiz
-v1.0.5 updated Quiz
-v1.0.6 updated QuizQuestionGroup
-v1.0.7 updated QuizQuestionGroup
-v1.0.8 updated QuizQuestion
-v1.0.9 added QuizQuestion
-v1.0.10 added QuizQuestionGetCommand, QuizQuestionListCommand
-v1.0.11 added Canvas::getUserCourses(int $iCanvasId):CourseCollection
-v1.0.12 added Lots of endpoints
-v1.0.13 bugfix Made setters nullable
-v1.0.15 bugfix Added missing properties to Assignment endpoint
-v1.0.16 added Assignments, AssignmentGroups, CourseCommands, CourseSubmissionCommands, PageCommands,
-QuizQuestionCommands
-v1.0.17 removed Account part due to insufficient privileges on my Canvas account.
-v1.0.18 improved README.md
+- v1.0.21 initialized frozenAttributes in Assignment, was breaking unit testing.
+- v1.0.20 upgraded various dependencies
+- v1.0.18 improved README.md
+- v1.0.17 removed Account part due to insufficient privileges on my Canvas account.
+- v1.0.16 added Assignments, AssignmentGroups, CourseCommands, CourseSubmissionCommands, PageCommands, QuizQuestionCommands
+- v1.0.15 bugfix Added missing properties to Assignment endpoint
+- v1.0.13 bugfix Made setters nullable
+- v1.0.12 added Lots of endpoints
+- v1.0.11 added Canvas::getUserCourses(int $iCanvasId):CourseCollection
+- v1.0.10 added QuizQuestionGetCommand, QuizQuestionListCommand
+- v1.0.9 added QuizQuestion
+- v1.0.8 updated QuizQuestion
+- v1.0.7 updated QuizQuestionGroup
+- v1.0.6 updated QuizQuestionGroup
+- v1.0.5 updated Quiz
+- v1.0.3 added Quiz
