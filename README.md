@@ -98,6 +98,7 @@ Contributions and feedback are welcome! Please keep in mind that this software i
 ## CicleCI build status
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/antonboutkam/php-canvas-api/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/antonboutkam/php-canvas-api/tree/main)
 
+- v1.0.22 upgrade dependencies
 - v1.0.21 initialized frozenAttributes in Assignment, was breaking unit testing.
 - v1.0.20 upgraded various dependencies
 - v1.0.18 improved README.md
