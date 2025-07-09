@@ -11,18 +11,24 @@ class StudentCollection extends AbstractCollectionDataType
     /**
      * @throws Exception
      */
-    public function addArray(array $module): self
+    public function addArray(array $student): self
     {
-        $this->array[] = Student::fromCanvasArray($module);
+        $this->add(Student::fromCanvasArray($student));
         return $this;
     }
 
+    public function add(Student $oStudent): void
+    {
+        $this->array[] = $oStudent;
+    }
     /**
      * @throws Exception
      */
     public static function fromCanvasArray(array $canvasCollection): self
     {
+
         $self = new StudentCollection();
+
         foreach ($canvasCollection as $student) {
             $self->addArray($student);
         }

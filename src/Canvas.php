@@ -51,7 +51,7 @@ class Canvas
      * @throws GuzzleException
      * @throws InvalidArgumentException
      */
-    private function getCollection(string $endpoint, int $iItemsPerPage = 10): array
+    private function getCollection(string $endpoint, int $iItemsPerPage = 10, array $aOptionalArguments = []): array
     {
         $headers = [
             'Authorization' => 'Bearer ' . Config::getCanvasToken()
@@ -62,6 +62,11 @@ class Canvas
 
         $url = Config::getCanvasUrl()->addPath("/api/v1{$endpoint}");
         $url->addQuery(['per_page' => $iItemsPerPage]);
+
+        if (isset($aOptionalArguments['GET']) && is_array($aOptionalArguments['GET'])) {
+            $url->addQuery($aOptionalArguments['GET']);
+        }
+
         return $this->apiCall($url, $options);
     }
 
@@ -171,7 +176,8 @@ class Canvas
     public function getStudentsInCourse(int $iCourseId): StudentCollection
     {
         $url = "/courses/{$iCourseId}/users";
-        return StudentCollection::fromCanvasArray($this->getCollection($url));
+        $aArguments = ['GET' => ['enrollment_type' => 'student']];
+        return StudentCollection::fromCanvasArray($this->getCollection($url, 100, $aArguments));
     }
 
     /**

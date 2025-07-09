@@ -39,6 +39,10 @@ abstract class CanvasObject
             return null;
         }
         $dateTime = preg_replace('/Z$/', '', $dateTime);
+        if (strpos($dateTime, '+')) {
+            $dateTime = explode('+', $dateTime)[0];
+        }
+
         return DateTime::createFromFormat('Y-m-d\TH:i:s', $dateTime);
     }
 
