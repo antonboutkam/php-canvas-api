@@ -6,6 +6,9 @@ use Hurah\Types\Type\Url;
 
 class Config
 {
+/**
+* The user ID
+*/
     public static function getAccountId():?string
     {
         return $_ENV['CANVAS_ACCOUNT_ID'] ?? null;
