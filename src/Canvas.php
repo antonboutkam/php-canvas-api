@@ -619,10 +619,10 @@ class Canvas
      * @throws GuzzleException
      * @throws InvalidArgumentException
      */
-    public function getPage(int $iCourseId, int $iPageId): Student
+    public function getPage(int $iCourseId, int $iPageId): Page
     {
         $data = $this->getItem("/courses/{$iCourseId}/pages/{$iPageId}");
-        return Student::fromCanvasArray($data);
+        return Page::fromCanvasArray($data);
     }
 
     /**
