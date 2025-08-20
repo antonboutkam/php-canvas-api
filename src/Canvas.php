@@ -788,6 +788,7 @@ class Canvas
 
     }
 
+
     /**
      * @throws InvalidArgumentException
      * @throws GuzzleException
