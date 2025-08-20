@@ -92,7 +92,8 @@ abstract class CanvasObject
 
             if ($property->getType()->getName() === 'DateTime') {
                 $aOut[$keyName] = self::formatDt($property->getValue($this));
-            } else {
+            } else if($property->isInitialized()) {
+                
                 $aOut[$keyName] = $property->getValue($this);
             }
 
