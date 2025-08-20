@@ -11,6 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GradingStandardCreateCommand extends Command
 {
+    /**
+     * Renamed grading standards
+     * @return void
+     */
     function configure():void
     {
         $this->setDescription('Create a new grading standard');
