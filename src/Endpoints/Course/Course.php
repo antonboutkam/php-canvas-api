@@ -15,7 +15,7 @@ use Hurah\Types\Exception\InvalidArgumentException;
 
 class Course extends CanvasObject
 {
-    protected int $id;
+    protected ?int $id = null;
 
     protected string $name;
 
