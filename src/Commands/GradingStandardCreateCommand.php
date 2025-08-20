@@ -13,9 +13,9 @@ class GradingStandardCreateCommand extends Command
 {
     function configure():void
     {
-        $this->setDescription('Create a new course');
+        $this->setDescription('Create a new grading standard');
         $this->setHelp('XXX');
-        $this->setName('course:create');
+        $this->setName('grading:standard:create');
         $this->addArgument('name', InputArgument::REQUIRED, 'The name of the course');
         $this->addArgument('code', InputArgument::REQUIRED, 'The code of the course');
     }
@@ -23,9 +23,6 @@ class GradingStandardCreateCommand extends Command
     {
         $oCanvas = new Canvas();
         $oGradingStandard = new GradingStandard();
-
-        $sName = $input->getArgument('name');
-        $sCode = $input->getArgument('code');
 
         $oGradingStandard->setTitle('1 t/m 10');
         $oGradingStandard->setPointsBased(true);

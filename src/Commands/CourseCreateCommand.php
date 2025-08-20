@@ -33,7 +33,9 @@ class CourseCreateCommand extends Command
         $oCourse->setCourseCode($sCode);
         $oCourse->setIsPublic(false);
 
+        $output->writeln("Creating course {$sName} with code {$sCode}");
         $aCreatedCourse = $oCanvas->createCourse($oCourse);
+
 
         $table = new Table($output);
         $table->setHeaders(['Key', 'Value']);
