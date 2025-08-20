@@ -261,7 +261,7 @@ class Canvas
     public function createCourse(Course $oCourse): array
     {
         $iAccountId = Config::getAccountId();
-        $url = "/api/v1/accounts/{$iAccountId}/courses";
+        $url = "/accounts/{$iAccountId}/courses";
         return $this->postItem($url, $oCourse->toCanvasArray());
 
     }
