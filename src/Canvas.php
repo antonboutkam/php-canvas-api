@@ -615,7 +615,7 @@ class Canvas
     /**
      * @param int $iCourseId
      * @param int $iPageId
-     * @return Student
+     * @return Page
      * @throws GuzzleException
      * @throws InvalidArgumentException
      */
