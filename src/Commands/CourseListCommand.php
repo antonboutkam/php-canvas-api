@@ -22,11 +22,11 @@ class CourseListCommand extends Command
         $oCourseCollection = $oCanvas->getCourses(100);
 
         $table = new Table($output);
-        $table->setHeaders(['Course Id', 'Name']);
+        $table->setHeaders(['Course Id', 'Name', 'Account ID']);
 
         foreach ($oCourseCollection as $oCourse)
         {
-            $table->addRow([$oCourse->getId(), $oCourse->getName()]);
+            $table->addRow([$oCourse->getId(), $oCourse->getName(), $oCourse->getAccountId()]);
         }
 
 

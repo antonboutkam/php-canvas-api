@@ -48,7 +48,15 @@ class CourseCreateCommand extends Command
 
         foreach ($aCreatedCourse as $key => $value)
         {
-            $table->addRow([$key, $value]);
+            if(!is_array($value) && !is_object($value))
+            {
+                $table->addRow([$key, $value]);
+            }
+            else
+            {
+                $table->addRow([$key, json_encode($value)]);
+            }
+
         }
 
 
