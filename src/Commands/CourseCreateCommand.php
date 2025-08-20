@@ -20,6 +20,12 @@ class CourseCreateCommand extends Command
         $this->addArgument('name', InputArgument::REQUIRED, 'The name of the course');
         $this->addArgument('code', InputArgument::REQUIRED, 'The code of the course');
     }
+
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $oCanvas = new Canvas();
