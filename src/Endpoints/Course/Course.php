@@ -76,9 +76,17 @@ class Course extends CanvasObject
     public static function fromArray(array $course): self
     {
         $obj = new self();
-        $obj->setId($course['id']);
-        $obj->setName($course['name']);
+        if(isset($course['id']))
+        {
+            $obj->setId($course['id']);
+        }
+        if(isset($course['name']))
+        {
+            $obj->setName($course['name']);
+        }
+
         $obj->setAccountId($course['account_id']);
+        
         $obj->setUuid($course['uuid']);
         $obj->setStartAt(self::makeDate($course['start_at']));
         $obj->setGradingStandardId($course['grading_standard_id']);
