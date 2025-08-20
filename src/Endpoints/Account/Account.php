@@ -1,6 +1,6 @@
 <?php
+namespace Hurah\Canvas\Endpoints\Account;
 
-namespace Roc\Cockpit\Canvas\Account;
 
 use DateTime;
 

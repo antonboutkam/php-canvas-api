@@ -5,6 +5,7 @@ namespace Hurah\Canvas;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Hurah\Canvas\Endpoints\Account\AccountCollection;
 use Hurah\Canvas\Endpoints\Assignment\Assignment;
 use Hurah\Canvas\Endpoints\Assignment\AssignmentCollection;
 use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroup;
@@ -781,10 +782,10 @@ class Canvas
      * @throws GuzzleException
      * @throws Exception
      */
-    public function getAccounts(int $iLimit = 100): array
+    public function getAccounts(int $iLimit = 100): AccountCollection
     {
         $data = $this->getCollection('/accounts', $iLimit);
-        return $data;
+        return AccountCollection::fromCanvasArray($data);
 
     }
 
