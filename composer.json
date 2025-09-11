@@ -23,7 +23,7 @@
         "ext-json": "*",
         "ext-curl": "*",
         "ext-iconv": "*",
-        "hurah/data-types": "dev-main",
+        "hurah/data-types": ">=v1.1",
         "symfony/routing": ">=6.4",
         "symfony/http-foundation": ">=6.4",
         "guzzlehttp/guzzle": ">=7.4",

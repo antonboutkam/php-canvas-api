@@ -11,7 +11,7 @@ class AttachmentCollection extends AbstractCollectionDataType
     /**
      * @throws Exception
      */
-    public static function fromCanvasArray(array $canvasCollection): AttachmentCollection
+    public static function fromCanvasArray(array $canvasCollection): FileCollection
     {
         $out = new self();
         foreach ($canvasCollection as $attachment) {
@@ -26,16 +26,16 @@ class AttachmentCollection extends AbstractCollectionDataType
     public function addArray(array $attachment): self
     {
 
-        $this->array[] = Attachment::fromCanvasArray($attachment);
+        $this->array[] = File::fromCanvasArray($attachment);
         return $this;
     }
 
-    public function add(Attachment $attachment): void
+    public function add(File $attachment): void
     {
         $this->array[] = $attachment;
     }
 
-    public function current(): Attachment
+    public function current(): File
     {
         return $this->array[$this->position];
     }

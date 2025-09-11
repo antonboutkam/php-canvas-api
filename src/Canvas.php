@@ -12,6 +12,10 @@ use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroup;
 use Hurah\Canvas\Endpoints\AssignmentGroup\AssignmentGroupCollection;
 use Hurah\Canvas\Endpoints\Course\Course;
 use Hurah\Canvas\Endpoints\Course\CourseCollection;
+use Hurah\Canvas\Endpoints\File\File;
+use Hurah\Canvas\Endpoints\File\FileCollection;
+use Hurah\Canvas\Endpoints\Folder\Folder;
+use Hurah\Canvas\Endpoints\Folder\FolderCollection;
 use Hurah\Canvas\Endpoints\GradingStandard\GradingStandard;
 use Hurah\Canvas\Endpoints\Module\Module;
 use Hurah\Canvas\Endpoints\Module\ModuleCollection;
@@ -223,7 +227,8 @@ class Canvas
     public function createGradingStandard(GradingStandard $oGradingStandard): array
     {
         $iAccountId = Config::getAccountId();
-        $url = "/api/v1/accounts/{$iAccountId}/grading_standards";
+        $url = "/accounts/{$iAccountId}/grading_standards";
+        // $oGradingStandard->toCanvasArray()
         return $this->postItem($url, $oGradingStandard->toCanvasArray());
     }
 
@@ -232,6 +237,28 @@ class Canvas
         return $this->sendItem($endpoint, $item, 'POST');
     }
 
+    private function sendFileCloudStorage(string $sUrl, array $aPostData):?array
+    {
+        $client = new Client();
+        $options = [
+            'form_params' => $aPostData
+        ];
+        $response = $client->request('POST', $sUrl, $options);
+        $mUrl = $response->getHeader('Location');
+
+        $oUrl = new Url($sUrl);
+        if(is_array($mUrl))
+        {
+            $sUrl = array_shift($mUrl);
+            $sUrl = str_replace('https://canvas.instructure.com/api/v1', '', $sUrl);
+        }
+
+        echo 'Calling:' .  $sUrl . PHP_EOL;
+        // $oEndpointUrl = new Url($sEndPoint);
+        // $sEndpoint = $oEndpointUrl->addQuery($oUrl->getQuery());
+        return $this->getItem($sUrl);
+
+    }
     private function sendItem(string $endpoint, array $item, string $method)
     {
         $headers = [
@@ -802,4 +829,108 @@ class Canvas
         return CourseCollection::fromCanvasArray($data);
     }
 
+    /**
+     * @throws InvalidArgumentException
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function getFiles(int $iCourseId): FileCollection
+    {
+        $data = $this->getCollection('/courses/' . $iCourseId . '/files');
+
+        return FileCollection::fromCanvasArray($data);
+    }
+    public function getFile(int $iCourseId, int $iFileId):File
+    {
+        return File::fromCanvasArray($this->getItem('/courses/' . $iCourseId . '/files/' . $iFileId));
+    }
+    public function uploadFileFromUrl(int $iCourseId, string $sFileName, string $sParentFolderPath, string $sContentType, string $sUrl, int $iFileSize):File
+    {
+        $aData = [
+            'url' => $sUrl,
+            'name' => $sFileName,
+            'size' => $iFileSize,
+            'content_type' => $sContentType,
+            'parent_folder_path' => $sParentFolderPath
+        ];
+        $response = $this->postItem('/courses/' . $iCourseId . '/files/', $aData);
+        echo "Canvas response: " . PHP_EOL;
+        print_r($response);
+        if(isset($response['upload_url']))
+        {
+            echo "Send file cloud storage" . PHP_EOL;
+            $response2 = $this->sendFileCloudStorage($response['upload_url'], $response['upload_params']);
+            print_r($response2);
+        }
+
+        // courses/:course_id/files
+        return File::fromCanvasArray($response2);
+    }
+
+    /**
+     *
+     * @param int $iCourseId course id
+     * @param string $sFileName The filename of the file. Any UTF-8 name is allowed. Path components such as `/` and
+     *     `\` will be treated as part of the filename, not a path to a sub-folder.
+     * @param string $sFolderPath The path of the folder to store the file in. The path separator is the forward slash
+     *     `/`, never a back slash. The folder will be created if it does not already exist. This parameter only
+     *     applies to file uploads in a context that has folders, such as a user, a course, or a group. If this and
+     *     parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used.
+     * @param int $sSizeInBytes The size of the file, in bytes. This field is recommended, as it will let you find out
+     *     if there's a quota issue before uploading the raw file.
+     * @param string $sContentType The content type of the file. If not given, it will be guessed based on the file
+     *     extension.
+     * @param string $sOnDuplicate [overwrite|rename]
+     * @param string $f
+     * @return File
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     */
+    public function uploadFile(int $iCourseId, string $sFileName, string $sFolderPath, int $sSizeInBytes, string $sContentType, string $sOnDuplicate, string $sContents):File
+    {
+        $item = [
+            'name' => $sFileName,
+            'size' => $sSizeInBytes,
+            'content_type' => $sContentType,
+            'parent_folder_path' => $sFolderPath,
+            'on_duplicate' => $sOnDuplicate
+        ];
+        $result = $this->postItem('courses/' . $iCourseId . '/files/', $item);
+
+        $postVars = [];
+        if(isset($result['upload_params']))
+        {
+            $postVars = $result['upload_params'];
+        }
+        $postVars['file'] = $sContents;
+
+        $aFile = $this->sendFileCloudStorage($result['upload_url'], $postVars);
+        // courses/:course_id/files
+        return File::fromCanvasArray($aFile);
+    }
+    /**
+     * @throws InvalidArgumentException
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function getFolders(int $iCourseId): FolderCollection
+
+    {
+        $data = $this->getCollection('/courses/' . $iCourseId . '/folders');
+
+        return FolderCollection::fromCanvasArray($data);
+    }
+    public function getFolder(int $iCourseId, int $iFolderID):Folder
+    {
+        return Folder::fromCanvasArray($this->getItem('/courses/' . $iCourseId . '/files/' . $iFolderID));
+    }
+    public function createFolder(int $iCourseId, array $aFolder):Folder
+    {
+        $aFolder = $this->postItem('/courses/' . $iCourseId . '/folders', $aFolder);
+        return Folder::fromCanvasArray($aFolder);
+    }
+    public function deleteFolder(int $iCourseId, int $iFolderId):void
+    {
+        $this->deleteItem('/courses/' . $iCourseId . '/folders/' . $iFolderId);
+    }
 }
