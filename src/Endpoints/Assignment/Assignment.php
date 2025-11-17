@@ -31,14 +31,14 @@ class Assignment extends CanvasObject
     public ?int $maxNameLength = null;
     public ?bool $turnitinEnabled = null;
     public ?bool $vericiteEnabled = null;
-    public $turnitinSettings = null; // Still unclear about this one
+    public ?array $turnitinSettings = null; // Still unclear about this one
     public ?bool $gradeGroupStudentsIndividually = null;
     public ?bool $graderNamesVisibleToGrader = null;
     public ?bool $graderNamesVisibleToFinalGrader = null;
     public ?string $url = null;
     public ?array $frozenAttributes = null;
     public ?int $originalLtiResourceLinkId = null;
-    public $externalToolTagAttributes = null; // Still unclear about this one
+    public ?array $externalToolTagAttributes = null; // Still unclear about this one
     public ?bool $peerReviews = false;
     public ?bool $automaticPeerReviews = null;
     public ?int $peerReviewCount = null;
@@ -61,7 +61,7 @@ class Assignment extends CanvasObject
 
     // https://canvas.instructure.com/doc/api/assignments.html
     public ?string $gradingType = null;
-    public $gradingStandardId; // Still unclear about this one
+    public ?int $gradingStandardId = null; // Still unclear about this one
     public ?bool $published = null;
     public ?bool $unpublishable = null;
     public ?bool $onlyVisibleToOverrides = null;
@@ -84,10 +84,10 @@ class Assignment extends CanvasObject
     public ?int $graderCount = null;
     public ?int $finalGraderId = null;
     public ?bool $graderCommentsVisibleToGraders = null;
-    public $scoreStatistics = null;
+    public ?array $scoreStatistics = null;
     public ?bool $canSubmit = null;
 
-    public $annotatableAttachmentId = null;
+    public ?int $annotatableAttachmentId = null;
     public ?bool $muted = null;
     public ?int $allowedAttempts = null;
 
@@ -680,18 +680,18 @@ class Assignment extends CanvasObject
     }
 
     /**
-     * @return mixed
+     * @return array|null
      */
-    public function getTurnitinSettings()
+    public function getTurnitinSettings(): ?array
     {
         return $this->turnitinSettings;
     }
 
     /**
-     * @param mixed $turnitinSettings
+     * @param array|null $turnitinSettings
      * @return Assignment
      */
-    public function setTurnitinSettings($turnitinSettings)
+    public function setTurnitinSettings(?array $turnitinSettings): Assignment
     {
         $this->turnitinSettings = $turnitinSettings;
         return $this;
@@ -716,18 +716,18 @@ class Assignment extends CanvasObject
     }
 
     /**
-     * @return mixed
+     * @return array|null
      */
-    public function getExternalToolTagAttributes()
+    public function getExternalToolTagAttributes(): ?array
     {
         return $this->externalToolTagAttributes;
     }
 
     /**
-     * @param mixed $externalToolTagAttributes
+     * @param array|null $externalToolTagAttributes
      * @return Assignment
      */
-    public function setExternalToolTagAttributes($externalToolTagAttributes)
+    public function setExternalToolTagAttributes(?array $externalToolTagAttributes): Assignment
     {
         $this->externalToolTagAttributes = $externalToolTagAttributes;
         return $this;
@@ -1015,18 +1015,18 @@ class Assignment extends CanvasObject
     }
 
     /**
-     * @return mixed
+     * @return int|null
      */
-    public function getGradingStandardId()
+    public function getGradingStandardId(): ?int
     {
         return $this->gradingStandardId;
     }
 
     /**
-     * @param mixed $gradingStandardId
+     * @param int|null $gradingStandardId
      * @return Assignment
      */
-    public function setGradingStandardId($gradingStandardId)
+    public function setGradingStandardId(?int $gradingStandardId): Assignment
     {
         $this->gradingStandardId = $gradingStandardId;
         return $this;
@@ -1359,18 +1359,18 @@ class Assignment extends CanvasObject
     }
 
     /**
-     * @return mixed
+     * @return array|null
      */
-    public function getScoreStatistics()
+    public function getScoreStatistics(): ?array
     {
         return $this->scoreStatistics;
     }
 
     /**
-     * @param mixed $scoreStatistics
+     * @param array|null $scoreStatistics
      * @return Assignment
      */
-    public function setScoreStatistics($scoreStatistics)
+    public function setScoreStatistics(?array $scoreStatistics): Assignment
     {
         $this->scoreStatistics = $scoreStatistics;
         return $this;
@@ -1396,18 +1396,18 @@ class Assignment extends CanvasObject
 
 
     /**
-     * @return mixed
+     * @return int|null
      */
-    public function getAnnotatableAttachmentId()
+    public function getAnnotatableAttachmentId(): ?int
     {
         return $this->annotatableAttachmentId;
     }
 
     /**
-     * @param mixed $annotatableAttachmentId
+     * @param int|null $annotatableAttachmentId
      * @return Assignment
      */
-    public function setAnnotatableAttachmentId($annotatableAttachmentId)
+    public function setAnnotatableAttachmentId(?int $annotatableAttachmentId): Assignment
     {
         $this->annotatableAttachmentId = $annotatableAttachmentId;
         return $this;
