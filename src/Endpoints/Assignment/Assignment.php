@@ -155,11 +155,23 @@ class Assignment extends CanvasObject
     }
 
     /**
-     * @param int|null $originalLtiResourceLinkId
+     * @param int|string|null $originalLtiResourceLinkId
      * @return $this
      */
-    public function setOriginalLtiResourceLinkId(?int $originalLtiResourceLinkId):static
+    public function setOriginalLtiResourceLinkId(int|string|null $originalLtiResourceLinkId): static
     {
+        if ($originalLtiResourceLinkId === null) {
+            $this->originalLtiResourceLinkId = null;
+            return $this;
+        }
+
+        // Canvas sometimes returns numeric identifiers as strings; normalise to int.
+        if (is_string($originalLtiResourceLinkId)) {
+            if (!is_numeric($originalLtiResourceLinkId)) {
+                throw new \InvalidArgumentException('Original LTI resource link id must be numeric.');
+            }
+            $originalLtiResourceLinkId = (int)$originalLtiResourceLinkId;
+        }
         $this->originalLtiResourceLinkId = $originalLtiResourceLinkId;
         return $this;
     }
