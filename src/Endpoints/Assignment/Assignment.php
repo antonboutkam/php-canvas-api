@@ -148,6 +148,7 @@ class Assignment extends CanvasObject
     }
 
     /**
+     * x
      * @return int|null
      */
     public function getOriginalLtiResourceLinkId():?int{
