@@ -130,13 +130,19 @@ class Canvas
      * @throws GuzzleException
      * @throws Exception
      */
-    public function getSubmissions(int $iCourseId, int $iAssignmentId, string $sWorkflowState = 'pending_review', int $iLimit = 100): SubmissionCollection
+    public function getSubmissions(int $iCourseId, int $iAssignmentId, string|int $mWorkflowState = 'pending_review', int $iLimit = 100): SubmissionCollection
     {
         $assignment = $this->getAssignment($iCourseId, $iAssignmentId);
         $sUrl = "/courses/{$iCourseId}/assignments/{$iAssignmentId}/submissions";
 
+        if (is_int($mWorkflowState)) {
+            $iLimit = $mWorkflowState;
+            $sWorkflowState = 'pending_review';
+        } else {
+            $sWorkflowState = $mWorkflowState;
+        }
 
-        $data = $this->getCollection($sUrl, $iLimit);
+        $data = $this->getCollection($sUrl, $iLimit, ['GET' => ['workflow_state' => $sWorkflowState]]);
 
         return SubmissionCollection::fromCanvasArray($data, $assignment);
     }

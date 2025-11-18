@@ -75,7 +75,6 @@ class Course extends CanvasObject
      */
     public static function fromArray(array $course): self
     {
-        print_r($course);
         $obj = new self();
         if(isset($course['id']))
         {

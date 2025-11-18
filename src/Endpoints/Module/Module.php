@@ -13,6 +13,7 @@ class Module extends CanvasObject
     public ?string $itemsUrl = null;
     public ?string $unlockAt = null;
     public ?bool $requireSequentialProgress = true;
+    public ?string $requirementType = null;
     public ?bool $publishFinalGrade = false;
     public array $prerequisiteModuleIds = [];
     public bool $published = false;
@@ -140,6 +141,16 @@ class Module extends CanvasObject
     public function setItemsUrl(string $itemsUrl): void
     {
         $this->itemsUrl = $itemsUrl;
+    }
+
+    public function getRequirementType(): ?string
+    {
+        return $this->requirementType;
+    }
+
+    public function setRequirementType(?string $requirementType): void
+    {
+        $this->requirementType = $requirementType;
     }
 
 
