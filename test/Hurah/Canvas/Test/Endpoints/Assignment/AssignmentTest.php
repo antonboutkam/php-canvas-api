@@ -22,4 +22,26 @@ class AssignmentTest extends TestCase
 		
 
 	}
+
+	public function testOriginalLtiResourceLinkIdAllowsStrings()
+	{
+		$assignment = Assignment::fromCanvasArray([
+			'name' => 'Example assignment',
+			'course_id' => 42,
+			'original_lti_resource_link_id' => 'lti-resource-abc',
+		]);
+
+		static::assertSame('lti-resource-abc', $assignment->getOriginalLtiResourceLinkId());
+	}
+
+	public function testOriginalLtiResourceLinkIdCastsNumericStringsToInt()
+	{
+		$assignment = Assignment::fromCanvasArray([
+			'name' => 'Example assignment',
+			'course_id' => 42,
+			'original_lti_resource_link_id' => '12345',
+		]);
+
+		static::assertSame(12345, $assignment->getOriginalLtiResourceLinkId());
+	}
 }

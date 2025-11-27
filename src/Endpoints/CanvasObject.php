@@ -6,6 +6,8 @@ use DateTime;
 use DateTimeInterface;
 use Hurah\Canvas\Util;
 use ReflectionClass;
+use ReflectionNamedType;
+use ReflectionUnionType;
 
 abstract class CanvasObject
 {
@@ -90,10 +92,20 @@ abstract class CanvasObject
                 continue;
             }
 
-            if ($property->getType()->getName() === 'DateTime') {
+            $type = $property->getType();
+            $typeNames = [];
+
+            if ($type instanceof ReflectionNamedType) {
+                $typeNames[] = $type->getName();
+            } elseif ($type instanceof ReflectionUnionType) {
+                foreach ($type->getTypes() as $unionType) {
+                    $typeNames[] = $unionType->getName();
+                }
+            }
+
+            if (in_array('DateTime', $typeNames, true)) {
                 $aOut[$keyName] = self::formatDt($property->getValue($this));
             } else if($property->isInitialized($this)) {
-
                 $aOut[$keyName] = $property->getValue($this);
             }
 

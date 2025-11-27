@@ -36,7 +36,10 @@ class Assignment extends CanvasObject
     public ?bool $graderNamesVisibleToGrader = null;
     public ?bool $graderNamesVisibleToFinalGrader = null;
     public ?string $url = null;
+    public ?bool $isQuizLtiAssignment = null;
+    public ?array $settings = null;
     public ?array $frozenAttributes = null;
+    /** Canvas can return an int or string identifier for the original LTI link. */
     public int|string|null $originalLtiResourceLinkId = null;
     public ?array $externalToolTagAttributes = null; // Still unclear about this one
     public ?bool $peerReviews = false;
@@ -166,9 +169,17 @@ class Assignment extends CanvasObject
             return $this;
         }
 
-        // Canvas sometimes returns numeric identifiers as strings; normalise to int when possible.
-        if (is_string($originalLtiResourceLinkId) && is_numeric($originalLtiResourceLinkId)) {
-            $originalLtiResourceLinkId = (int) $originalLtiResourceLinkId;
+        if (is_string($originalLtiResourceLinkId)) {
+            $originalLtiResourceLinkId = trim($originalLtiResourceLinkId);
+            if ($originalLtiResourceLinkId === '') {
+                $this->originalLtiResourceLinkId = null;
+                return $this;
+            }
+
+            // Canvas sometimes returns numeric identifiers as strings; normalise to int when possible.
+            if (is_numeric($originalLtiResourceLinkId)) {
+                $originalLtiResourceLinkId = (int)$originalLtiResourceLinkId;
+            }
         }
 
         $this->originalLtiResourceLinkId = $originalLtiResourceLinkId;
@@ -705,6 +716,28 @@ class Assignment extends CanvasObject
     public function setTurnitinSettings(?array $turnitinSettings): Assignment
     {
         $this->turnitinSettings = $turnitinSettings;
+        return $this;
+    }
+
+    public function isQuizLtiAssignment(): ?bool
+    {
+        return $this->isQuizLtiAssignment;
+    }
+
+    public function setIsQuizLtiAssignment(?bool $isQuizLtiAssignment): Assignment
+    {
+        $this->isQuizLtiAssignment = $isQuizLtiAssignment;
+        return $this;
+    }
+
+    public function getSettings(): ?array
+    {
+        return $this->settings;
+    }
+
+    public function setSettings(?array $settings): Assignment
+    {
+        $this->settings = $settings;
         return $this;
     }
 
