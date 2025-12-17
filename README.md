@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/hurah/canvas-api/v/stable)](https://packagist.org/packages/hurah/canvas-api)
 [![License](https://poser.pugx.org/hurah/canvas-api/license)](https://packagist.org/packages/hurah/canvas-api)
 [![CircleCI Build](https://poser.pugx.org/hurah/php-canvas-api/circleci)](https://packagist.org/packages/hurah/php-canvas-api)
-
+..
 
 ---
 This library is a PHP SDK for the Instructure Canvas API, designed to simplify 
