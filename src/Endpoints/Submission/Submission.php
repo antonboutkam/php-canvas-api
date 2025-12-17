@@ -24,6 +24,12 @@ class Submission extends CanvasObject {
         'online_url',
         'online_upload',
         'media_recording',
+        'online_quiz',
+        'discussion_topic',
+        'external_tool',
+        'on_paper',
+        'none',
+        'wiki_page',
         'basic_lti_launch',
         'student_annotation'
     ];
@@ -213,6 +219,11 @@ class Submission extends CanvasObject {
      */
     
     protected ?string $preview_url = null;
+
+    /**
+     * @var string|null
+     */
+    protected ?string $external_tool_url = null;
 
     /**
      *
@@ -470,7 +481,7 @@ class Submission extends CanvasObject {
     }
 
     /**
-     * @param string|null $submission_type valid options are: online_text_entry, online_url, online_upload, media_recording, basic_lti_launch, student_annotation
+     * @param string|null $submission_type valid options are: online_text_entry, online_url, online_upload, media_recording, online_quiz, discussion_topic, external_tool, on_paper, none, wiki_page, basic_lti_launch, student_annotation
      * @return Submission
      */
     public function setSubmissionType(?string $submission_type): Submission
@@ -858,6 +869,24 @@ class Submission extends CanvasObject {
     public function setPreviewUrl(?string $preview_url): Submission
     {
         $this->preview_url = $preview_url;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getExternalToolUrl(): ?string
+    {
+        return $this->external_tool_url;
+    }
+
+    /**
+     * @param string|null $external_tool_url
+     * @return Submission
+     */
+    public function setExternalToolUrl(?string $external_tool_url): Submission
+    {
+        $this->external_tool_url = $external_tool_url;
         return $this;
     }
 
