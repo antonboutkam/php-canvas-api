@@ -37,7 +37,7 @@ class Assignment extends CanvasObject
     public ?bool $graderNamesVisibleToFinalGrader = null;
     public ?string $url = null;
     public ?array $frozenAttributes = null;
-    public ?int $originalLtiResourceLinkId = null;
+    public ?string $originalLtiResourceLinkId = null;
     public ?array $externalToolTagAttributes = null; // Still unclear about this one
     public ?bool $peerReviews = false;
     public ?bool $automaticPeerReviews = null;
@@ -149,9 +149,9 @@ class Assignment extends CanvasObject
 
     /**
      * x
-     * @return int|null
+     * @return string|null
      */
-    public function getOriginalLtiResourceLinkId():?int{
+    public function getOriginalLtiResourceLinkId():?string{
         return $this->originalLtiResourceLinkId;
     }
 
@@ -167,13 +167,10 @@ class Assignment extends CanvasObject
             return $this;
         }
 
-        // Canvas sometimes returns numeric identifiers as strings; normalise to int.
-        if (is_string($originalLtiResourceLinkId)) {
-            if (!is_numeric($originalLtiResourceLinkId)) {
-                throw new \InvalidArgumentException('Original LTI resource link id must be numeric.');
-            }
-            $originalLtiResourceLinkId = (int)$originalLtiResourceLinkId;
+        if (is_int($originalLtiResourceLinkId)) {
+            $originalLtiResourceLinkId = (string)$originalLtiResourceLinkId;
         }
+
         $this->originalLtiResourceLinkId = $originalLtiResourceLinkId;
         return $this;
     }
