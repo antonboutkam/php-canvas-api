@@ -9,7 +9,7 @@ This library is a PHP SDK for the Instructure Canvas API, designed to simplify
 communication with Canvas by providing statically typed classes for most API 
 endpoints. It supports both collection and single entity operations. The SDK is 
 still in development but is already being used in small production environments.
-.
+,,.
 ---
 
 ## Features
