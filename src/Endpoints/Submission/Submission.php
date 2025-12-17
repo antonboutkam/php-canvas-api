@@ -3,8 +3,8 @@ namespace Hurah\Canvas\Endpoints\Submission;
 
 use DateTimeInterface;
 use Hurah\Canvas\Endpoints\Assignment\Assignment;
-use Hurah\Canvas\Endpoints\Attachment\File;
-use Hurah\Canvas\Endpoints\Attachment\FileCollection;
+use Hurah\Canvas\Endpoints\Attachment\Attachment;
+use Hurah\Canvas\Endpoints\Attachment\AttachmentCollection;
 use Hurah\Canvas\Endpoints\CanvasObject;
 use Hurah\Canvas\Util;
 use Hurah\Types\Exception\InvalidArgumentException;
@@ -180,9 +180,9 @@ class Submission extends CanvasObject {
     
     protected ?string $sticker = null;
     /**
-     * @var FileCollection
+     * @var AttachmentCollection
      */
-    protected FileCollection $attachments;
+    protected AttachmentCollection $attachments;
 
     /**
      * @var bool|null
@@ -230,7 +230,7 @@ class Submission extends CanvasObject {
      */
     public function __construct()
     {
-        $this->attachments = new FileCollection();
+        $this->attachments = new AttachmentCollection();
     }
 
     /**
@@ -249,15 +249,15 @@ class Submission extends CanvasObject {
     {
         foreach($aAttachments as $attachment)
         {
-            $this->attachments->add(File::fromCanvasArray($attachment));
+            $this->attachments->add(Attachment::fromCanvasArray($attachment));
         }
         return $this;
     }
 
     /**
-     * @return FileCollection
+     * @return AttachmentCollection
      */
-    public function getAttachments():FileCollection
+    public function getAttachments():AttachmentCollection
     {
         return $this->attachments;
     }
