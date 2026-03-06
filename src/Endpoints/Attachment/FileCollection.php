@@ -19,7 +19,6 @@ class FileCollection extends AbstractCollectionDataType
         }
         return $out;
     }
-
     /**
      * @throws Exception
      */
