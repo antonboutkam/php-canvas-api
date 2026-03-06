@@ -1,3 +1,5 @@
 /vendor/
 .env
 /composer.phar
+skills
+doc/prompt

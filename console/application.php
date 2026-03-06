@@ -16,7 +16,7 @@ if(file_exists($sEnvFile))
 }
 $application = new Application();
 
-$oDir = Path::make(__DIR__)->dirname(1)->extend('src', 'commands');
+$oDir = Path::make(__DIR__)->dirname(1)->extend('src', 'Commands');
 $oFinder = $oDir->getFinder()->name('*Command.php');
 
 foreach ($oFinder as $oFile) {

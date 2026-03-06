@@ -21,6 +21,7 @@ use Hurah\Canvas\Endpoints\Module\Module;
 use Hurah\Canvas\Endpoints\Module\ModuleCollection;
 use Hurah\Canvas\Endpoints\ModuleItem\ModuleItem;
 use Hurah\Canvas\Endpoints\ModuleItem\ModuleItemCollection;
+use Hurah\Canvas\Endpoints\ModuleItemSequence\ModuleItemSequence;
 use Hurah\Canvas\Endpoints\Page\Page;
 use Hurah\Canvas\Endpoints\Page\PageCollection;
 use Hurah\Canvas\Endpoints\Quiz\Quiz;
@@ -165,7 +166,7 @@ class Canvas
      * @throws GuzzleException
      * @throws InvalidArgumentException
      */
-    private function getItem(string $endpoint): array
+    private function getItem(string $endpoint, array $aOptionalArguments = []): array
     {
         $headers = [
             'Authorization' => 'Bearer ' . Config::getCanvasToken()
@@ -175,6 +176,9 @@ class Canvas
         ];
 
         $url = Config::getCanvasUrl()->addPath("/api/v1{$endpoint}");
+        if (isset($aOptionalArguments['GET']) && is_array($aOptionalArguments['GET'])) {
+            $url->addQuery($aOptionalArguments['GET']);
+        }
 
         return $this->apiCall($url, $options);
     }
@@ -771,6 +775,39 @@ class Canvas
     {
         $url = "/courses/{$iCourseId}/modules/{$iModuleId}/items";
         return $this->postItem($url, $oModuleItem->toCanvasArray());
+    }
+
+    /**
+     * GET /api/v1/courses/:course_id/module_item_sequence
+     */
+    public function getModuleItemSequence(int $iCourseId, string $sAssetType, int|string $mAssetId, ?int $iStudentId = null): ModuleItemSequence
+    {
+        $aQuery = [
+            'asset_type' => $sAssetType,
+            'asset_id' => $mAssetId,
+        ];
+        if ($iStudentId !== null) {
+            $aQuery['student_id'] = $iStudentId;
+        }
+
+        $data = $this->getItem("/courses/{$iCourseId}/module_item_sequence", ['GET' => $aQuery]);
+        return ModuleItemSequence::fromCanvasArray($data);
+    }
+
+    /**
+     * POST /api/v1/courses/:course_id/modules/:module_id/items/:id/select_mastery_path
+     */
+    public function selectMasteryPath(int $iCourseId, int $iModuleId, int $iModuleItemId, string $sAssignmentSetId, ?int $iStudentId = null): array
+    {
+        $aPayload = [
+            'assignment_set_id' => $sAssignmentSetId,
+        ];
+        if ($iStudentId !== null) {
+            $aPayload['student_id'] = $iStudentId;
+        }
+
+        $sUrl = "/courses/{$iCourseId}/modules/{$iModuleId}/items/{$iModuleItemId}/select_mastery_path";
+        return $this->postItem($sUrl, $aPayload);
     }
 
     /**
