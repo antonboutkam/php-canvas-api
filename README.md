@@ -98,6 +98,7 @@ Contributions and feedback are welcome! Please keep in mind that this software i
 ## CicleCI build status
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/antonboutkam/php-canvas-api/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/antonboutkam/php-canvas-api/tree/main)
 
+- v1.0.51 attempt to add mastery paths
 - v1.0.39 removed print_r
 - v1.0.40 added documentation index under `doc/index.md`
 - v1.0.41 added mastery path support (`getModuleItemSequence`, `selectMasteryPath`) with endpoint models, commands, and tests
