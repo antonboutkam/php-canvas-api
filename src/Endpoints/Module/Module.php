@@ -2,6 +2,7 @@
 
 namespace Hurah\Canvas\Endpoints\Module;
 
+use DateTime;
 use Hurah\Canvas\Endpoints\CanvasObject;
 use Hurah\Canvas\Util;
 
@@ -12,6 +13,8 @@ class Module extends CanvasObject
     public ?int $position = null;
     public ?string $itemsUrl = null;
     public ?string $unlockAt = null;
+    public ?string $state = null;
+    public ?DateTime $completedAt = null;
     public ?bool $requireSequentialProgress = true;
     public ?string $requirementType = null;
     public ?bool $publishFinalGrade = false;
@@ -29,6 +32,14 @@ class Module extends CanvasObject
         $instance = new self();
 
         foreach ($array as $key => $value) {
+            if ($key === 'completed_at') {
+                try {
+                    $instance->setCompletedAt(is_string($value) && $value !== '' ? new DateTime($value) : null);
+                } catch (\Throwable) {
+                    $instance->setCompletedAt(null);
+                }
+                continue;
+            }
 
             $method = 'set' . Util::underscoreToCamelCase($key, true);
             self::_setValue($instance, $key, $method, $value);
@@ -81,6 +92,26 @@ class Module extends CanvasObject
     public function setUnlockAt(?string $unlockAt): void
     {
         $this->unlockAt = $unlockAt;
+    }
+
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    public function setState(?string $state): void
+    {
+        $this->state = $state;
+    }
+
+    public function getCompletedAt(): ?DateTime
+    {
+        return $this->completedAt;
+    }
+
+    public function setCompletedAt(?DateTime $completedAt): void
+    {
+        $this->completedAt = $completedAt;
     }
 
     public function getRequireSequentialProgress(): ?bool
