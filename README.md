@@ -121,3 +121,12 @@ Contributions and feedback are welcome! Please keep in mind that this software i
 - v1.0.6 updated QuizQuestionGroup
 - v1.0.5 updated Quiz
 - v1.0.3 added Quiz
+
+## v1.1.11
+
+- Added the reusable `Hurah\Canvas\CanvasApiClient` for authenticated Canvas HTTP communication.
+- Added injectable Guzzle client support for deterministic unit tests and custom transports.
+- Centralized paginated GET requests, single-object requests, POST/PUT/DELETE form requests, downloads and the two-step Canvas file upload flow.
+- Added consistent JSON and HTTP error handling without writing errors directly to stdout.
+- Added unit tests for pagination, bearer authentication, nested form encoding, downloads and uploads.
+- Removed a duplicate `Assignment::$isQuizLtiAssignment` declaration and duplicate accessors that prevented the test suite from starting.

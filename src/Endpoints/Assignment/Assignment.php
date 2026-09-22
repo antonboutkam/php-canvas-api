@@ -98,7 +98,6 @@ class Assignment extends CanvasObject
     public ?bool $visibleToEveryone = null;
     public ?string $secureParams = null;
     public ?string $ltiContextId = null;
-    public ?bool $isQuizLtiAssignment = null;
     public ?bool $isQuizAssignment = null;
     public ?int $quizId = null;
     public ?bool $hasSubmittedSubmissions = null;
@@ -1498,17 +1497,6 @@ class Assignment extends CanvasObject
     public function setLtiContextId(?string $ltiContextId): self
     {
         $this->ltiContextId = $ltiContextId;
-        return $this;
-    }
-
-    public function isQuizLtiAssignment(): ?bool
-    {
-        return $this->isQuizLtiAssignment;
-    }
-
-    public function setIsQuizLtiAssignment(?bool $isQuizLtiAssignment): self
-    {
-        $this->isQuizLtiAssignment = $isQuizLtiAssignment;
         return $this;
     }
 
