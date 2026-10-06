@@ -34,6 +34,32 @@ class AssignmentTest extends TestCase
 		static::assertSame('lti-resource-abc', $assignment->getOriginalLtiResourceLinkId());
 	}
 
+	public function testFromCanvasArrayMapsSpeedGraderUrlWithoutOutput(): void
+	{
+		$this->expectOutputString('');
+		$url = 'https://canvas.example.com/courses/42/gradebook/speed_grader?assignment_id=12';
+		$assignment = Assignment::fromCanvasArray([
+			'name' => 'Example assignment',
+			'course_id' => 42,
+			'speed_grader_url' => $url,
+		]);
+
+		static::assertSame($url, $assignment->getSpeedGraderUrl());
+		static::assertSame($url, $assignment->toArray()['speed_grader_url']);
+	}
+
+	public function testSpeedGraderUrlMayBeAbsentOrNull(): void
+	{
+		$this->expectOutputString('');
+		static::assertNull(Assignment::fromCanvasArray([])->getSpeedGraderUrl());
+		static::assertNull(Assignment::fromCanvasArray(['speed_grader_url' => null])->getSpeedGraderUrl());
+
+		$assignment = new Assignment();
+		static::assertSame($assignment, $assignment->setSpeedGraderUrl('https://canvas.example.com/speed_grader'));
+		static::assertSame($assignment, $assignment->setSpeedGraderUrl(null));
+		static::assertNull($assignment->getSpeedGraderUrl());
+	}
+
 	public function testOriginalLtiResourceLinkIdCastsNumericStringsToInt()
 	{
 		$assignment = Assignment::fromCanvasArray([

@@ -24,6 +24,7 @@ class Assignment extends CanvasObject
     public bool $hasOverrides = false;
     public ?int $courseId = null;
     public string $htmlUrl = '';
+    public ?string $speedGraderUrl = null;
     public string $submissionsDownloadUrl = '';
     public ?int $assignmentGroupId = null;
     public bool $dueDateRequired = false;
@@ -574,6 +575,17 @@ class Assignment extends CanvasObject
     public function setHtmlUrl(string $htmlUrl): Assignment
     {
         $this->htmlUrl = $htmlUrl;
+        return $this;
+    }
+
+    public function getSpeedGraderUrl(): ?string
+    {
+        return $this->speedGraderUrl;
+    }
+
+    public function setSpeedGraderUrl(?string $speedGraderUrl): Assignment
+    {
+        $this->speedGraderUrl = $speedGraderUrl;
         return $this;
     }
 
